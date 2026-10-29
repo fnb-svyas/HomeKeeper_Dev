@@ -1,0 +1,81 @@
+=== CHECKPOINT 7 — REMINDERS (synthetic sample house) ===
+
+Traceback (most recent call last):
+  File "/home/claude/homekeeper/homekeeper.py", line 399, in <module>
+    main()
+    ~~~~^^
+  File "/home/claude/homekeeper/homekeeper.py", line 395, in main
+    a.fn(a)
+    ~~~~^^^
+  File "/home/claude/homekeeper/homekeeper.py", line 292, in cmd_reminders
+    p = Profile.load(a.id)
+                     ^^^^
+AttributeError: 'Namespace' object has no attribute 'id'
+
+### Upcoming 90 days (after the Checkpoint 5 actions: furnace service done 10-20, gutters snoozed to 11-20, dryer dismissed, roof finding resolved)
+UPCOMING REMINDERS — next 90 days (from 2026-10-29); 23 event(s)
+This is a snapshot: it reflects the house record as of now and changes only when you record work and re-export.
+
+2026-10-29  Thu
+  • Documented finding: Open junction box with exposed splices above basement stairs  [safety; documented finding — open]
+  • Seal obvious air leaks at windows, doors and the sill (optional improvement)  [comfort; open until done]
+  • Test smoke and CO alarms monthly; record manufacture dates  [safety; due now (no completion on record)]
+  • Replace smoke alarms older than 10 years; CO alarms per their label  [safety; verify]
+  • Annual chimney and flue inspection (Level 1)  [safety; due now (no completion on record)]
+  • Test GFCI outlets and breakers monthly  [safety; due now (no completion on record)]
+  • Check that the ground slopes away from the foundation  [damage; open until done]
+  • Check the furnace/air-handler filter  [comfort; due now (no completion on record)]
+  • Lead-based paint: collect the disclosure and pamphlet; assess if children will live here  [health; open until done]
+  • Consider Mine Subsidence Insurance before closing  [deadline; open until done]
+  • Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)  [health; verify]
+  • Plan an asphalt-roof replacement window  [budget; open until done]
+  • Seasonal roof and flashing visual check (spring and fall, and after severe weather)  [damage; due now (no completion on record)]
+  • Test the sump pump  [damage; due now (no completion on record)]
+  • Wood-destroying insect inspection and moisture contact at wood  [damage; open until done]
+  • Water heater: test the T&P relief valve, flush sediment, check the anode  [safety; due now (no completion on record)]
+  • Plan a water-heater replacement window  [budget; open until done]
+
+2026-11-20  Fri
+  • Clean gutters and confirm downspouts discharge 5–10 ft from the foundation  [damage; snoozed until]
+
+2026-11-29  Sun
+  • Test smoke and CO alarms monthly; record manufacture dates  [safety; due]
+  • Test GFCI outlets and breakers monthly  [safety; due]
+
+2026-12-29  Tue
+  • Test smoke and CO alarms monthly; record manufacture dates  [safety; due]
+  • Test GFCI outlets and breakers monthly  [safety; due]
+  • Check the furnace/air-handler filter  [comfort; due]
+
+### Export
+wrote /home/claude/homekeeper/houses/sample-complete/reminders.ics (59 events, next 12 months). Import or subscribe to it in your calendar app.
+
+### First event in the .ics (CRLF, folded to 75 octets, stable UID, all-day, 1-day-before alarm)
+BEGIN:VEVENT
+UID:04f932903c5cda4cb072@homekeeper
+DTSTAMP:20261029T172209Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:[House] Documented finding: Open junction box with exposed splices 
+ above basement stairs
+DESCRIPTION:documented finding — open\nLicensed electrician to correct\nW
+ hy this house: Documented in inspection report p.22 on 2026-10-20.\nDone w
+ hen: Repair or assessment documented in the house record and the finding m
+ arked resolved.\nRule FINDING-f-002\; source: inspection report p.22: \n(H
+ omeKeeper snapshot — re-export after recording completions.)
+CATEGORIES:safety,HomeKeeper
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Documented finding: Open junction box with exposed splices abov
+ e basement stairs
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+
+### Recording a completion and re-exporting moves the series (same UIDs for unchanged events)
+completed R-ALARM-001 on 2026-10-29
+no recommendation changed
+  next: next due 2026-11-29 (last done 2026-10-29)
+  • Test smoke and CO alarms monthly; record manufacture dates  [safety; due]
+  • Test GFCI outlets and breakers monthly  [safety; due]
+wrote /home/claude/homekeeper/houses/sample-complete/reminders.ics (58 events, next 12 months). Import or subscribe to it in your calendar app.

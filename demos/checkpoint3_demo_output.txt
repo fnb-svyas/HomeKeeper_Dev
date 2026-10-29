@@ -1,0 +1,422 @@
+=== CHECKPOINT 3 DEMONSTRATIONS (synthetic sample house: 1928 brick colonial, Mt. Lebanon, full basement, 1 fireplace) ===
+
+### 1. A rule that applies (from public record alone)
+  R-CHIM-001  Annual chimney and flue inspection (Level 1)  [safety]
+      why: The record lists a fireplace. CSIA (citing NFPA 211) recommends annual inspection; CPSC includes chimneys and flues in its CO guidance.
+      do:  Arrange a Level 1 chimney inspection before the heating season; sweep if 1/8 inch of soot has built up. Ask whether the flue is lined and whether the heating appliance vents through it.
+      due: due now — no completion on record; best window in season now, window closes 2026-10-31 (before heating season)
+      if delayed: Flue blockage or liner failure can vent CO into the house or start a chimney fire.
+      effort 1 visit; pro; cost unknown; provider: chimney
+      done when: Inspection report in the house record.
+      because: all trigger conditions met
+      evidence: fireplaces=1 (public record); chimney_in_use=unknown (UNKNOWN)
+      source: csia_homeowner: CSIA Homeowner Resources: chimneys inspected at least once a year (NFPA 211); sweep at 1/8 in buildup; CPSC CO Fact Sheet: check chimneys and flues
+
+### 2. A rule excluded by confirmed information
+recorded heating_fuel = 'heat pump' (source: owner) for sample-complete
+recommendations changed:
+  R-HEAT-001: needs_info -> excluded
+recorded chimney_in_use = False (source: owner) for sample-complete
+recommendations changed:
+  R-CHIM-001: applies -> excluded
+EXCLUDED BY CONFIRMED INFORMATION
+  R-HEAT-001  Annual professional inspection and service of the fuel-burning heating system  [safety]
+      because: excluded because heating_fuel = 'heat pump' (confirmed information)
+
+### 3. A rule requiring verification
+  R-SUMP-001  Test the sump pump  [damage]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      do:  Check the basement for a sump pit and pump; record whether one is present, and photograph the pump label if so.
+      if delayed: A silent pump failure is discovered during the storm that floods the basement.
+      effort 10 minutes; verification; cost none; provider: plumber
+      done when: Pump cycled on test; date recorded.
+      because: sump_pump_present unknown — verify first
+
+### 4. Generic recommendation refined by equipment-specific instructions
+recorded heating_type = 'forced air' (source: owner) for sample-complete
+recommendations changed:
+  R-HEAT-002: needs_info -> applies
+--- before identifying the furnace:
+  R-HEAT-002  Check the furnace/air-handler filter  [comfort]
+      why: A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual's own interval overrides this when known.
+      do:  Check the filter; replace when dirty. Without a manufacturer instruction, check monthly during heating and cooling seasons (DOE's AC guidance) and record the filter size.
+      due: due now — no completion on record
+recorded furnace: Goodman GMVC96 installed 2019 (manual: goodman_rs6612023)
+no recommendation changed
+--- after:
+  R-HEAT-002  Check the furnace/air-handler filter  [comfort]
+      why: A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual's own interval overrides this when known. Refined by the installed equipment's own instructions (Goodman GMVC96).
+      do:  Clean or replace the filter every two months or as required (Goodman).
+      due: due now — no completion on record
+      equipment: Goodman GMVC96 — Goodman RS6612023r2: filters cleaned/replaced every two months or as required
+      if delayed: Higher bills, reduced heat, and strain on the blower and heat exchanger.
+
+### 5. A task changed by a recent replacement
+recorded water_heater_type = 'tank' (source: owner) for sample-complete
+no recommendation changed
+recorded water_heater_installed_year = 2012 (source: owner) for sample-complete
+recommendations changed:
+  R-WH-002: needs_info -> applies
+--- 2012 heater:
+  R-WH-002  Plan a water-heater replacement window  [budget]
+      why: InterNACHI estimates 6–12 years for conventional tank heaters (NAHB 2007: 10); a unit at 8+ years is in its planning window.
+recorded water_heater: A. O. Smith GCR-50 installed 2026 (manual: aosmith_100398943)
+recommendations changed:
+  R-WH-002: applies -> not_triggered
+  R-WH-003: not_triggered -> applies
+--- after replacement:
+  R-WH-001  Water heater: test the T&P relief valve, flush sediment, check the anode  [safety]
+      why: Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified. Refined by the installed equipment's own instructions (A. O. Smith GCR-50).
+      do:  Inspect and operate the T&P valve annually; inspect the anode at 6 months then at least annually; flush after the first six months (A. O. Smith).
+      due: due now — no completion on record
+      equipment: A. O. Smith GCR-50 — A. O. Smith 100398943
+  R-WH-003  Register new equipment with the manufacturer before the deadline  [deadline]
+      why: Manufacturer warranty terms condition the longer parts warranty on timely registration.
+      do:  Register the new unit on the manufacturer's site within its deadline (Goodman: 60 days; Carrier: 90 days) and file the confirmation; unregistered units typically drop to the shorter base warranty.
+  water_heater_installed_year  2026                                               [owner; owner_confirmed; equipment:eq-002]
+      history: [(2012, 'owner')]
+  new_equipment_pending_registration True                                               [owner; owner_confirmed; owner]
+
+### 6. An HOA responsibility that removes work from the homeowner's action list
+recorded major finding on roof
+recommendations changed:
+  FINDING-f-001: — -> finding
+--- documented finding ranks first:
+NEXT 3 ACTIONS
+  1. Documented finding: Lifted shingles and exposed nail heads at rear slope   [damage; finding]
+     why this house: Documented in inspection report p.14 on 2026-10-20.
+     priority: documented defect — severity: damage; documented defect; strong evidence
+roof responsibility -> HOA
+recommendations changed:
+  R-ROOF-001: applies -> someone_else
+  R-ROOF-002: not_applicable -> someone_else
+  R-ROOF-003: applies -> someone_else
+  FINDING-f-001: finding -> someone_else
+gutters_downspouts responsibility -> HOA
+recommendations changed:
+  R-GUTTER-001: applies -> someone_else
+--- after:
+SOMEONE ELSE'S RESPONSIBILITY
+  R-ROOF-001  Establish the roof's installation date  [budget]
+      because: roof is HOA's responsibility per the house record
+      evidence: roof_installed_year=unknown (UNKNOWN)
+NEXT 3 ACTIONS
+  1. Water heater: test the T&P relief valve, flush sediment, check the anode   [safety; applies]
+     why this house: Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified. Refined by the installed equipment's own instructions (A. O. Smith GCR-50).
+     priority: severity: safety; rule applies; owner-reported; no completion on record
+
+### Final house record
+EQUIPMENT
+  eq-001 furnace        Goodman GMVC96  installed 2019  manual: goodman_rs6612023  [installed; owner_reported]
+  eq-002 water_heater   A. O. Smith GCR-50  installed 2026  manual: aosmith_100398943  [installed; owner_reported]
+
+DOCUMENTED FINDINGS
+  f-001 roof           major   Lifted shingles and exposed nail heads at rear slope  (inspection report p.14; open)
+
+RESPONSIBILITIES: roof -> HOA, gutters_downspouts -> HOA
+
+REGIONAL EXPOSURE (describes the area, not this house)
+
+### Full plan
+
+PLAN (rules: author-reviewed against cited sources; not yet expert-validated)
+
+NEXT 3 ACTIONS
+  1. Water heater: test the T&P relief valve, flush sediment, check the anode   [safety; applies]
+     why this house: Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified. Refined by the installed equipment's own instructions (A. O. Smith GCR-50).
+     priority: severity: safety; rule applies; owner-reported; no completion on record
+  2. Test smoke and CO alarms monthly; record manufacture dates   [safety; applies]
+     why this house: Applies to every home. CPSC: test monthly, replace batteries at least annually.
+     priority: severity: safety; rule applies; unknown; no completion on record
+  3. Test GFCI outlets and breakers monthly   [safety; applies]
+     why this house: CPSC: test every GFCI at least once a month, after installation and after power failures.
+     priority: severity: safety; rule applies; unknown; no completion on record
+
+APPLIES
+  R-WH-001  Water heater: test the T&P relief valve, flush sediment, check the anode  [safety]
+      why: Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified. Refined by the installed equipment's own instructions (A. O. Smith GCR-50).
+      do:  Inspect and operate the T&P valve annually; inspect the anode at 6 months then at least annually; flush after the first six months (A. O. Smith).
+      due: due now — no completion on record
+      equipment: A. O. Smith GCR-50 — A. O. Smith 100398943
+      if delayed: Sediment shortens tank life and a stuck T&P valve removes the tank's over-pressure protection.
+      effort 20 minutes; diy_or_pro; cost none; provider: plumber
+      done when: T&P tested, sediment drained, anode checked; dates recorded.
+      because: applies to every home in the pilot
+      evidence: water_heater_type=tank (owner)
+      source: doe_energysaver: DOE Energy Saver 'Storage Water Heaters': flush a quart every three months; check T&P every six months; inspect anode every three to four years; ~120°F | aosmith_100398943: 100398943 maintenance section
+  R-ALARM-001  Test smoke and CO alarms monthly; record manufacture dates  [safety]
+      why: Applies to every home. CPSC: test monthly, replace batteries at least annually.
+      do:  Press the test button on every smoke and CO alarm. On first pass, write down the manufacture date printed on the back of each unit; replace batteries at least yearly.
+      due: due now — no completion on record
+      if delayed: A dead alarm gives no warning; CPSC links most fatal fires to missing or non-working alarms (statement from Pub 559).
+      effort 10 minutes; diy; cost none
+      done when: Every alarm sounded on test; dates recorded in the house record.
+      because: applies to every home in the pilot
+      source: cpsc_alarms: CPSC Pub 559 'Smoke Alarms – Why, Where, and Which': test once a month; replace batteries at least annually
+  R-GFCI-001  Test GFCI outlets and breakers monthly  [safety]
+      why: CPSC: test every GFCI at least once a month, after installation and after power failures.
+      do:  Press TEST then RESET on every GFCI receptacle and GFCI breaker (kitchen, baths, basement, garage, exterior). Any that does not trip or reset needs replacement.
+      due: due now — no completion on record
+      if delayed: A failed GFCI leaves wet-area circuits without shock protection.
+      effort 10 minutes; diy; cost none
+      done when: All GFCIs tripped and reset.
+      because: applies to every home in the pilot
+      source: cpsc_dryer_gfci: CPSC Pub 099 'What Is A GFCI?': test at least once a month; Pub 513 Home Electrical Safety Checklist
+  R-BSMT-001  Keep basement humidity below 60% and dry any wet spot within 24–48 hours  [health]
+      why: EPA mold guidance thresholds; old basements in this climate run humid all summer.
+      do:  Put an inexpensive hygrometer in the basement; run a dehumidifier in humid months to keep relative humidity under 60% (ideally 30–50%). Dry any wet material within 24–48 hours; cleanup larger than about 10 sq ft of mold warrants professional help.
+      due: next window 2027-05-15 to 2027-09-30 (humid season)
+      if delayed: Mold growth, musty odors, and damage to stored items and finishes.
+      effort ongoing; 5 minutes to check; diy; cost planning_assumption
+      done when: Hygrometer in place; readings under 60% during humid months.
+      because: all trigger conditions met
+      evidence: basement=Full (public record)
+      source: epa_mold_guide: EPA 'A Brief Guide to Mold, Moisture and Your Home' pp.3,4,10,11: humidity below 60%; dry within 24–48 h; DIY cleanup under ~10 sq ft
+  R-LEAD-001  Lead-based paint: collect the disclosure and pamphlet; assess if children will live here  [health]
+      why: Built before 1978: federal lead disclosure rules apply.
+      do:  Confirm you received the seller's lead-based-paint disclosure and the EPA pamphlet; if children under six will live in the home, use the 10-day window for a lead inspection or risk assessment, and plan lead-safe practices for any renovation.
+      due: open until done
+      if delayed: Loss of the pre-closing inspection window; exposure risk during renovation.
+      effort 15 minutes; diy; cost none; provider: lead_assessor
+      done when: Disclosure and pamphlet filed; assessment decision recorded.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record)
+      source: epa_lead: EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing — pamphlet, disclosure, 10-day inspection opportunity
+  R-RADON-001  Test for radon (or file a result from the last two years)  [health]
+      why: EPA recommends testing every home below the third floor; PA law requires only disclosure at sale, not a test.
+      do:  Run a short-term test on the lowest lived-in level, or file the inspection's radon result in the house record. At 4 pCi/L or above, get mitigation quotes; EPA says consider fixing between 2 and 4.
+      due: due now — no completion on record
+      if delayed: Unmeasured exposure; the seller-remediation window closes at closing.
+      effort test kit: 10 minutes + lab wait; diy_or_pro; cost planning_assumption; provider: radon
+      done when: Result (pCi/L, date, floor) stored in the house record.
+      because: all trigger conditions met
+      evidence: radon_result_date=unknown (UNKNOWN)
+      source: epa_radon_guides: EPA Citizen's Guide to Radon pp.2–3, 10, 12: test homes below third floor; fix at 4 pCi/L; consider 2–4; retest every two years
+  R-DISC-001  Before you buy: reconcile the seller disclosure with the inspection report  [deadline]
+      why: PA's Real Estate Seller Disclosure Law defines what the seller must disclose; the inspection report is the independent evidence.
+      do:  Read the seller's property disclosure statement (PA law lists roof, basements, structure, water/sewage, plumbing, heating/AC, electrical, soils/drainage, hazardous substances) against the inspection findings; list every 'yes/unknown' answer and every report finding that the other document does not mention. Those are your questions before the inspection contingency expires.
+      due: open until done
+      if delayed: Lost contingency leverage.
+      effort 1 hour; diy; cost none
+      done when: Question list sent to the agent; answers filed.
+      because: all trigger conditions met
+      evidence: stage=under_contract (owner)
+      source: pa_seller_disclosure: 68 Pa.C.S. §7304(b) subjects of disclosure; form at 49 Pa. Code §35.335a
+  R-WH-003  Register new equipment with the manufacturer before the deadline  [deadline]
+      why: Manufacturer warranty terms condition the longer parts warranty on timely registration.
+      do:  Register the new unit on the manufacturer's site within its deadline (Goodman: 60 days; Carrier: 90 days) and file the confirmation; unregistered units typically drop to the shorter base warranty.
+      due: when: equipment installed
+      if delayed: Loss of the extended parts warranty (e.g., 10-year vs 5-year).
+      effort 10 minutes; diy; cost none
+      done when: Registration confirmation stored with the equipment record.
+      because: all trigger conditions met
+      evidence: new_equipment_pending_registration=True (owner)
+      source: goodman_rs6612023: Goodman Warranty Overview PM-WARRCHRT-G: online registration within 60 days of installation; Carrier warranty page: 90 days to register
+  R-SEWER-001  Point-of-sale sewer dye test / lateral certification  [deadline]
+      why: The municipality requires a sewer certification before sale; lead times run 7–30 days and a failed test can require repairs before closing.
+      do:  Confirm the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.
+      due: open until done
+      if delayed: Closing delay or seller-side repair dispute.
+      effort phone call; pro; cost published_reference; provider: plumber
+      done when: Certificate stored in the house record.
+      because: all trigger conditions met
+      evidence: point_of_sale_sewer_rule=name=Mt. Lebanon, required_at_sale=True, applies=Sale; refinancing exempt, performed_by=Allegheny County-licensed plumber (municipality does not schedule tests) (public record)
+      source: municipal_dye_tests: data/municipal_dye_tests.json entry for the municipality (primary municipal page/code cited there)
+  R-MSI-001  Consider Mine Subsidence Insurance before closing  [deadline]
+      why: DEP's confirmed-mining layer intersects this point (a flag only; not a parcel-level mine-map review).
+      do:  Look up the address on PA DEP's Mine Subsidence Insurance map and decide on coverage; a policy applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.
+      due: open until done
+      if delayed: Uninsured subsidence damage; coverage timing tied to closing.
+      effort 30 minutes; diy; cost published_reference
+      done when: Decision recorded (policy number or 'declined').
+      because: all trigger conditions met
+      evidence: undermined=True (regional)
+      source: padep_msi_layer: DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ (coverage effective at closing when applied for at purchase agreement)
+  R-GRADE-001  Check that the ground slopes away from the foundation  [damage]
+      why: Houses with below-grade space depend on surface drainage; EPA and ISU Extension both call for ground sloping away from the foundation.
+      do:  Walk the perimeter after a rain: the first 10 ft should drop about 6 in away from the house (ISU Extension). Note low spots, settled backfill, window wells that hold water, and paving that slopes toward the wall.
+      due: open until done
+      if delayed: Water against the wall; seepage; freeze–thaw damage.
+      effort 30 minutes; verification; cost unknown; provider: landscaper
+      done when: Grading observation recorded; any low spots photographed.
+      because: all trigger conditions met
+      evidence: basement=Full (public record)
+      source: isu_drainage: ISU Extension Pm-1560: first 10 ft from the house should drop at least 6 in; EPA Mold Guide p.10: ground slopes away from the building foundation
+  R-SEWER-002  Private sewer lateral: establish material and condition (pre-1960 house)  [damage]
+      why: Laterals of this era are commonly clay or cast iron; the homeowner owns the lateral to the main in most Allegheny County municipalities (ALCOSAN: municipalities own local sewers; private laterals are the owner's).
+      do:  If the municipality's sale process did not include a camera inspection of the lateral, consider one before closing or in the first year; record the material (clay, cast iron, Orangeburg) and any root intrusion.
+      due: open until done
+      if delayed: Sewer backup into the basement; emergency excavation.
+      effort 1 visit; pro; cost unknown; provider: plumber
+      done when: Lateral material and condition recorded with the video/report.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record); point_of_sale_sewer_rule=name=Mt. Lebanon, required_at_sale=True, applies=Sale; refinancing exempt, performed_by=Allegheny County-licensed plumber (municipality does not schedule tests) (public record)
+      source: municipal_dye_tests: Municipal dye-test/lateral programs (Upper St. Clair, Bethel Park, Dormont, Baldwin require lateral video at sale); ALCOSAN municipal-customers page on sewer ownership
+  R-WDI-001  Wood-destroying insect inspection and moisture contact at wood  [damage]
+      why: Allegheny County municipalities adopt the IRC termite probability 'moderate to heavy' (e.g., Shaler Township UCC ordinance); the seller disclosure form asks about infestation (item 5).
+      do:  If the purchase did not include a wood-destroying insect (WDI) inspection, get one; keep soil and mulch below sill plates and wood siding, and fix wood-to-ground contact.
+      due: open until done
+      if delayed: Hidden structural damage.
+      effort 1 visit; pro; cost unknown; provider: pest_control
+      done when: WDI report filed; wdi_inspection_date recorded.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record); wdi_inspection_date=unknown (UNKNOWN)
+      source: termite_probability: Shaler Township UCC ordinance: Termite 'Moderate to heavy'; PA seller disclosure form item 5 (termites/wood-destroying insects)
+  R-HEAT-002  Check the furnace/air-handler filter  [comfort]
+      why: A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual's own interval overrides this when known. Refined by the installed equipment's own instructions (Goodman GMVC96).
+      do:  Clean or replace the filter every two months or as required (Goodman).
+      due: due now — no completion on record
+      equipment: Goodman GMVC96 — Goodman RS6612023r2: filters cleaned/replaced every two months or as required
+      if delayed: Higher bills, reduced heat, and strain on the blower and heat exchanger.
+      effort 5 minutes; diy; cost planning_assumption
+      done when: Filter checked/replaced; size and date recorded.
+      because: all trigger conditions met
+      evidence: heating_type=forced air (owner)
+      source: doe_energysaver: DOE Energy Saver 'Maintaining Your Air Conditioner': clean or replace filters every month or two in season (applied to forced-air heating as a planning assumption) | goodman_rs6612023: RS6612023r2 maintenance section
+  R-AIR-001  Seal obvious air leaks at windows, doors and the sill (optional improvement)  [comfort]
+      why: DOE air-sealing guidance; optional comfort/energy improvement, deliberately ranked last.
+      do:  Caulk gaps at window and door trim and the foundation sill with latex or silicone caulk; leave duct sealing to a contractor. Do this after moisture problems are controlled, not before.
+      due: open until done
+      if delayed: Higher heating bills; no safety consequence.
+      effort an afternoon; diy; cost planning_assumption
+      done when: Done; noted.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record)
+      source: doe_energysaver: DOE Energy Saver 'Seal Air Leaks with Caulk': caulk windows/doors/foundation sill; leave duct sealing to a contractor
+
+VERIFY FIRST
+  R-ALARM-002  Replace smoke alarms older than 10 years; CO alarms per their label  [safety]
+      why: CPSC: replace smoke alarms that are more than 10 years old; CO alarms have a manufacturer replacement age.
+      do:  Read the manufacture date on the back of each smoke and CO alarm and record the oldest year.
+      if delayed: Sensors degrade; an old alarm can pass a button test and still fail to detect smoke.
+      effort 30–60 minutes; verification; cost unknown
+      done when: No alarm older than 10 years in the record.
+      because: oldest_smoke_alarm_year unknown — verify first
+      evidence: oldest_smoke_alarm_year=unknown (UNKNOWN)
+      source: cpsc_alarms: CPSC Pub 559: replace smoke alarms more than 10 years old; CPSC CO Fact Sheet: alarms have a recommended replacement age
+  R-ELEC-001  Establish the wiring type and grounding (pre-1960 house)  [safety]
+      why: Houses of this era commonly retain original wiring; the assessor record says nothing about it and the inspection report is the only document that does.
+      do:  Check the inspection report's electrical section for knob-and-tube, ungrounded two-slot receptacles, aluminum branch wiring or an undersized panel. Record what it says. If the report is silent, ask an electrician to assess.
+      if delayed: Fire and shock risk is unquantified until assessed; insurers may ask about knob-and-tube.
+      effort 15 minutes to read the report; assessment visit if needed; verification; cost unknown; provider: electrician
+      done when: wiring_type recorded with the report page or electrician's note as source.
+      because: wiring_type unknown — verify first
+      evidence: year_built=1928 (public record); wiring_type=unknown (UNKNOWN)
+      source: cpsc_dryer_gfci: CPSC Pub 099: GFCI receptacles may replace ungrounded two-slot receptacles with a 'NO EQUIPMENT GROUND' label; InterNACHI SOP §3 electrical scope
+  R-PLUMB-001  Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)  [health]
+      why: The assessor record never records pipe materials; houses of this era commonly retain original galvanized supply and cast-iron drains.
+      do:  Read the inspection report's plumbing section and look at exposed pipes in the basement: grey threaded pipe is galvanized steel; black heavy pipe is cast iron; a dull grey soft pipe at the meter may be lead. Record what you find.
+      if delayed: Low pressure, leaks inside walls, and (for lead) a health exposure.
+      effort 20 minutes; verification; cost unknown; provider: plumber
+      done when: Materials recorded with source.
+      because: plumbing_supply_material unknown — verify first
+      evidence: year_built=1928 (public record); plumbing_supply_material=unknown (UNKNOWN)
+      source: internachi_life_expectancy: InterNACHI chart: galvanized/copper water lines and cast-iron waste pipe estimated lives (guideline only); PWSA lead service line program page
+  R-SUMP-001  Test the sump pump  [damage]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      do:  Check the basement for a sump pit and pump; record whether one is present, and photograph the pump label if so.
+      if delayed: A silent pump failure is discovered during the storm that floods the basement.
+      effort 10 minutes; verification; cost none; provider: plumber
+      done when: Pump cycled on test; date recorded.
+      because: sump_pump_present unknown — verify first
+      evidence: sump_pump_present=unknown (UNKNOWN); basement=Full (public record)
+      source: zoeller_fm2676: Zoeller FM2676: inspect and test for proper operation at least every three months (used as the generic planning interval until the installed model is identified)
+
+NEEDS AN ANSWER
+  R-DRYER-001  Clean the dryer vent duct; replace any plastic or foil duct with metal  [safety]
+      why: CPSC dryer-fire guidance.
+      do:  Clean the lint screen every load; periodically disconnect and clean the exhaust duct and the outside hood; replace plastic or foil accordion duct with rigid or semi-rigid metal. The yearly duct cleaning cadence is a planning assumption (CPSC says 'periodically').
+      if delayed: Lint fires; long dry times.
+      effort 30–60 minutes; diy_or_pro; cost none; provider: duct_cleaner
+      done when: Duct cleaned; duct material recorded.
+      because: needs dryer_present to decide
+      evidence: dryer_present=unknown (UNKNOWN)
+      source: cpsc_dryer_gfci: CPSC Pub 5022 'Overheated Clothes Dryers Can Cause Fires': clean lint screen each load; clean vent and exhaust duct periodically; use rigid or semi-rigid metal duct
+  R-FREEZE-001  Winterize exterior hose bibs before the first freeze  [damage]
+      why: Pittsburgh's median first 32°F date is about October 20 (NCEI normals); freeze-split pipes behind a wall are a common winter loss. The task is standard practice; the timing is sourced, the practice is a planning assumption.
+      do:  Disconnect hoses, close any interior shutoff for each exterior faucet and open the exterior valve to drain it; for frost-free faucets, disconnecting the hose is the essential step.
+      if delayed: A split pipe that floods a wall or basement during the first hard freeze.
+      effort 15 minutes; diy; cost none
+      done when: Hoses off; valves drained; date recorded.
+      because: needs exterior_hose_bibs to decide
+      evidence: exterior_hose_bibs=unknown (UNKNOWN)
+      source: ncei_normals: NCEI 1991–2020 normals, station USW00094823: ANN-TMIN-PRBFST-T32FP50 = 10/20 (50% probability first 32°F)
+  R-AC-001  Central AC: filter monthly in season, clear the outdoor unit, annual coil check  [comfort]
+      why: DOE Energy Saver AC maintenance guidance.
+      do:  Clean or replace the filter every month or two during cooling season; keep about 2 ft clear around the outdoor condenser and remove debris; have the evaporator coil checked yearly and the drain channels cleared.
+      if delayed: Reduced cooling, higher bills, frozen coil.
+      effort 15 minutes monthly; one pro visit; diy_or_pro; cost unknown; provider: hvac
+      done when: Pre-season check recorded; service invoice if a pro visited.
+      because: needs ac_present to decide
+      evidence: ac_present=unknown (UNKNOWN)
+      source: doe_energysaver: DOE Energy Saver 'Maintaining Your Air Conditioner': filter every month or two; evaporator coil every year; keep ~2 ft clearance; clear drain channels
+
+SOMEONE ELSE'S RESPONSIBILITY
+  R-ROOF-001  Establish the roof's installation date  [budget]
+      because: roof is HOA's responsibility per the house record
+      evidence: roof_installed_year=unknown (UNKNOWN)
+      source: internachi_sop: InterNACHI SOP §3.1: inspector not required to predict roof service life; §2.1.08 life expectancy not determined
+  R-ROOF-002  Plan an asphalt-roof replacement window  [budget]
+      because: roof is HOA's responsibility per the house record
+      evidence: roof_type=SHINGLE (public record)
+      source: internachi_life_expectancy: InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only); NAHB 2007: asphalt shingles ~20 yr
+  R-ROOF-003  Seasonal roof and flashing visual check (spring and fall, and after severe weather)  [damage]
+      because: roof is HOA's responsibility per the house record
+      source: nrca_roof_inspection: Professional Roofing article 4787 reporting NRCA's recommendation of roof inspections at least twice per year (spring/fall) and after severe weather
+  R-GUTTER-001  Clean gutters and confirm downspouts discharge 5–10 ft from the foundation  [damage]
+      because: gutters_downspouts is HOA's responsibility per the house record
+      evidence: gutters_present=unknown (UNKNOWN)
+      source: isu_drainage: ISU Extension Pm-1560: downspouts should discharge at least 5 to 10 feet from the house; EPA Mold Guide p.10: clean and repair roof gutters regularly
+  FINDING-f-001  Documented finding: Lifted shingles and exposed nail heads at rear slope  [damage]
+      because: roof is HOA's responsibility
+      evidence: finding f-001=Lifted shingles and exposed nail heads at rear slope (inspection)
+      source: inspection report p.14: 
+
+EXCLUDED BY CONFIRMED INFORMATION
+  R-HEAT-001  Annual professional inspection and service of the fuel-burning heating system  [safety]
+      because: excluded because heating_fuel = 'heat pump' (confirmed information)
+      evidence: heating_fuel=heat pump (owner)
+      source: cpsc_alarms: CPSC NSN-9 'Inspect, Detect and Protect': have a professional inspect all fuel-burning heating systems every year; DOE Energy Saver furnace/boiler checklist
+  R-CHIM-001  Annual chimney and flue inspection (Level 1)  [safety]
+      because: excluded because chimney_in_use = False (confirmed information)
+      evidence: fireplaces=1 (public record); chimney_in_use=False (owner)
+      source: csia_homeowner: CSIA Homeowner Resources: chimneys inspected at least once a year (NFPA 211); sweep at 1/8 in buildup; CPSC CO Fact Sheet: check chimneys and flues
+
+NOT APPLICABLE (data gap)
+  R-SUMP-002  Plan a sump-pump replacement and consider battery backup  [budget]
+      because: sump_pump_age_years not available
+      source: internachi_life_expectancy: InterNACHI chart: sump pump 7 years (guideline only)
+
+QUESTIONS THAT COULD CHANGE THE PLAN (answer with: answer <house> <field> <value>)
+  ac_present                   Is there central air conditioning?  [yes / no]  (unblocks R-AC-001)
+      matters because: adds pre-season AC tasks
+  sump_pump_present            Is there a sump pump in the basement?  [yes / no / unknown]  (unblocks R-SUMP-001)
+      matters because: adds a quarterly test task; absence in a full basement may add a verification task
+  dryer_present                Is there a clothes dryer?  [yes / no]  (unblocks R-DRYER-001)
+      matters because: adds the dryer-vent fire-safety task
+  exterior_hose_bibs           Are there exterior hose faucets?  [yes / no]  (unblocks R-FREEZE-001)
+      matters because: adds the first-freeze winterizing deadline
+  wiring_type                  What does the inspection say about wiring?  [knob-and-tube / ungrounded / mixed / modern grounded / rewired]  (unblocks R-ELEC-001)
+      matters because: modern grounded wiring clears the electrical verification task
+  plumbing_supply_material     Supply pipe material?  [galvanized / copper / pex / cpvc / lead / mixed]  (unblocks R-PLUMB-001)
+      matters because: copper/PEX clears the pipe-material verification; lead raises a health task
+  oldest_smoke_alarm_year      Oldest smoke-alarm manufacture year?  [year or 'unknown']  (unblocks R-ALARM-002)
+      matters because: alarms over 10 years old get a replacement task
+  owner_confirms_match         Is this the right parcel/address?  [yes / no]
+      matters because: everything else is keyed to this parcel
+  roof_installed_year          What year was the roof last replaced?  [year or 'unknown']
+      matters because: largest replacement budget item; unknown keeps it provisional
+  radon_result_date            Date of the most recent radon test, if any  [YYYY-MM-DD or 'none']
+      matters because: a result within two years satisfies the EPA retest guidance
+  radon_result_pci_l           Radon test result, if known  [number (pCi/L)]
+      matters because: 4 pCi/L or higher triggers mitigation planning
+  radon_mitigation_present     Is there an existing radon mitigation system (fan + pipe)?  [yes / no]
+      matters because: adds manometer/fan upkeep; removes the mitigation-quote task
+  gutters_present              Does the house have gutters?  [yes / no]
+      matters because: removes gutter cleaning if there are none
+  wdi_inspection_date          Date of a wood-destroying-insect inspection, if any  [YYYY-MM-DD or 'none']
+      matters because: a filed WDI report clears the termite verification
+  hoa_or_shared                Is there an HOA or any shared-responsibility items (party wall, shared drive)?  [yes / no]
+      matters because: moves exterior/shared items off your action list
+  known_problems               Any known problems from the inspection or seller disclosure?  [short text]
+      matters because: documented defects outrank preventive tasks

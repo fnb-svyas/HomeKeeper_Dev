@@ -1,0 +1,115 @@
+=== CHECKPOINT 6 — PROVIDER MATCHING (synthetic house; providers shown are SYNTHETIC demo records) ===
+
+### Inventory
+p-0001  Demo Plumbing Co (SYNTHETIC)             plumber              creds=2  [SYNTHETIC]
+p-0002  Demo Drain & Sewer (SYNTHETIC)           plumber, sewer       creds=0  [SYNTHETIC]
+p-0003  Demo Electric LLC (SYNTHETIC)            electrician          creds=2  [SYNTHETIC]
+p-0004  Demo Radon Mitigation (SYNTHETIC)        radon mitigator      creds=1  [SYNTHETIC]
+p-0005  Demo Chimney Sweeps (SYNTHETIC)          chimney              creds=1  [SYNTHETIC]
+
+### Plumber match for the water-heater task
+PROVIDERS FOR: plumber   (home municipality: Mt. Lebanon)
+Ranked: task suitability → serves the address → verified credentials → freshness → distance. Unknown stays unknown.
+Registration/licensing is never proof of competence; workmanship evidence is not available from any permitted source.
+
+1. Demo Plumbing Co (SYNTHETIC)  [SYNTHETIC — demo only]
+   listed as: plumber  (existence: synthetic demo record, 2026-10-29)
+   serves the address: yes (stated service area)
+   credential: Allegheny County Health Department registered master plumber, HP 00000 (list dated 2026-07-29) — https://data.wprdc.org/dataset/allegheny-county-plumbers
+   credential: Registered with the PA Attorney General under HICPA, PA000000, as checked 2026-10-15 — https://hicsearch.attorneygeneral.gov/
+   insurance: unknown
+   workmanship: unknown (no permitted source)
+   distance: 0.8 mi
+   phone: 412-555-0100
+   provider claim (not checked): 'family owned since 1980' (website)
+
+2. Demo Drain & Sewer (SYNTHETIC)  [SYNTHETIC — demo only]
+   listed as: plumber, sewer  (existence: synthetic demo record, 2026-10-29)
+   serves the address: unknown (no service area on file)
+   credential: none verified (unknown)
+   insurance: unknown
+   workmanship: unknown (no permitted source)
+   distance: unknown (address not geocoded)
+   phone: 412-555-0101
+   provider claim (not checked): 'licensed and insured' (truck lettering)
+
+GAP: only 2 provider(s) on file for 'plumber' — inventory is thin; use the hiring checklist and add providers as you find them
+
+HIRING CHECKLIST (what to verify yourself before signing)
+  □ PA HICPA registration: ask for the PA number; check at hicsearch.attorneygeneral.gov or 888-520-6680; the number must appear on the contract
+  □ Certificate of insurance naming you; HICPA requires $50k/$50k liability at registration but it can lapse
+  □ Written scope with exclusions, timeline, payment terms, and warranty
+  □ Who pulls permits and whether they are in the price
+  □ ACHD registered master plumber (HP number): eapps.alleghenycounty.us/Plumbing — required to pull a county plumbing permit
+
+### Electrician match for the safety finding (City-scoped license vs a Mt. Lebanon house)
+PROVIDERS FOR: electrician   (home municipality: Mt. Lebanon)
+Ranked: task suitability → serves the address → verified credentials → freshness → distance. Unknown stays unknown.
+Registration/licensing is never proof of competence; workmanship evidence is not available from any permitted source.
+
+1. Demo Electric LLC (SYNTHETIC)  [SYNTHETIC — demo only]
+   listed as: electrician  (existence: synthetic demo record, 2026-10-29)
+   serves the address: unknown (no service area on file)
+   credential: City of Pittsburgh trade license Electrical 00000, status Active, per City open data 2026-10-29 — https://data.wprdc.org/dataset/business-contractors-trades
+      note: this license covers work in the City of Pittsburgh; the house is in Mt. Lebanon, where no municipal electrical license may exist — ask the municipality
+   credential: Insurance expiration date on file with the City of Pittsburgh: 2027-03-31 (City data 2026-10-29)
+   insurance: Insurance expiration date on file with the City of Pittsburgh: 2027-03-31 (City data 2026-10-29)
+   workmanship: unknown (no permitted source)
+   distance: 5.2 mi
+   phone: 412-555-0102
+
+GAP: only 1 provider(s) on file for 'electrician' — inventory is thin; use the hiring checklist and add providers as you find them
+
+HIRING CHECKLIST (what to verify yourself before signing)
+  □ PA HICPA registration: ask for the PA number; check at hicsearch.attorneygeneral.gov or 888-520-6680; the number must appear on the contract
+  □ Certificate of insurance naming you; HICPA requires $50k/$50k liability at registration but it can lapse
+  □ Written scope with exclusions, timeline, payment terms, and warranty
+  □ Who pulls permits and whether they are in the price
+  □ City of Pittsburgh: trade license (City data); suburbs: ask the municipality — PA has no state electrician license
+
+### Chimney match
+PROVIDERS FOR: chimney   (home municipality: Mt. Lebanon)
+Ranked: task suitability → serves the address → verified credentials → freshness → distance. Unknown stays unknown.
+Registration/licensing is never proof of competence; workmanship evidence is not available from any permitted source.
+
+1. Demo Chimney Sweeps (SYNTHETIC)  [SYNTHETIC — demo only]
+   listed as: chimney  (existence: synthetic demo record, 2026-10-29)
+   serves the address: yes (stated service area)
+   credential: Listed as CSIA Certified Chimney Sweep on csia.org as checked 2026-10-20 — https://web.csia.org/CSIA-Certified
+   insurance: unknown
+   workmanship: unknown (no permitted source)
+   distance: 0.7 mi
+   phone: 412-555-0104
+
+GAP: only 1 provider(s) on file for 'chimney' — inventory is thin; use the hiring checklist and add providers as you find them
+
+HIRING CHECKLIST (what to verify yourself before signing)
+  □ PA HICPA registration: ask for the PA number; check at hicsearch.attorneygeneral.gov or 888-520-6680; the number must appear on the contract
+  □ Certificate of insurance naming you; HICPA requires $50k/$50k liability at registration but it can lapse
+  □ Written scope with exclusions, timeline, payment terms, and warranty
+  □ Who pulls permits and whether they are in the price
+  □ CSIA certification (csia.org locator); which inspection level is quoted
+
+### Thin inventory: roofer
+PROVIDERS FOR: roofer   (home municipality: Mt. Lebanon)
+Ranked: task suitability → serves the address → verified credentials → freshness → distance. Unknown stays unknown.
+Registration/licensing is never proof of competence; workmanship evidence is not available from any permitted source.
+
+  no providers on file for this category — only 0 provider(s) on file for 'roofer' — inventory is thin; use the hiring checklist and add providers as you find them
+
+GAP: only 0 provider(s) on file for 'roofer' — inventory is thin; use the hiring checklist and add providers as you find them
+
+HIRING CHECKLIST (what to verify yourself before signing)
+  □ PA HICPA registration: ask for the PA number; check at hicsearch.attorneygeneral.gov or 888-520-6680; the number must appear on the contract
+  □ Certificate of insurance naming you; HICPA requires $50k/$50k liability at registration but it can lapse
+  □ Written scope with exclusions, timeline, payment terms, and warranty
+  □ Who pulls permits and whether they are in the price
+  □ No PA roofing license; HICPA registration; manufacturer-certified installer status if a material warranty matters
+
+### A real (non-sample) house never sees synthetic providers:
+PROVIDERS FOR: roofer   (home municipality: unknown)
+Ranked: task suitability → serves the address → verified credentials → freshness → distance. Unknown stays unknown.
+Registration/licensing is never proof of competence; workmanship evidence is not available from any permitted source.
+
+  no providers on file for this category — only 0 provider(s) on file for 'roofer' — inventory is thin; use the hiring checklist and add providers as you find them
+

@@ -1,0 +1,423 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HomeKeeper — synthetic demo snapshot</title><style>
+:root{--paper:#F4F4F1;--ink:#243039;--ink-2:#4F5B64;--brick:#8E3A2B;--verdigris:#2E6E66;--mortar:#D8D5CE;--chalk:#FFFFFF;--slate:#5B6B78;--mustard:#8A6A1F}
+@media(prefers-color-scheme:dark){:root{--paper:#1C2227;--ink:#E8E6E1;--ink-2:#B8B4AC;--brick:#D6705E;--verdigris:#6FB3A8;--mortar:#3A434A;--chalk:#232B31;--slate:#9AA9B4;--mustard:#C9A24A}}
+*{box-sizing:border-box}html{font-size:17px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Palatino Linotype","Iowan Old Style","Book Antiqua",Palatino,Georgia,serif;line-height:1.5}
+a{color:inherit}
+.ui,button,input,select,textarea,.nav,.tag,.meta,.btn,table{font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+header.top{display:flex;align-items:baseline;gap:1.25rem;padding:1rem 16px;border-bottom:1px solid var(--mortar);flex-wrap:wrap}
+header.top .brand{font-size:1.15rem;letter-spacing:.01em}
+header.top .brand b{font-weight:600}
+.nav{display:flex;flex-wrap:wrap;gap:.2rem 1rem;min-width:0}.nav a{font-size:.9rem;color:var(--ink-2);text-decoration:none}
+.nav a[aria-current]{color:var(--ink);border-bottom:2px solid var(--brick)}
+main{max-width:72rem;margin:0 auto;padding:1.25rem 16px 4rem}
+.cols{display:grid;grid-template-columns:minmax(0,1fr);gap:2rem}
+@media(min-width:900px){.cols{grid-template-columns:17rem minmax(0,1fr)}}
+.rail{font-size:.92rem;color:var(--ink-2)}
+.rail h2{font-size:1.4rem;color:var(--ink);margin:.2rem 0 .4rem;font-weight:500;line-height:1.2}
+.rail dl{margin:0}.rail dt{color:var(--ink-2);font-size:.8rem;margin-top:.6rem}.rail dd{margin:0;color:var(--ink)}
+h1{font-size:2rem;font-weight:500;line-height:1.15;margin:.2rem 0 1rem;max-width:30ch}
+h2{font-size:1.35rem;font-weight:500;margin:2rem 0 .6rem}
+h3{font-size:1.05rem;font-weight:600;margin:1.2rem 0 .4rem;font-family:"Segoe UI",system-ui,sans-serif}
+p,li{max-width:70ch}
+.next{list-style:none;counter-reset:n;padding:0;margin:0 0 1rem}
+.next>li{counter-increment:n;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:.5rem 1rem;padding:1.1rem 0;border-top:1px solid var(--mortar)}
+.next>li:first-child{border-top:2px solid var(--ink)}
+.next>li::before{content:counter(n);font-size:2.6rem;line-height:1;color:var(--brick);font-weight:500;grid-row:span 3}
+.next .title{font-size:1.3rem;line-height:1.25;margin:0}
+.next .why{margin:.25rem 0 0;color:var(--ink-2)}
+.next .meta{font-size:.82rem;color:var(--ink-2);margin:.3rem 0 0}
+.task{border-left:3px solid var(--slate);padding:.6rem 0 .6rem 1rem;margin:.6rem 0}
+.task.safety{border-color:var(--brick)}.task.health{border-color:var(--mustard)}.task.deadline{border-color:var(--mustard)}
+.task.done,.task.someone_else,.task.excluded,.task.dismissed,.task.snoozed{border-color:var(--mortar);color:var(--ink-2)}
+.task .t{margin:0;font-size:1.08rem}
+.task .meta{font-size:.82rem;color:var(--ink-2);margin:.15rem 0}
+.task .row{margin:.3rem 0 0}.task p.row{margin:.35rem 0 0}details.act summary{color:var(--ink)}
+details{margin:.3rem 0}summary{cursor:pointer;font-family:"Segoe UI",system-ui,sans-serif;font-size:.85rem;color:var(--ink-2)}
+details[open] summary{color:var(--ink)}
+.ev{font-size:.9rem;margin:.4rem 0 0;padding-left:1rem;border-left:1px dotted var(--mortar)}
+.tag{display:inline-block;font-size:.72rem;padding:.05rem .4rem;border:1px solid var(--mortar);border-radius:2px;color:var(--ink-2);vertical-align:middle;margin-left:.3rem;white-space:nowrap}
+.tag.rec{border-color:var(--slate)}.tag.own{border-color:var(--verdigris);color:var(--verdigris)}.tag.pro{border-color:var(--verdigris);color:var(--verdigris)}
+.tag.reg{border-color:var(--mustard);color:var(--mustard)}.tag.unk{border-style:dotted}
+.unknown{border-bottom:2px dotted var(--brick);color:var(--ink-2)}
+.fields{width:100%;border-collapse:collapse;font-size:.92rem}
+.fields td{padding:.35rem .5rem .35rem 0;border-top:1px solid var(--mortar);vertical-align:top}
+.fields td:first-child{color:var(--ink-2);width:14rem;font-family:"Segoe UI",system-ui,sans-serif;font-size:.82rem}
+.fields td{overflow-wrap:anywhere}
+@media(max-width:600px){.fields td:first-child{width:7.5rem}.next>li{grid-template-columns:2.2rem minmax(0,1fr)}.next>li::before{font-size:2rem}html{font-size:16px}}
+input,select{max-width:100%;min-width:0}.row>*{min-width:0}form.inline{display:inline-block;max-width:100%}
+.limits{font-size:.8rem;color:var(--ink-2);max-width:70ch}
+form.inline{display:inline}
+.btn,button{font-size:.85rem;padding:.3rem .7rem;border:1px solid var(--ink);background:var(--chalk);color:var(--ink);border-radius:3px;cursor:pointer}
+.btn.quiet,button.quiet{border-color:var(--mortar);color:var(--ink-2)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--verdigris);outline-offset:2px}
+input,select,textarea{font-size:.9rem;padding:.3rem .4rem;border:1px solid var(--mortar);border-radius:3px;background:var(--chalk);color:var(--ink);max-width:100%}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0}
+.q{padding:.6rem 0;border-top:1px solid var(--mortar)}
+.q label{display:block;font-size:1rem}
+.q .because{font-size:.82rem;color:var(--ink-2)}
+pre.doc{white-space:pre-wrap;font-family:inherit;font-size:.95rem;line-height:1.45;background:var(--chalk);padding:1rem;border:1px solid var(--mortar);overflow-x:auto}
+.tbl{overflow-x:auto;max-width:100%}table.b{border-collapse:collapse;width:100%;font-size:.9rem}table.b td{overflow-wrap:anywhere}table.b td,table.b th{text-align:left;padding:.4rem .5rem;border-top:1px solid var(--mortar);vertical-align:top}
+table.b th{font-weight:600;color:var(--ink-2);font-size:.8rem}
+.notice{border:1px solid var(--mortar);padding:.6rem .9rem;font-size:.9rem;background:var(--chalk);max-width:70ch}
+.notice.synthetic{border-color:var(--brick)}
+.gap{color:var(--ink-2);font-style:italic}
+.cal .m{margin:1rem 0}.cal .m h3{margin:.2rem 0}
+footer{padding:2rem 16px;border-top:1px solid var(--mortar);font-size:.8rem;color:var(--ink-2);max-width:72rem;margin:0 auto}
+@media(prefers-reduced-motion:no-preference){details[open] .ev{animation:reveal .18s ease-out}}
+@keyframes reveal{from{opacity:0;transform:translateY(-2px)}to{opacity:1;transform:none}}
+
+.hero{padding:2.5rem 0 1.5rem;max-width:40rem}
+.next>li{max-width:52rem}
+.hero h1{font-size:2.4rem;margin:0 0 .6rem}
+.hero p{font-size:1.1rem;color:var(--ink-2);margin:0 0 1.4rem}
+.addr{display:flex;gap:.5rem;flex-wrap:wrap}.addr input{flex:1 1 20rem;font-size:1.05rem;padding:.55rem .7rem}
+.addr button{font-size:1rem;padding:.55rem 1rem}
+.houses{list-style:none;padding:0;margin:0}.houses li{padding:.7rem 0;border-top:1px solid var(--mortar)}
+.houses a{text-decoration:none;font-size:1.15rem}.houses .meta{display:block}
+.strip{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--ink-2);margin:0 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--mortar)}
+.strip b{color:var(--ink);font-weight:500}
+.done-btn{margin-top:.4rem}
+.next .act{grid-column:2;margin-top:.5rem}
+.sect{margin:1.6rem 0}.sect h2{margin:0 0 .5rem}
+.ask{border-top:2px solid var(--ink);padding-top:.8rem;margin-top:2rem}
+.ask .q{border-top:0;padding:.4rem 0}
+.more{font-size:.9rem;color:var(--ink-2)}
+.group summary{font-size:1.05rem;color:var(--ink);font-family:inherit}
+.group summary .n{color:var(--ink-2);font-size:.9rem}
+.onb{max-width:42rem}.onb .q{padding:.9rem 0}
+.center{max-width:46rem;margin:0 auto}
+.money h2 .limits{display:block;margin-top:.1rem}
+.quiet-link{color:var(--ink-2);font-size:.9rem}
+
+.pnav{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--mortar);z-index:2;padding:.45rem 16px;display:flex;gap:1.1rem;font-family:"Segoe UI",system-ui,sans-serif;font-size:.9rem;overflow-x:auto;white-space:nowrap}
+.pnav a{color:var(--ink-2);text-decoration:none;padding:.15rem 0}.pnav a:hover{color:var(--ink)}
+section.s{margin:2.2rem 0 0;scroll-margin-top:3.2rem}
+section.s>h2{margin:0 0 .8rem;font-size:1.3rem}
+.ident{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin:.6rem 0 .4rem}
+.ident h1{margin:0;font-size:1.9rem;max-width:26ch}
+.ident .status{font-family:"Segoe UI",system-ui,sans-serif;font-size:.88rem;color:var(--ink-2);max-width:26rem}
+.ident .status b{color:var(--ink);font-weight:500}
+.attn{border:1px solid var(--brick);border-left-width:5px;padding:.7rem 1rem;margin:1rem 0;background:var(--chalk)}
+.attn h2{margin:0 0 .3rem;font-size:1.05rem;font-family:"Segoe UI",system-ui,sans-serif;font-weight:600;color:var(--brick)}
+.attn ul{margin:.2rem 0 0;padding-left:1.1rem}.attn li{margin:.15rem 0}
+.tl{list-style:none;padding:0;margin:0}
+.tl>li{scroll-margin-top:3.4rem;border-top:1px solid var(--mortar);padding:.75rem 0}
+.tl>li.first{border-top:2px solid var(--ink)}
+.trow{display:grid;grid-template-columns:1.4rem minmax(0,1fr) auto;gap:.3rem .7rem;align-items:start}
+.trow .ic{color:var(--ink-2);padding-top:.25rem}.trow .ic.safety{color:var(--brick)}.trow .ic.done{color:var(--verdigris)}
+.tl{max-width:56rem}
+.trow .ttl{margin:0;font-size:1.12rem;line-height:1.3}
+.trow .sub{grid-column:2;margin:.1rem 0 0;font-size:.86rem;color:var(--ink-2);font-family:"Segoe UI",system-ui,sans-serif}
+.trow .sub .when{color:var(--ink)}
+.trow .sub .warn{color:var(--brick)}
+.trow .do{grid-column:3;grid-row:1/span 2;display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.trow .do form{margin:0}
+.trow details{grid-column:2;margin:.35rem 0 0}
+.trow details>summary{list-style:none;font-size:.86rem;color:var(--ink-2);display:inline-flex;align-items:center;gap:.3rem}
+.trow details>summary::-webkit-details-marker{display:none}
+.trow details>summary::before{content:"";display:inline-block;width:.4rem;height:.4rem;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg) translate(-1px,-1px);transition:transform .15s;margin-right:.1rem}
+.trow details[open]>summary::before{transform:rotate(45deg) translate(-2px,-2px)}
+@media(prefers-reduced-motion:reduce){.trow details>summary::before{transition:none}}
+.panel{margin:.6rem 0 .2rem;padding:.8rem 1rem;background:var(--chalk);border:1px solid var(--mortar);border-radius:4px;font-size:.95rem}
+.panel h4{margin:.7rem 0 .2rem;font-family:"Segoe UI",system-ui,sans-serif;font-size:.8rem;color:var(--ink-2);font-weight:600}
+.panel h4:first-child{margin-top:0}
+.panel p{margin:.2rem 0}
+.panel .opts{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.4rem 0}
+.panel .opts form{display:inline}
+.panel .pv{border-top:1px solid var(--mortar);padding:.4rem 0}
+.panel .pv b{font-weight:500}
+.panel .pv .cred{display:block;font-size:.84rem;color:var(--ink-2)}
+.chip{font-size:.82rem;padding:.25rem .6rem;border:1px solid var(--mortar);background:var(--paper);border-radius:999px;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:var(--ink)}
+.flash{position:relative;border:1px solid var(--verdigris);border-left-width:5px;background:var(--chalk);padding:.6rem .9rem;margin:.8rem 0;font-size:.92rem}
+.flash form{display:inline;margin-left:.4rem}
+.flash.err{border-color:var(--brick)}
+.prev{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
+@media(min-width:800px){.prev{grid-template-columns:1fr 1fr}}
+.prev h3{margin:0 0 .4rem}
+.up li{margin:.2rem 0;font-size:.95rem}.up .d{color:var(--ink-2);font-family:"Segoe UI",system-ui,sans-serif;font-size:.82rem;margin-right:.4rem}
+.kv{font-size:.95rem}.kv div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;border-top:1px solid var(--mortar)}
+.kv div:first-child{border-top:0}.kv .v{font-family:"Segoe UI",system-ui,sans-serif;white-space:nowrap}
+.fields td .edit{display:inline-block;margin-left:.4rem}
+.fields details.ed{display:inline-block;margin:0}.fields details.ed summary{display:inline;font-size:.8rem;color:var(--ink-2);text-decoration:underline;cursor:pointer}
+.fields details.ed form{display:flex;gap:.4rem;flex-wrap:wrap;margin:.3rem 0 0}
+.gq{border-top:1px solid var(--mortar);padding:.7rem 0}
+.sr-only{position:absolute;left:-9999px}
+.btn.sm,button.sm{font-size:.8rem;padding:.25rem .55rem}
+.ghost{background:transparent}
+.sect-note{font-size:.88rem;color:var(--ink-2);margin:0 0 .6rem}
+.group summary{padding:.4rem 0}
+.empty{color:var(--ink-2);font-style:italic;padding:.4rem 0}
+@media(max-width:640px){.trow{grid-template-columns:1.2rem minmax(0,1fr) auto}.trow .do{grid-column:3;grid-row:1}.trow .sub,.trow details{grid-column:2/span 2}.ident h1{font-size:1.5rem}.pnav{gap:.9rem}.btn,button{min-height:2.4rem}}
+.attn ul{list-style:none;padding:0}.attn li{padding:.25rem 0;border-top:1px solid var(--mortar)}.attn li:first-child{border-top:0}
+</style></head><body>
+<header class="top" style="padding-bottom:.6rem"><a class="brand" href="/" style="text-decoration:none"><b>HomeKeeper</b></a><nav class="nav"></nav></header><div class="notice synthetic" style="margin:1rem 16px 0">This is a read-only snapshot built from a synthetic sample house. Buttons and forms are simulated and do nothing here; the local app records them.</div>
+<nav class="pnav" aria-label="Sections"><a href="#now">Now</a><a href="#upcoming">Upcoming</a><a href="#house">House</a><a href="#history">History</a><a href="/" style="margin-left:auto">All houses</a></nav><main><section id="s0"><hr style="border:0;border-top:2px solid var(--ink);margin:3rem 0 1rem"><p class="limits">Demo house</p>
+<section class="s" id="now" style="margin-top:.4rem">
+<div class="ident"><div><h1>123 Sample St, Pittsburgh, 15228</h1></div><p class="status">built <b>1928</b>, <b>full</b> basement, <b>Mt. Lebanon</b>, you own it. <span class="tag">demo house</span></p></div>
+<div class="attn" role="region" aria-label="Needs attention"><h2>Needs attention</h2><ul><li><a href="#FINDING-f-002">Documented finding: Open junction box with exposed splices above basement stairs</a> <span class="limits">— a safety item in your inspection report</span></li><li><a href="#R-WH-003">Register new equipment with the manufacturer before the deadline</a> <span class="limits">— closing is 16 days away</span></li><li><a href="#R-MSI-001">Consider Mine Subsidence Insurance before closing</a> <span class="limits">— closing is 16 days away</span></li></ul></div>
+<h2>Do next</h2>
+<ul class="tl"><li id="FINDING-f-002" class="first"><div class="trow"><span class="ic safety"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Documented finding: Open junction box with exposed splices above basement stairs</p>
+<div class="do"></div>
+<p class="sub"><span class="when warn">From your inspection</span> · needs a pro · <span class="warn">if delayed: a documented hazard remains in place</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Your inspector documented this. See inspection report p.22 on 2026-10-20.</p>
+<h4>What to do</h4><p>Licensed electrician to correct</p>
+
+
+<h4>Done when</h4><p>Repair or assessment documented in the house record and the finding marked resolved. · keep: invoice, before/after photos, any warranty</p>
+<h4>Who could do this (electrician)</h4><div class="pv"><b>Demo Electric LLC (SYNTHETIC) (demo)</b> <span class="limits">service area unknown · 5.2 mi · 412-555-0102</span><span class="cred">City of Pittsburgh trade license Electrical 00000, status Active, per City open data 2026-10-29</span><span class="cred">Insurance expiration date on file with the City of Pittsburgh: 2027-03-31 (City data 2026-10-29)</span></div><p class="limits">only 1 provider(s) on file for &#x27;electrician&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/FINDING-f-002">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: safety finding, open</p><ul><li>finding f-002: Open junction box with exposed splices above basement stairs <span class="tag pro">inspection</span></li></ul><p>Sources:</p><ul><li>inspection report p.22: </li></ul></div></details>
+</div></details></div></li><li id="R-WH-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Water heater: test the T&amp;P relief valve, flush sediment, check the anode</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 20 minutes · you or a pro · no cost · <span class="">if delayed: Sediment shortens tank life and a stuck T&amp;P valve removes the tank&#x27;s over-pressure protect…</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater&#x27;s manual overrides when identified. Your unit&#x27;s own manual sets the interval.</p>
+<h4>What to do</h4><p>Check the T&amp;P relief valve at least once a year; drain a gallon monthly for sediment; inspect the anode periodically; have the vent inspected yearly (Bradford White I&amp;O).</p>
+<h4>Before you start</h4><p>T&amp;P test discharges hot water — ensure the discharge pipe ends somewhere safe before lifting the lever.</p>
+<h4>Call a professional if</h4><p>A T&amp;P valve that drips afterwards or won&#x27;t reseat; gas-valve or venting issues; anode replacement if seized.</p>
+<h4>Done when</h4><p>T&amp;P tested, sediment drained, anode checked; dates recorded. · keep: Model and serial (label photo); anode condition note.</p>
+<h4>Your equipment</h4><p>Bradford White RG240T6N · installed 2015 · interval from its manual</p><h4>Who could do this (plumber)</h4><div class="pv"><b>Demo Plumbing Co (SYNTHETIC) (demo)</b> <span class="limits">serves your area · 0.8 mi · 412-555-0100</span><span class="cred">Allegheny County Health Department registered master plumber, HP 00000 (list dated 2026-07-29)</span><span class="cred">Registered with the PA Attorney General under HICPA, PA000000, as checked 2026-10-15</span></div><div class="pv"><b>Demo Drain &amp; Sewer (SYNTHETIC) (demo)</b> <span class="limits">service area unknown · 412-555-0101</span><span class="cred">no credential verified</span></div><p class="limits">only 2 provider(s) on file for &#x27;plumber&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-WH-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: applies to every home in the pilot</p><ul><li>water heater type: tank <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>doe energysaver: DOE Energy Saver &#x27;Storage Water Heaters&#x27;: flush a quart every three months; check T&amp;P every six months; inspect anode every three to four years; ~120°F</li><li>bradford white io: 238-37281-00AB maintenance section</li></ul></div></details>
+</div></details></div></li><li id="R-CHIM-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Annual chimney and flue inspection (Level 1)</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · one visit · needs a pro · <span class="">if delayed: Flue blockage or liner failure can vent CO into the house or start a chimney fire.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>The record lists a fireplace. CSIA (citing NFPA 211) recommends annual inspection; CPSC includes chimneys and flues in its CO guidance.</p>
+<h4>What to do</h4><p>Arrange a Level 1 chimney inspection before the heating season; sweep if 1/8 inch of soot has built up. Ask whether the flue is lined and whether the heating appliance vents through it.</p>
+
+<h4>Call a professional if</h4><p>Inspection and sweeping — professional.</p>
+<h4>Done when</h4><p>Inspection report in the house record. · keep: Inspection report; sweep invoice.</p>
+<h4>Who could do this (chimney)</h4><div class="pv"><b>Demo Chimney Sweeps (SYNTHETIC) (demo)</b> <span class="limits">serves your area · 0.7 mi · 412-555-0104</span><span class="cred">Listed as CSIA Certified Chimney Sweep on csia.org as checked 2026-10-20</span></div><p class="limits">only 1 provider(s) on file for &#x27;chimney&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-CHIM-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>fireplaces: 1 <span class="tag rec">public record</span></li><li>chimney in use: <span class=unknown>unknown</span> <span class="tag unk">unknown</span></li></ul><p>Sources:</p><ul><li>csia homeowner: CSIA Homeowner Resources: chimneys inspected at least once a year (NFPA 211); sweep at 1/8 in buildup; CPSC CO Fact Sheet: check chimneys and flues</li></ul></div></details>
+</div></details></div></li></ul>
+<details class="group"><summary>17 more to do</summary><ul class="tl"><li id="R-ALARM-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Test smoke and CO alarms monthly; record manufacture dates</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 10 minutes · you can do it · no cost · <span class="">if delayed: A dead alarm gives no warning; CPSC links most fatal fires to missing or non-working alarm…</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Applies to every home. CPSC: test monthly, replace batteries at least annually.</p>
+<h4>What to do</h4><p>Press the test button on every smoke and CO alarm. On first pass, write down the manufacture date printed on the back of each unit; replace batteries at least yearly.</p>
+<h4>Before you start</h4><p>Test button only; do not open sealed units.</p>
+
+<h4>Done when</h4><p>Every alarm sounded on test; dates recorded in the house record. · keep: Alarm manufacture dates (photo of back label).</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: applies to every home in the pilot</p><ul><li class=empty>none</li></ul><p>Sources:</p><ul><li>cpsc alarms: CPSC Pub 559 &#x27;Smoke Alarms – Why, Where, and Which&#x27;: test once a month; replace batteries at least annually</li></ul></div></details>
+</div></details></div></li><li id="R-GFCI-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Test GFCI outlets and breakers monthly</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 10 minutes · you can do it · no cost · <span class="">if delayed: A failed GFCI leaves wet-area circuits without shock protection.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>CPSC: test every GFCI at least once a month, after installation and after power failures.</p>
+<h4>What to do</h4><p>Press TEST then RESET on every GFCI receptacle and GFCI breaker (kitchen, baths, basement, garage, exterior). Any that does not trip or reset needs replacement.</p>
+
+
+<h4>Done when</h4><p>All GFCIs tripped and reset. · keep: Note any failed device and its location.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: applies to every home in the pilot</p><ul><li class=empty>none</li></ul><p>Sources:</p><ul><li>cpsc dryer gfci: CPSC Pub 099 &#x27;What Is A GFCI?&#x27;: test at least once a month; Pub 513 Home Electrical Safety Checklist</li></ul></div></details>
+</div></details></div></li><li id="R-ALARM-002" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Replace smoke alarms older than 10 years; CO alarms per their label</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Quick check</span> · about 30–60 minutes · a quick check · <span class="">if delayed: Sensors degrade; an old alarm can pass a button test and still fail to detect smoke.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>CPSC: replace smoke alarms that are more than 10 years old; CO alarms have a manufacturer replacement age.</p>
+<h4>What to do</h4><p>Read the manufacture date on the back of each smoke and CO alarm and record the oldest year.</p>
+
+
+<h4>Done when</h4><p>No alarm older than 10 years in the record. · keep: Purchase receipt; new manufacture dates.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: oldest_smoke_alarm_year unknown — verify first</p><ul><li>oldest smoke alarm year: <span class=unknown>unknown</span> <span class="tag unk">unknown</span></li></ul><p>Sources:</p><ul><li>cpsc alarms: CPSC Pub 559: replace smoke alarms more than 10 years old; CPSC CO Fact Sheet: alarms have a recommended replacement age</li></ul></div></details>
+</div></details></div></li><li id="R-BSMT-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Keep basement humidity below 60% and dry any wet spot within 24–48 hours</p>
+<div class="do"></div>
+<p class="sub"><span class="when">From 2027-05-15</span> · ongoing; 5 minutes to check · you can do it · <span class="">if delayed: Mold growth, musty odors, and damage to stored items and finishes.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>EPA mold guidance thresholds; old basements in this climate run humid all summer.</p>
+<h4>What to do</h4><p>Put an inexpensive hygrometer in the basement; run a dehumidifier in humid months to keep relative humidity under 60% (ideally 30–50%). Dry any wet material within 24–48 hours; cleanup larger than about 10 sq ft of mold warrants professional help.</p>
+
+
+<h4>Done when</h4><p>Hygrometer in place; readings under 60% during humid months. · keep: Occasional readings.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>basement: Full <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>epa mold guide: EPA &#x27;A Brief Guide to Mold, Moisture and Your Home&#x27; pp.3,4,10,11: humidity below 60%; dry within 24–48 h; DIY cleanup under ~10 sq ft</li></ul></div></details>
+</div></details></div></li><li id="R-LEAD-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Lead-based paint: collect the disclosure and pamphlet; assess if children will live here</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · about 15 minutes · you can do it · no cost · <span class="">if delayed: Loss of the pre-closing inspection window; exposure risk during renovation.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Built before 1978: federal lead disclosure rules apply.</p>
+<h4>What to do</h4><p>Confirm you received the seller&#x27;s lead-based-paint disclosure and the EPA pamphlet; if children under six will live in the home, use the 10-day window for a lead inspection or risk assessment, and plan lead-safe practices for any renovation.</p>
+
+
+<h4>Done when</h4><p>Disclosure and pamphlet filed; assessment decision recorded. · keep: Signed disclosure form.</p>
+<h4>Who could do this (lead assessor)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;lead_assessor&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-LEAD-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>year built: 1928 <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>epa lead: EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing — pamphlet, disclosure, 10-day inspection opportunity</li></ul></div></details>
+</div></details></div></li><li id="R-PLUMB-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M6.2 6.3a1.9 1.9 0 1 1 2.6 1.8c-.6.3-.8.6-.8 1.2M8 11.6v.2"/></svg></span><p class="ttl">Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Quick check</span> · about 20 minutes · a quick check · <span class="">if delayed: Low pressure, leaks inside walls, and (for lead) a health exposure.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>The assessor record never records pipe materials; houses of this era commonly retain original galvanized supply and cast-iron drains.</p>
+<h4>What to do</h4><p>Read the inspection report&#x27;s plumbing section and look at exposed pipes in the basement: grey threaded pipe is galvanized steel; black heavy pipe is cast iron; a dull grey soft pipe at the meter may be lead. Record what you find.</p>
+
+
+<h4>Done when</h4><p>Materials recorded with source. · keep: Photos of pipe at the meter and main stack.</p>
+<h4>Who could do this (plumber)</h4><div class="pv"><b>Demo Plumbing Co (SYNTHETIC) (demo)</b> <span class="limits">serves your area · 0.8 mi · 412-555-0100</span><span class="cred">Allegheny County Health Department registered master plumber, HP 00000 (list dated 2026-07-29)</span><span class="cred">Registered with the PA Attorney General under HICPA, PA000000, as checked 2026-10-15</span></div><div class="pv"><b>Demo Drain &amp; Sewer (SYNTHETIC) (demo)</b> <span class="limits">service area unknown · 412-555-0101</span><span class="cred">no credential verified</span></div><p class="limits">only 2 provider(s) on file for &#x27;plumber&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-PLUMB-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: plumbing_supply_material unknown — verify first</p><ul><li>year built: 1928 <span class="tag rec">public record</span></li><li>plumbing supply material: <span class=unknown>unknown</span> <span class="tag unk">unknown</span></li></ul><p>Sources:</p><ul><li>internachi life expectancy: InterNACHI chart: galvanized/copper water lines and cast-iron waste pipe estimated lives (guideline only); PWSA lead service line program page</li></ul></div></details>
+</div></details></div></li><li id="R-WH-003" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Register new equipment with the manufacturer before the deadline</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · about 10 minutes · you can do it · no cost · <span class="">if delayed: Loss of the extended parts warranty (e.g., 10-year vs 5-year).</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Manufacturer warranty terms condition the longer parts warranty on timely registration.</p>
+<h4>What to do</h4><p>Register the new unit on the manufacturer&#x27;s site within its deadline (Goodman: 60 days; Carrier: 90 days) and file the confirmation; unregistered units typically drop to the shorter base warranty.</p>
+
+
+<h4>Done when</h4><p>Registration confirmation stored with the equipment record. · keep: Registration confirmation; installer invoice; serial number.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>new equipment pending registration: True <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>goodman rs6612023: Goodman Warranty Overview PM-WARRCHRT-G: online registration within 60 days of installation; Carrier warranty page: 90 days to register</li></ul></div></details>
+</div></details></div></li><li id="R-MSI-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Consider Mine Subsidence Insurance before closing</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · about 30 minutes · you can do it · <span class="">if delayed: Uninsured subsidence damage; coverage timing tied to closing.</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>DEP&#x27;s confirmed-mining layer intersects this point (a flag only; not a parcel-level mine-map review).</p>
+<h4>What to do</h4><p>Look up the address on PA DEP&#x27;s Mine Subsidence Insurance map and decide on coverage; a policy applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.</p>
+
+
+<h4>Done when</h4><p>Decision recorded (policy number or &#x27;declined&#x27;). · keep: Policy.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>undermined: True <span class="tag reg">regional</span></li></ul><p>Sources:</p><ul><li>padep msi layer: DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ (coverage effective at closing when applied for at purchase agreement)</li></ul></div></details>
+</div></details></div></li><li id="R-SUMP-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Test the sump pump</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 10 minutes · you can do it · no cost</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing. Your unit&#x27;s own manual sets the interval.</p>
+<h4>What to do</h4><p>Inspect and test the system at least every three months; check frequently for debris (Zoeller FM2676).</p>
+<h4>Before you start</h4><p>Keep hands clear of the impeller; unplug before clearing debris.</p>
+<h4>Call a professional if</h4><p>Pump doesn&#x27;t run, runs constantly, or trips the GFCI.</p>
+<h4>Done when</h4><p>Pump cycled on test; date recorded. · keep: Pump label photo (make/model) for its manual.</p>
+<h4>Your equipment</h4><p>Zoeller M53 · installed 2026 · interval from its manual</p><h4>Who could do this (plumber)</h4><div class="pv"><b>Demo Plumbing Co (SYNTHETIC) (demo)</b> <span class="limits">serves your area · 0.8 mi · 412-555-0100</span><span class="cred">Allegheny County Health Department registered master plumber, HP 00000 (list dated 2026-07-29)</span><span class="cred">Registered with the PA Attorney General under HICPA, PA000000, as checked 2026-10-15</span></div><div class="pv"><b>Demo Drain &amp; Sewer (SYNTHETIC) (demo)</b> <span class="limits">service area unknown · 412-555-0101</span><span class="cred">no credential verified</span></div><p class="limits">only 2 provider(s) on file for &#x27;plumber&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-SUMP-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>sump pump present: True <span class="tag own">owner</span></li><li>basement: Full <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>zoeller fm2676: Zoeller FM2676: inspect and test for proper operation at least every three months (used as the generic planning interval until the installed model is identified)</li><li>zoeller fm2676: FM2676 maintenance section; 3-year warranty void if not maintained per instructions</li></ul></div></details>
+</div></details></div></li><li id="R-GRADE-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Check that the ground slopes away from the foundation</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · about 30 minutes · a quick check</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Houses with below-grade space depend on surface drainage; EPA and ISU Extension both call for ground sloping away from the foundation.</p>
+<h4>What to do</h4><p>Walk the perimeter after a rain: the first 10 ft should drop about 6 in away from the house (ISU Extension). Note low spots, settled backfill, window wells that hold water, and paving that slopes toward the wall.</p>
+<h4>Before you start</h4><p>Visual, after rain.</p>
+<h4>Call a professional if</h4><p>Regrading against a foundation wall, or any sign of movement/cracking — professional.</p>
+<h4>Done when</h4><p>Grading observation recorded; any low spots photographed. · keep: Photos of low spots.</p>
+<h4>Who could do this (landscaper)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;landscaper&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-GRADE-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>basement: Full <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>isu drainage: ISU Extension Pm-1560: first 10 ft from the house should drop at least 6 in; EPA Mold Guide p.10: ground slopes away from the building foundation</li></ul></div></details>
+</div></details></div></li><li id="R-WDI-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10.5 2.5a3 3 0 0 0-3.2 4.2L2.5 11.5l2 2 4.8-4.8a3 3 0 0 0 4.2-3.2l-1.8 1.8-1.7-.5-.5-1.7Z" stroke-linejoin="round"/></svg></span><p class="ttl">Wood-destroying insect inspection and moisture contact at wood</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · one visit · needs a pro</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Allegheny County municipalities adopt the IRC termite probability &#x27;moderate to heavy&#x27; (e.g., Shaler Township UCC ordinance); the seller disclosure form asks about infestation (item 5).</p>
+<h4>What to do</h4><p>If the purchase did not include a wood-destroying insect (WDI) inspection, get one; keep soil and mulch below sill plates and wood siding, and fix wood-to-ground contact.</p>
+
+
+<h4>Done when</h4><p>WDI report filed; wdi_inspection_date recorded. · keep: WDI report.</p>
+<h4>Who could do this (pest control)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;pest_control&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-WDI-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>year built: 1928 <span class="tag rec">public record</span></li><li>wdi inspection date: <span class=unknown>unknown</span> <span class="tag unk">unknown</span></li></ul><p>Sources:</p><ul><li>termite probability: Shaler Township UCC ordinance: Termite &#x27;Moderate to heavy&#x27;; PA seller disclosure form item 5 (termites/wood-destroying insects)</li></ul></div></details>
+</div></details></div></li><li id="R-ROOF-003" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Seasonal roof and flashing visual check (spring and fall, and after severe weather)</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 20 minutes · you can do it · no cost</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>NRCA recommends scheduled roof inspections at least twice a year plus after severe weather (reported by Professional Roofing).</p>
+<h4>What to do</h4><p>From the ground or a window, look for missing/lifted shingles, exposed nails, rust at flashings, debris in valleys, and daylight or staining in the attic. Do not walk the roof.</p>
+<h4>Before you start</h4><p>Ground level with binoculars or a camera; attic check with a flashlight.</p>
+<h4>Call a professional if</h4><p>Anything you see that needs a ladder on a slope, or any active leak.</p>
+<h4>Done when</h4><p>Check recorded with any observations and photos. · keep: Photos of problem areas.</p>
+<h4>Who could do this (roofer)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;roofer&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-ROOF-003">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: applies to every home in the pilot</p><ul><li class=empty>none</li></ul><p>Sources:</p><ul><li>nrca roof inspection: Professional Roofing article 4787 reporting NRCA&#x27;s recommendation of roof inspections at least twice per year (spring/fall) and after severe weather</li></ul></div></details>
+</div></details></div></li><li id="R-WH-002" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Plan a water-heater replacement window</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · planning</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>InterNACHI estimates 6–12 years for conventional tank heaters (NAHB 2007: 10); a unit at 8+ years is in its planning window. Your unit&#x27;s own manual sets the interval.</p>
+<h4>What to do</h4><p>Start a replacement reserve; watch for rust at the base, moisture, or inconsistent hot water. This is planning, not a prediction — units often outlast the estimate.</p>
+
+
+<h4>Done when</h4><p>Reserve scenario chosen in the future-replacements budget. · keep: Label photo for age; quotes.</p>
+<h4>Your equipment</h4><p>Bradford White RG240T6N · installed 2015 · interval from its manual</p><h4>Who could do this (plumber)</h4><div class="pv"><b>Demo Plumbing Co (SYNTHETIC) (demo)</b> <span class="limits">serves your area · 0.8 mi · 412-555-0100</span><span class="cred">Allegheny County Health Department registered master plumber, HP 00000 (list dated 2026-07-29)</span><span class="cred">Registered with the PA Attorney General under HICPA, PA000000, as checked 2026-10-15</span></div><div class="pv"><b>Demo Drain &amp; Sewer (SYNTHETIC) (demo)</b> <span class="limits">service area unknown · 412-555-0101</span><span class="cred">no credential verified</span></div><p class="limits">only 2 provider(s) on file for &#x27;plumber&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-WH-002">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>water heater type: tank <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>internachi life expectancy: InterNACHI life-expectancy chart: conventional water heater 6–12 years (guideline only); NAHB 2007 study: gas water heater 10 years</li></ul></div></details>
+</div></details></div></li><li id="R-ROOF-002" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Plan an asphalt-roof replacement window</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · planning</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>InterNACHI estimates 20 years (3-tab) to 30 (architectural) for asphalt shingles; a roof past 15 years is in its planning window.</p>
+<h4>What to do</h4><p>Start a replacement reserve and get a roofer&#x27;s condition assessment at the next seasonal check; condition drives timing more than age.</p>
+
+
+<h4>Done when</h4><p>Reserve scenario chosen. · keep: Roofer&#x27;s assessment; quotes.</p>
+<h4>Who could do this (roofer)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;roofer&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-ROOF-002">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>roof type: SHINGLE <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>internachi life expectancy: InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only); NAHB 2007: asphalt shingles ~20 yr</li></ul></div></details>
+</div></details></div></li><li id="R-HEAT-002" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Check the furnace/air-handler filter</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · about 5 minutes · you can do it</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual&#x27;s own interval overrides this when known. Your unit&#x27;s own manual sets the interval.</p>
+<h4>What to do</h4><p>Clean or replace the filter every two months or as required (Goodman).</p>
+
+
+<h4>Done when</h4><p>Filter checked/replaced; size and date recorded. · keep: Filter size.</p>
+<h4>Your equipment</h4><p>Goodman GMVC96 · installed 2019 · interval from its manual</p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>heating type: forced air <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>doe energysaver: DOE Energy Saver &#x27;Maintaining Your Air Conditioner&#x27;: clean or replace filters every month or two in season (applied to forced-air heating as a planning assumption)</li><li>goodman rs6612023: RS6612023r2 maintenance section</li></ul></div></details>
+</div></details></div></li><li id="R-AC-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Central AC: filter monthly in season, clear the outdoor unit, annual coil check</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Due now</span> · 15 minutes monthly; one pro visit · you or a pro</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>DOE Energy Saver AC maintenance guidance.</p>
+<h4>What to do</h4><p>Clean or replace the filter every month or two during cooling season; keep about 2 ft clear around the outdoor condenser and remove debris; have the evaporator coil checked yearly and the drain channels cleared.</p>
+
+<h4>Call a professional if</h4><p>Refrigerant, electrical and coil cleaning inside the cabinet — professional.</p>
+<h4>Done when</h4><p>Pre-season check recorded; service invoice if a pro visited. · keep: Invoice; filter size.</p>
+<h4>Who could do this (hvac)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;hvac&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-AC-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>ac present: True <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>doe energysaver: DOE Energy Saver &#x27;Maintaining Your Air Conditioner&#x27;: filter every month or two; evaporator coil every year; keep ~2 ft clearance; clear drain channels</li></ul></div></details>
+</div></details></div></li><li id="R-AIR-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.4 1.5"/></svg></span><p class="ttl">Seal obvious air leaks at windows, doors and the sill (optional improvement)</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Open</span> · an afternoon · you can do it</p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>DOE air-sealing guidance; optional comfort/energy improvement, deliberately ranked last.</p>
+<h4>What to do</h4><p>Caulk gaps at window and door trim and the foundation sill with latex or silicone caulk; leave duct sealing to a contractor. Do this after moisture problems are controlled, not before.</p>
+
+
+<h4>Done when</h4><p>Done; noted. · keep: None.</p>
+
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>year built: 1928 <span class="tag rec">public record</span></li></ul><p>Sources:</p><ul><li>doe energysaver: DOE Energy Saver &#x27;Seal Air Leaks with Caulk&#x27;: caulk windows/doors/foundation sill; leave duct sealing to a contractor</li></ul></div></details>
+</div></details></div></li></ul></details>
+<details class="group"><summary>Recurring, next due later <span class="n">(1)</span></summary><ul class="tl"><li id="R-HEAT-001" class=""><div class="trow"><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2.2 14.5 13.5H1.5Z" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.8v.2"/></svg></span><p class="ttl">Annual professional inspection and service of the fuel-burning heating system</p>
+<div class="do"></div>
+<p class="sub"><span class="when">Next 2027-10-20</span> · one visit · needs a pro · <span class="">if delayed: Carbon-monoxide exposure risk and mid-winter failure; many manufacturer warranties conditi…</span></p>
+<details><summary>Details</summary><div class="panel">
+<h4>Why it applies to this house</h4><p>Fuel-burning heating equipment produces combustion gases; CPSC recommends professional inspection every year. Your unit&#x27;s own manual sets the interval.</p>
+<h4>What to do</h4><p>Before the heating season, have a heating professional inspect and service the furnace or boiler: vent connector and chimney/flue, heat exchanger, combustion/CO check, blower or circulator, controls. Ask for the CO reading in writing.</p>
+
+<h4>Call a professional if</h4><p>All of it — combustion equipment is professional work.</p>
+<h4>Done when</h4><p>Service invoice with date, CO reading and technician notes in the house record. · keep: Invoice; CO reading; any parts replaced.</p>
+<h4>Your equipment</h4><p>Goodman GMVC96 · installed 2019 · interval from its manual</p><h4>Done before</h4><ul><li>2026-10-20 — CO reading 3 ppm; blower cleaned (Keystone HVAC)</li></ul><h4>Who could do this (hvac)</h4><p class="empty">No one on file yet for this kind of work.</p><p class="limits">only 0 provider(s) on file for &#x27;hvac&#x27; — inventory is thin; use the hiring checklist and add providers as you find them</p><p class="limits">Listed credentials are quoted from their source with the date checked. A registration is not proof of skill; no permitted source rates workmanship. <a href="/house/sample-complete/providers/R-HEAT-001">Full list and hiring checklist</a></p>
+<details><summary>Evidence and sources</summary><div class="ev"><p>Because: all trigger conditions met</p><ul><li>heating fuel: gas <span class="tag own">owner</span></li></ul><p>Sources:</p><ul><li>cpsc alarms: CPSC NSN-9 &#x27;Inspect, Detect and Protect&#x27;: have a professional inspect all fuel-burning heating systems every year; DOE Energy Saver furnace/boiler checklist</li><li>goodman rs6612023: RS6612023r2 &#x27;Scheduled Maintenance&#x27; p.18</li></ul></div></details>
+</div></details></div></li></ul></details>
+
+<details class="group"><summary>Postponed <span class="n">(1)</span></summary><ul class="tl"><li id="R-GUTTER-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Clean gutters and confirm downspouts discharge 5–10 ft from the foundation</p><div class="do"></div><p class="sub">postponed until 2026-11-20 — leaves not down yet</p></div></li></ul></details><details class="group"><summary>Set aside <span class="n">(1)</span></summary><ul class="tl"><li id="R-DRYER-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Clean the dryer vent duct; replace any plastic or foil duct with metal</p><div class="do"></div><p class="sub">no dryer; use laundromat</p></div></li></ul></details><details class="group"><summary>Someone else&#x27;s <span class="n">(2)</span></summary><ul class="tl"><li id="R-SEWER-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Point-of-sale sewer dye test / lateral certification</p><div class="do"></div><p class="sub">sewer_lateral is shared with neighbor (party agreement)&#x27;s responsibility per the house record</p></div></li><li id="R-SEWER-002"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Private sewer lateral: establish material and condition (pre-1960 house)</p><div class="do"></div><p class="sub">sewer_lateral is shared with neighbor (party agreement)&#x27;s responsibility per the house record</p></div></li></ul></details><details class="group"><summary>Not relevant to this house <span class="n">(3)</span></summary><ul class="tl"><li id="R-ELEC-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Establish the wiring type and grounding (pre-1960 house)</p><div class="do"></div><p class="sub">wiring_type = &#x27;rewired&#x27;</p></div></li><li id="R-FREEZE-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Winterize exterior hose bibs before the first freeze</p><div class="do"></div><p class="sub">exterior_hose_bibs = False</p></div></li><li id="R-DISC-001"><div class="trow"><span class="ic"></span><p class="ttl" style="font-size:1rem;color:var(--ink-2)">Before you buy: reconcile the seller disclosure with the inspection report</p><div class="do"></div><p class="sub">stage = &#x27;owner&#x27;</p></div></li></ul></details>
+<h3 style="margin-top:1.6rem">One answer would sharpen this plan</h3><div id="q-plumbing_supply_material"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-oldest_smoke_alarm_year"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><details class="group"><summary>7 more questions</summary><div id="q-owner_confirms_match"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-radon_mitigation_present"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-chimney_in_use"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-gutters_present"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-wdi_inspection_date"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-hoa_or_shared"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div><div id="q-known_problems"><div class="q"><span class='limits'>[form — available in the local app]</span></div></div></details>
+<p class="more" style="margin-top:1.2rem"><a href="/house/sample-complete/fit">I have limited time and money</a></p>
+</section>
+<section class="s" id="upcoming"><h2>Coming up</h2>
+<div class="prev"><div><h3>Next 60 days</h3><ul class="up"><li><span class="d">Nov 20</span>Clean gutters and confirm downspouts discharge 5–10 ft from the foundation</li><li><span class="d">Nov 29</span>Test smoke and CO alarms monthly; record manufacture dates</li><li><span class="d">Nov 29</span>Test GFCI outlets and breakers monthly</li></ul><p class="limits"><a href="/house/sample-complete/reminders.ics">Add these to my calendar</a> — a file you import; re-download after recording work. <a href="/house/sample-complete/report/calendar">Full year</a></p></div>
+<div><h3>Money at a glance</h3><div class="kv"><div><span>Routine upkeep, priced items</span><span class="v">$360–$750 / yr</span></div><div><span>Known repairs, quoted</span><span class="v">$0–$0</span></div><div><span>Saving for replacements</span><span class="v">$164–$294 / mo</span></div><div><span>Not priced yet</span><span class="v">3 items</span></div></div><p class="limits">Only prices you entered or references you chose are counted; nothing is estimated for you. <a href="/house/sample-complete/money">Add quotes and set-asides</a></p></div></div>
+</section>
+<section class="s" id="house"><h2>The house</h2><p class="sect-note">Facts from the county assessor are unmarked; yours are marked <span class="tag own">owner</span>; inspection findings <span class="tag pro">inspection</span>. Dotted underlines are gaps. Edit anything that's wrong — the plan above updates.</p>
+<h3>About the house</h3><table class="fields"><tr><td>Year built</td><td>1928  </td></tr><tr><td>Style</td><td>COLONIAL  </td></tr><tr><td>Stories</td><td>2.0  </td></tr><tr><td>Basement</td><td>Full  </td></tr><tr><td>Exterior</td><td>Brick  </td></tr><tr><td>Roof</td><td>SHINGLE  </td></tr><tr><td>Living area</td><td>1850 sq ft  </td></tr><tr><td>Lot</td><td>6200 sq ft  </td></tr><tr><td>Bedrooms</td><td>3  </td></tr><tr><td>Full baths</td><td>1  </td></tr><tr><td>Fireplaces</td><td>1  </td></tr><tr><td>Assessor&#x27;s condition</td><td>AVERAGE  </td></tr><tr><td>Assessor&#x27;s grade</td><td>AVERAGE +  </td></tr></table>
+<h3>Systems</h3><table class="fields"><tr><td>Heating / cooling (record)</td><td>Central Heat with AC <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Heating fuel</td><td>gas <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Heating type</td><td>forced air <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Central AC</td><td>True <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Furnace installed</td><td>2019 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Water heater</td><td>tank <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Water heater installed</td><td>2015 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Roof installed</td><td>2008 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Sump pump</td><td>True <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Sump pump installed</td><td>2026 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Wiring</td><td>rewired <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Supply pipes</td><td><span class="unknown">unknown</span>  </td></tr><tr><td>Radon result (pCi/L)</td><td>1.9 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Radon tested</td><td>2026-09-30 <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Radon system</td><td><span class="unknown">unknown</span>  </td></tr><tr><td>Chimney in use</td><td><span class="unknown">unknown</span>  </td></tr><tr><td>Dryer</td><td>True <span class="tag own">owner · owner confirmed</span> </td></tr><tr><td>Outside faucets</td><td>False <span class="tag own">owner · owner corrected</span> <div class="limits">was True</div></td></tr><tr><td>Gutters</td><td><span class="unknown">unknown</span>  </td></tr></table>
+<h3>Equipment</h3><table class="fields"><tr><td>furnace</td><td>Goodman GMVC96 · installed 2019 · manual on file</td></tr><tr><td>water heater</td><td>Bradford White RG240T6N · installed 2015 · manual on file</td></tr><tr><td>sump pump</td><td>Zoeller M53 · installed 2026 · manual on file</td></tr></table>
+<h3>Findings from the inspection</h3><table class="fields"><tr><td>roof</td><td>Lifted shingles and exposed nail heads at rear slope <span class='tag'>major</span> <span class=tag>resolved</span> <span class='limits'>inspection report p.14</span></td></tr><tr><td>electrical</td><td>Open junction box with exposed splices above basement stairs <span class='tag'>safety</span> <span class='limits'>inspection report p.22</span></td></tr></table>
+<h3>Who is responsible</h3><table class="fields"><tr><td>sewer lateral</td><td>shared with neighbor (party agreement)</td></tr></table>
+
+<h3>The area <span class="limits">describes the neighbourhood, not this house</span></h3><table class="fields"><tr><td>Radon in this ZIP</td><td>12 tests on file; median 3.6 pCi/L; 42% at or above 4 (through 2025-03-09)  <div class="limits">Self-selected tests reported by certified testers; includes post-mitigation tests; ZIP is not a municipality. Describes neighbours&#x27; results, not this house. Only a test in this house establishes its radon level.</div></td></tr><tr><td>Flood zone</td><td>Zone X — outside the special hazard area  <div class="limits">Mapped zone containment at FIRM-panel scale; a LOMA may remove the structure; Zone X still has basement-flooding exposure. Does not establish whether this basement takes water.</div></td></tr><tr><td>Mining under or near</td><td>yes (mapped)  <div class="limits">DEP layer of areas known to be undermined or near undermined areas, from mine maps of varying accuracy. Not a parcel-level mine map review and not evidence of movement. License: not for commercial use or resale — flag and link only.</div></td></tr><tr><td>Landslide-prone area</td><td>not mapped here  <div class="limits">Coarse slope/geology zone; the published layer covers the City of Pittsburgh extent only, so False outside the city means &#x27;not mapped&#x27;, not &#x27;not prone&#x27;. Does not establish slope movement at this lot.</div></td></tr><tr><td>Soil</td><td>Synthetic silt loam, 8 to 15 percent slopes; drainage: Moderately well drained; frost action: Moderate  <div class="limits">SSURGO map unit (1:12,000–1:63,360) describing the dominant soil of a polygon that may cover many lots; urban map units carry few attributes. Not a foundation condition; NRCS says it does not replace on-site investigation.</div></td></tr><tr><td>Climate</td><td>median first freeze 10/20, last 04/24; 41.4 in snow/yr  <div class="limits">30-year station normals at Pittsburgh International Airport; freeze dates are 50% probabilities, not forecasts; no site microclimate.</div></td></tr><tr><td>Sewer test at sale</td><td>Mt. Lebanon: required (Sale; refinancing exempt); fee $50; lead time Evidence of Compliance at least 10 business days before closing; interim relief request at least 14; valid 3 years <span class="tag rec">public record · unverified</span> <div class="limits">Compiled from the municipality&#x27;s own page/code on 2026-10-29; fees, lead times and validity change. Verify with the municipality.</div></td></tr></table>
+<details class="group"><summary>Details and administration</summary><table class="fields"><tr><td>Matched address</td><td>123 SAMPLE ST, PITTSBURGH, 15228 <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Coordinates</td><td>lat 40.3801, lon -80.0491 <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Parcel</td><td>0000X00001000000 <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Municipality</td><td>Mt. Lebanon <span class="tag rec">public record · unverified</span> </td></tr><tr><td>School district</td><td>Mt Lebanon <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Use</td><td>SINGLE FAMILY <span class="tag rec">public record · unverified</span> </td></tr><tr><td>Last sale</td><td>2026-09-15 <span class="tag rec">public record · unverified</span> </td></tr><tr><td>City permits since 2019</td><td><span class="unknown">unknown</span>  </td></tr><tr><td>Stage</td><td>owner <span class="tag own">owner · owner corrected</span> <div class="limits">was under_contract</div></td></tr><tr><td>Closing date</td><td>2026-11-14 <span class="tag own">owner · owner confirmed</span> </td></tr></table>
+</details></section>
+<section class="s" id="history"><h2>History</h2>
+<div class="prev"><div><h3>Work done <span class="limits">3 items · $815 recorded</span></h3><ul class="up"><li><span class="d">2026-11-21</span>FINDING-f-001 — re-secured shingles, sealed nails · $650 · ABC Roofing</li><li><span class="d">2026-10-20</span>Annual professional inspection and service of the fuel-burning heating system — CO reading 3 ppm; blower cleaned · $165 · Keystone HVAC</li><li><span class="d">2026-09-30</span>Test for radon (or file a result from the last two years) — inspection radon test 1.9 pCi/L (lab report filed)</li></ul></div>
+<div><h3>Documents</h3><ul class="up"><li>brief: Job brief: Documented finding: Open junction box with exposed splices above basement stairs <span class="limits">/home/claude/homekeeper/houses/sample-complete/briefs/FINDING-f-002.md</span></li><li>invoice: ABC Roofing invoice 2026-11-21 <span class="limits">House/roof-invoice-2026.pdf</span></li><li>warranty: Zoeller 3-year warranty (FM2676) <span class="limits">https://zoellerpumps.com/wp-content/uploads/sites/3/2026/07/fm2676-3-Year-Warranty-Installation-Instructions.pdf</span></li></ul>
+</div></div>
+<p class="limits" style="margin-top:1rem"><a href="/house/sample-complete/history">Full history and change log</a> · <a href="/house/sample-complete/export.json">Download the whole record</a></p>
+</section></section></main>
+<footer>HomeKeeper prototype 0.9.1-ux · Allegheny County pilot · Not an inspection and not proof of a property's condition. Rules are author-reviewed against cited sources, not yet expert-validated.</footer>
+</body></html>

@@ -1,0 +1,6 @@
+{
+  "_source": "WPRDC Allegheny County Property Assessments data dictionary (resource c665470c-ee72-4f0d-b772-4f09c2145f2a), read 2026-10-29. Only code tables that the dictionary enumerates are included; for ROOF, EXTERIORFINISH, HEATINGCOOLING, STYLE and CDU the dictionary gives examples only, so the *DESC columns are used instead.",
+  "BASEMENT": {"1": "None", "2": "Slab/Piers", "3": "Crawl", "4": "Part", "5": "Full"},
+  "CONDITION": {"1": "Excellent", "2": "Good", "3": "Average", "4": "Fair", "5": "Poor", "6": "Unsound", "7": "Very good", "8": "Very poor"},
+  "GRADE_NOTE": "Letter grades A/X/XX (highest), B, C, D, E with +/- modifiers; an assessor quality-of-construction category, not a condition observation."
+}

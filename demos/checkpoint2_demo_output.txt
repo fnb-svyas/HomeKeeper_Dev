@@ -1,0 +1,416 @@
+=== CHECKPOINT 2 DEMO 1: reasonably complete profile (SYNTHETIC) ===
+HOUSE RECORD  sample-complete   (SYNTHETIC DEMO DATA)
+Address entered: 123 Sample St, Pittsburgh, PA 15228
+Match: 123 SAMPLE ST, PITTSBURGH, 15228  (score 100, PointAddress; best candidate score 100 (PointAddress); not yet confirmed)
+
+PROPERTY FIELDS
+  matched_address              123 SAMPLE ST, PITTSBURGH, 15228                   [public record; unverified; county_geocoder]
+  coordinates                  lat=40.3801, lon=-80.0491                          [public record; unverified; county_geocoder]
+  parcel_id                    0000X00001000000                                   [public record; unverified; wprdc_assessments]
+  municipality                 Mt. Lebanon                                        [public record; unverified; wprdc_assessments]
+  school_district              Mt Lebanon                                         [public record; unverified; wprdc_assessments]
+  use_description              SINGLE FAMILY                                      [public record; unverified; wprdc_assessments]
+  year_built                   1928                                               [public record; unverified; wprdc_assessments]
+  style                        COLONIAL                                           [public record; unverified; wprdc_assessments]
+  stories                      2.0                                                [public record; unverified; wprdc_assessments]
+  basement                     Full                                               [public record; unverified; wprdc_assessments]
+  exterior_finish              Brick                                              [public record; unverified; wprdc_assessments]
+  roof_type                    SHINGLE                                            [public record; unverified; wprdc_assessments]
+  heating_cooling              Central Heat with AC                               [public record; unverified; wprdc_assessments]
+  condition_assessor           AVERAGE                                            [public record; unverified; wprdc_assessments]
+  grade_assessor               AVERAGE +                                          [public record; unverified; wprdc_assessments]
+  fireplaces                   1                                                  [public record; unverified; wprdc_assessments]
+  basement_garage_cars         1                                                  [public record; unverified; wprdc_assessments]
+  living_area                  1850 sq ft                                         [public record; unverified; wprdc_assessments]
+  lot_area                     6200 sq ft                                         [public record; unverified; wprdc_assessments]
+  bedrooms                     3                                                  [public record; unverified; wprdc_assessments]
+  full_baths                   1                                                  [public record; unverified; wprdc_assessments]
+  last_sale_date               2026-09-15                                         [public record; unverified; wprdc_assessments]
+  city_permits_since_2019      unknown                                            [UNKNOWN; unknown]
+      -> Outside the City of Pittsburgh: no consolidated permit data; ask the municipality or rely on the inspection report.
+
+REGIONAL EXPOSURE (describes the area, not this house)
+  radon_zip_stats              zip=15228, tests=12, basement_tests=12, median_pci_l=3.6, pct_at_or_above_4=42, latest_test=2025-03-09 pCi/L [regional; unverified; padep_radon_tests]
+      limits: Self-selected tests reported by certified testers; includes post-mitigation tests; ZIP is not a municipality. Describes neighbours' results, not this house. Only a test in this house establishes its radon level.
+  flood_zone                   fld_zone=X, zone_subtype=AREA OF MINIMAL FLOOD HAZARD, sfha=False, static_bfe=-9999 [regional; unverified; fema_nfhl]
+      limits: Mapped zone containment at FIRM-panel scale; a LOMA may remove the structure; Zone X still has basement-flooding exposure. Does not establish whether this basement takes water.
+  undermined                   True                                               [regional; unverified; padep_msi_layer]
+      limits: DEP layer of areas known to be undermined or near undermined areas, from mine maps of varying accuracy. Not a parcel-level mine map review and not evidence of movement. License: not for commercial use or resale — flag and link only.
+  landslide_prone              False                                              [regional; unverified; pasda_landslide_prone]
+      limits: Coarse slope/geology zone; the published layer covers the City of Pittsburgh extent only, so False outside the city means 'not mapped', not 'not prone'. Does not establish slope movement at this lot.
+  soil_map_unit                mukey=999001, muname=Synthetic silt loam, 8 to 15 percent slopes, compname=Synthetic, comppct_r=85, drainagecl=Moderately well drained, hydricrating=No, frostac [regional; unverified; nrcs_sda]
+      limits: SSURGO map unit (1:12,000–1:63,360) describing the dominant soil of a polygon that may cover many lots; urban map units carry few attributes. Not a foundation condition; NRCS says it does not replace on-site investigation.
+  climate_normals              station=USW00094823, first_freeze_median=10/20, last_freeze_median=04/24, heating_degree_days_base65=5710.0, annual_precip_in=38.2, annual_snow_in=41.4 [regional; unverified; ncei_normals]
+      limits: 30-year station normals at Pittsburgh International Airport; freeze dates are 50% probabilities, not forecasts; no site microclimate.
+  point_of_sale_sewer_rule     name=Mt. Lebanon, required_at_sale=True, applies=Sale; refinancing exempt, performed_by=Allegheny County-licensed plumber (municipality does not schedule tests) [public record; unverified; municipal_dye_tests]
+      limits: Compiled from the municipality's own page/code on 2026-10-29; fees, lead times and validity change. Verify with the municipality.
+
+PROVISIONAL PLAN (seed rules — Checkpoint 3 will replace these with reviewed rules)
+
+APPLIES
+  R-ALARM-001  Test smoke and CO alarms; note their manufacture dates  [safety]
+      why: Applies to every home; the brief's safety floor.
+      do:  Press the test button on every smoke and CO alarm. Write down the manufacture date printed on the back of each; smoke alarms are replaced at 10 years, CO alarms per the label.
+      because: applies to every home
+      source: cpsc_alarms: CPSC Pub 559: test monthly, replace smoke alarms over 10 years; CPSC CO fact sheet: replacement age per manufacturer
+  R-RADON-001  Test for radon (or locate a test result from the last two years)  [health]
+      why: EPA recommends testing every home below the third floor; Allegheny County ZIP test histories show frequent elevated results, and PA law requires only disclosure, not testing.
+      do:  Run a short-term radon test on the lowest lived-in level, or file the inspection's radon test in the house record. If the result is 4 pCi/L or higher, get mitigation quotes; EPA says consider fixing between 2 and 4.
+      because: all trigger conditions met
+      evidence: radon_result_date=unknown (UNKNOWN)
+      source: epa_radon_guides: EPA Citizen's Guide to Radon pp.2-3,10: test all homes below third floor; fix at 4 pCi/L; retest every two years
+  R-ROOF-001  Establish the roof's installation date  [budget]
+      why: Replacement planning stays provisional until the roof's age and condition are better established.
+      do:  Ask the seller or agent for roofing paperwork; check the inspection report's roof section; look for a permit. Record the year once known.
+      because: all trigger conditions met
+      evidence: roof_installed_year=unknown (UNKNOWN)
+      source: internachi_sop: InterNACHI SOP §3.1: inspectors are not required to predict roof service life — the date must come from records
+  R-MSI-001  Consider Mine Subsidence Insurance before closing  [damage]
+      why: DEP's confirmed-mining layer intersects this point.
+      do:  Look the address up on PA DEP's Mine Subsidence Insurance map and consider applying; coverage applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.
+      because: all trigger conditions met
+      evidence: undermined=True (regional)
+      source: padep_msi_layer: DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ
+  R-SEWER-001  Point-of-sale sewer dye test / lateral certification  [deadline]
+      why: The municipality requires a sewer certification before sale; lead times run from 7 to 30 days and a failed test can require repairs before closing.
+      do:  Confirm with the seller's agent that the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.
+      because: all trigger conditions met
+      evidence: point_of_sale_sewer_rule=name=Mt. Lebanon, required_at_sale=True, applies=Sale; refinancing exempt, performed_by=Allegheny County-licensed plumber (municipality does not schedule tests) (public record)
+      source: municipal_dye_tests: data/municipal_dye_tests.json entry for the municipality
+  R-LEAD-001  Lead-based paint: collect the disclosure and pamphlet  [health]
+      why: The home was built before 1978, so federal lead disclosure rules apply.
+      do:  Make sure you received the seller's lead-based-paint disclosure and the EPA pamphlet; if children will live in the home, consider a lead inspection or risk assessment during the 10-day window.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record)
+      source: epa_lead: EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing
+  R-CHIM-001  Annual chimney and flue inspection  [safety]
+      why: The assessor record lists a fireplace; CSIA (citing NFPA 211) recommends annual inspection of chimneys and flues, and CPSC includes flues in its CO guidance.
+      do:  Arrange a Level 1 chimney inspection before the heating season; sweep if 1/8 inch of soot has built up.
+      because: all trigger conditions met
+      evidence: fireplaces=1 (public record); chimney_in_use=unknown (UNKNOWN)
+      source: csia_homeowner: CSIA Homeowner Resources: inspected at least once a year; sweep at 1/8 in buildup
+
+VERIFY FIRST
+  R-SUMP-001  Test the sump pump  [damage]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      do:  Check the basement for a sump pit and pump; record whether one is present.
+      because: sump_pump_present unknown — verify first
+      evidence: sump_pump_present=unknown (UNKNOWN); basement=Full (public record)
+      source: zoeller_fm2676: Zoeller FM2676: inspect and test at least every three months (generic until the installed model is identified)
+
+NEEDS AN ANSWER
+  R-HEAT-001  Annual professional inspection of the fuel-burning heating system  [safety]
+      why: Fuel-burning heating equipment produces combustion gases; CPSC recommends annual professional inspection.
+      do:  Have a heating professional inspect and service the furnace or boiler before the heating season, including vent connector, chimney/flue and a CO check.
+      because: needs heating_fuel to decide
+      evidence: heating_fuel=unknown (UNKNOWN)
+      source: cpsc_alarms: CPSC NSN-9 'Inspect, Detect and Protect': professional inspection of all fuel-burning heating systems every year; DOE Energy Saver furnace checklist
+  R-WH-001  Plan a water-heater replacement window  [budget]
+      why: InterNACHI's estimate for conventional tank water heaters is 6–12 years; a unit at or past 8 years is in its planning window.
+      do:  Set aside a replacement reserve and watch for rust at the base, moisture or inconsistent hot water. This is planning, not a prediction: the unit may last well beyond the estimate.
+      because: needs water_heater_age_years to decide
+      evidence: water_heater_age_years=unknown (UNKNOWN)
+      source: internachi_life_expectancy: InterNACHI life-expectancy chart: conventional water heater 6–12 years (guideline only)
+
+NOT APPLICABLE (data gap)
+  R-ROOF-002  Plan an asphalt-roof replacement window  [budget]
+      because: roof_age_years not available
+      evidence: roof_age_years=unknown (UNKNOWN); roof_type=SHINGLE (public record)
+      source: internachi_life_expectancy: InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only)
+
+QUESTIONS THAT COULD CHANGE THE PLAN (answer with: answer <house> <field> <value>)
+  heating_fuel                 What fuels the heating system?  [gas / oil / propane / electric / heat pump]  (unblocks R-HEAT-001)
+      matters because: fuel-burning systems get an annual CO-related service rule; electric ones do not
+  water_heater_installed_year  About what year was the water heater installed?  [year or 'unknown']  (unblocks R-WH-001)
+      matters because: sets the replacement-planning window (InterNACHI 6–12 yr estimate)
+  sump_pump_present            Is there a sump pump in the basement?  [yes / no / unknown]  (unblocks R-SUMP-001)
+      matters because: adds a quarterly test task; absence in a full basement may add a verification task
+  owner_confirms_match         Is this the right parcel/address?  [yes / no]
+      matters because: everything else is keyed to this parcel
+  furnace_installed_year       About what year was the furnace or boiler installed?  [year or 'unknown']
+      matters because: sets the replacement-planning window
+  roof_installed_year          What year was the roof last replaced?  [year or 'unknown']
+      matters because: largest replacement budget item; unknown keeps it provisional
+  radon_result_date            Date of the most recent radon test, if any  [YYYY-MM-DD or 'none']
+      matters because: a result within two years satisfies the EPA retest guidance
+  radon_result_pci_l           Radon test result, if known  [number (pCi/L)]
+      matters because: 4 pCi/L or higher triggers mitigation planning
+  chimney_in_use               Is the chimney/fireplace used?  [yes / no]
+      matters because: an unused chimney drops the annual inspection task
+  hoa_or_shared                Is there an HOA or any shared-responsibility items (party wall, shared drive)?  [yes / no]
+      matters because: moves exterior/shared items off your action list
+  known_problems               Any known problems from the inspection or seller disclosure?  [short text]
+      matters because: documented defects outrank preventive tasks
+
+=== DEMO 1b: owner answers; corrections change the plan ===
+recorded owner_confirms_match = True (source: owner) for sample-complete
+no recommendation changed
+recorded heating_fuel = 'electric' (source: owner) for sample-complete
+recommendations changed:
+  R-HEAT-001: needs_info -> excluded
+recorded roof_installed_year = 2009 (source: owner) for sample-complete
+recommendations changed:
+  R-ROOF-001: applies -> not_triggered
+  R-ROOF-002: not_applicable -> applies
+recorded sump_pump_present = True (source: owner) for sample-complete
+recommendations changed:
+  R-SUMP-001: verification -> applies
+recorded water_heater_installed_year = 2012 (source: owner) for sample-complete
+recommendations changed:
+  R-WH-001: needs_info -> applies
+recorded basement = 'Part' (source: owner) for sample-complete
+no recommendation changed
+
+--- plan after answers ---
+
+PROVISIONAL PLAN (seed rules — Checkpoint 3 will replace these with reviewed rules)
+
+APPLIES
+  R-ALARM-001  Test smoke and CO alarms; note their manufacture dates  [safety]
+      why: Applies to every home; the brief's safety floor.
+      do:  Press the test button on every smoke and CO alarm. Write down the manufacture date printed on the back of each; smoke alarms are replaced at 10 years, CO alarms per the label.
+      because: applies to every home
+      source: cpsc_alarms: CPSC Pub 559: test monthly, replace smoke alarms over 10 years; CPSC CO fact sheet: replacement age per manufacturer
+  R-SUMP-001  Test the sump pump  [damage]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      do:  Pour water into the sump pit until the float rises; confirm the pump runs, empties the pit and the check valve holds. Clear debris from the pit.
+      because: all trigger conditions met
+      evidence: sump_pump_present=True (owner); basement=Part (owner)
+      source: zoeller_fm2676: Zoeller FM2676: inspect and test at least every three months (generic until the installed model is identified)
+  R-RADON-001  Test for radon (or locate a test result from the last two years)  [health]
+      why: EPA recommends testing every home below the third floor; Allegheny County ZIP test histories show frequent elevated results, and PA law requires only disclosure, not testing.
+      do:  Run a short-term radon test on the lowest lived-in level, or file the inspection's radon test in the house record. If the result is 4 pCi/L or higher, get mitigation quotes; EPA says consider fixing between 2 and 4.
+      because: all trigger conditions met
+      evidence: radon_result_date=unknown (UNKNOWN)
+      source: epa_radon_guides: EPA Citizen's Guide to Radon pp.2-3,10: test all homes below third floor; fix at 4 pCi/L; retest every two years
+  R-WH-001  Plan a water-heater replacement window  [budget]
+      why: InterNACHI's estimate for conventional tank water heaters is 6–12 years; a unit at or past 8 years is in its planning window.
+      do:  Set aside a replacement reserve and watch for rust at the base, moisture or inconsistent hot water. This is planning, not a prediction: the unit may last well beyond the estimate.
+      because: all trigger conditions met
+      evidence: water_heater_age_years=unknown (UNKNOWN)
+      source: internachi_life_expectancy: InterNACHI life-expectancy chart: conventional water heater 6–12 years (guideline only)
+  R-ROOF-002  Plan an asphalt-roof replacement window  [budget]
+      why: InterNACHI estimates 20 years for 3-tab and 30 for architectural asphalt shingles; a roof past 15 years is in its planning window.
+      do:  Start a replacement reserve and get a roofer's condition assessment at the next semiannual check.
+      because: all trigger conditions met
+      evidence: roof_age_years=unknown (UNKNOWN); roof_type=SHINGLE (public record)
+      source: internachi_life_expectancy: InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only)
+  R-MSI-001  Consider Mine Subsidence Insurance before closing  [damage]
+      why: DEP's confirmed-mining layer intersects this point.
+      do:  Look the address up on PA DEP's Mine Subsidence Insurance map and consider applying; coverage applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.
+      because: all trigger conditions met
+      evidence: undermined=True (regional)
+      source: padep_msi_layer: DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ
+  R-SEWER-001  Point-of-sale sewer dye test / lateral certification  [deadline]
+      why: The municipality requires a sewer certification before sale; lead times run from 7 to 30 days and a failed test can require repairs before closing.
+      do:  Confirm with the seller's agent that the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.
+      because: all trigger conditions met
+      evidence: point_of_sale_sewer_rule=name=Mt. Lebanon, required_at_sale=True, applies=Sale; refinancing exempt, performed_by=Allegheny County-licensed plumber (municipality does not schedule tests) (public record)
+      source: municipal_dye_tests: data/municipal_dye_tests.json entry for the municipality
+  R-LEAD-001  Lead-based paint: collect the disclosure and pamphlet  [health]
+      why: The home was built before 1978, so federal lead disclosure rules apply.
+      do:  Make sure you received the seller's lead-based-paint disclosure and the EPA pamphlet; if children will live in the home, consider a lead inspection or risk assessment during the 10-day window.
+      because: all trigger conditions met
+      evidence: year_built=1928 (public record)
+      source: epa_lead: EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing
+  R-CHIM-001  Annual chimney and flue inspection  [safety]
+      why: The assessor record lists a fireplace; CSIA (citing NFPA 211) recommends annual inspection of chimneys and flues, and CPSC includes flues in its CO guidance.
+      do:  Arrange a Level 1 chimney inspection before the heating season; sweep if 1/8 inch of soot has built up.
+      because: all trigger conditions met
+      evidence: fireplaces=1 (public record); chimney_in_use=unknown (UNKNOWN)
+      source: csia_homeowner: CSIA Homeowner Resources: inspected at least once a year; sweep at 1/8 in buildup
+
+EXCLUDED
+  R-HEAT-001  Annual professional inspection of the fuel-burning heating system  [safety]
+      because: excluded because heating_fuel = 'electric'
+      evidence: heating_fuel=electric (owner)
+      source: cpsc_alarms: CPSC NSN-9 'Inspect, Detect and Protect': professional inspection of all fuel-burning heating systems every year; DOE Energy Saver furnace checklist
+
+QUESTIONS THAT COULD CHANGE THE PLAN (answer with: answer <house> <field> <value>)
+  furnace_installed_year       About what year was the furnace or boiler installed?  [year or 'unknown']
+      matters because: sets the replacement-planning window
+  radon_result_date            Date of the most recent radon test, if any  [YYYY-MM-DD or 'none']
+      matters because: a result within two years satisfies the EPA retest guidance
+  radon_result_pci_l           Radon test result, if known  [number (pCi/L)]
+      matters because: 4 pCi/L or higher triggers mitigation planning
+  chimney_in_use               Is the chimney/fireplace used?  [yes / no]
+      matters because: an unused chimney drops the annual inspection task
+  hoa_or_shared                Is there an HOA or any shared-responsibility items (party wall, shared drive)?  [yes / no]
+      matters because: moves exterior/shared items off your action list
+  known_problems               Any known problems from the inspection or seller disclosure?  [short text]
+      matters because: documented defects outrank preventive tasks
+
+--- corrected field with provenance ---
+  basement                     Part                                               [owner; owner_corrected; owner]
+      conflict kept: ['Full']
+      history: [('Full', 'wprdc_assessments')]
+  exterior_finish              Brick                                              [public record; unverified; wprdc_assessments]
+
+=== DEMO 2: profile with important missing information (SYNTHETIC) ===
+HOUSE RECORD  sample-missing   (SYNTHETIC DEMO DATA)
+Address entered: 456 Placeholder Ave, Pittsburgh, PA 15210
+Match: 456 PLACEHOLDER AVE, PITTSBURGH, 15210  (score 97, PointAddress; best candidate score 97 (PointAddress); not yet confirmed)
+
+PROPERTY FIELDS
+  matched_address              456 PLACEHOLDER AVE, PITTSBURGH, 15210             [public record; unverified; county_geocoder]
+  coordinates                  lat=40.4109, lon=-79.979                           [public record; unverified; county_geocoder]
+  parcel_id                    0000X00002000000                                   [public record; unverified; wprdc_assessments]
+  municipality                 18th Ward - PITTSBURGH                             [public record; unverified; wprdc_assessments]
+  school_district              Pittsburgh                                         [public record; unverified; wprdc_assessments]
+  use_description              SINGLE FAMILY                                      [public record; unverified; wprdc_assessments]
+  year_built                   unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record; How YEARBLT is derived is not documented by OPA; treat as construction era, not a precise date.
+  style                        unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record
+  stories                      2.0                                                [public record; unverified; wprdc_assessments]
+  basement                     unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record; Assessor basement category (None/Slab-Piers/Crawl/Part/Full); does not describe finish or water history.
+  exterior_finish              Frame                                              [public record; unverified; wprdc_assessments]
+  roof_type                    unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record; Roof covering type as recorded by the assessor; not its age or condition.
+  heating_cooling              unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record; Heating/cooling category only (e.g. 'Central Heat with AC'); fuel and equipment age are not recorded.
+  condition_assessor           FAIR                                               [public record; unverified; wprdc_assessments]
+  grade_assessor               BELOW AVERAGE                                      [public record; unverified; wprdc_assessments]
+  fireplaces                   0                                                  [public record; unverified; wprdc_assessments]
+  basement_garage_cars         0                                                  [public record; unverified; wprdc_assessments]
+  living_area                  1120 sq ft                                         [public record; unverified; wprdc_assessments]
+  lot_area                     2900 sq ft                                         [public record; unverified; wprdc_assessments]
+  bedrooms                     2                                                  [public record; unverified; wprdc_assessments]
+  full_baths                   1                                                  [public record; unverified; wprdc_assessments]
+  last_sale_date               unknown                                            [UNKNOWN; unknown; wprdc_assessments]
+      -> blank in assessor record
+  city_permits_since_2019      1 item(s)                                          [public record; unverified; pgh_pli_permits]
+
+REGIONAL EXPOSURE (describes the area, not this house)
+  radon_zip_stats              zip=15210, tests=5, basement_tests=5, median_pci_l=3.8, pct_at_or_above_4=40, latest_test=2024-11-01 pCi/L [regional; unverified; padep_radon_tests]
+      limits: Self-selected tests reported by certified testers; includes post-mitigation tests; ZIP is not a municipality. Describes neighbours' results, not this house. Only a test in this house establishes its radon level.
+  flood_zone                   unknown                                            [UNKNOWN; unknown]
+      -> FEMA flood zone not retrieved: offline: no fixture or cached response for this request
+  undermined                   True                                               [regional; unverified; padep_msi_layer]
+      limits: DEP layer of areas known to be undermined or near undermined areas, from mine maps of varying accuracy. Not a parcel-level mine map review and not evidence of movement. License: not for commercial use or resale — flag and link only.
+  landslide_prone              True                                               [regional; unverified; pasda_landslide_prone]
+      limits: Coarse slope/geology zone; the published layer covers the City of Pittsburgh extent only, so False outside the city means 'not mapped', not 'not prone'. Does not establish slope movement at this lot.
+  soil_map_unit                mukey=999001, muname=Synthetic silt loam, 8 to 15 percent slopes, compname=Synthetic, comppct_r=85, drainagecl=Moderately well drained, hydricrating=No, frostac [regional; unverified; nrcs_sda]
+      limits: SSURGO map unit (1:12,000–1:63,360) describing the dominant soil of a polygon that may cover many lots; urban map units carry few attributes. Not a foundation condition; NRCS says it does not replace on-site investigation.
+  climate_normals              station=USW00094823, first_freeze_median=10/20, last_freeze_median=04/24, heating_degree_days_base65=5710.0, annual_precip_in=38.2, annual_snow_in=41.4 [regional; unverified; ncei_normals]
+      limits: 30-year station normals at Pittsburgh International Airport; freeze dates are 50% probabilities, not forecasts; no site microclimate.
+  point_of_sale_sewer_rule     name=City of Pittsburgh (PWSA), required_at_sale=True, applies=Properties in a separate sanitary-sewer area need the dye test; combined-sewer areas are exempt f [public record; unverified; municipal_dye_tests]
+      limits: Compiled from the municipality's own page/code on 2026-10-29; fees, lead times and validity change. Verify with the municipality.
+
+PROVISIONAL PLAN (seed rules — Checkpoint 3 will replace these with reviewed rules)
+
+APPLIES
+  R-ALARM-001  Test smoke and CO alarms; note their manufacture dates  [safety]
+      why: Applies to every home; the brief's safety floor.
+      do:  Press the test button on every smoke and CO alarm. Write down the manufacture date printed on the back of each; smoke alarms are replaced at 10 years, CO alarms per the label.
+      because: applies to every home
+      source: cpsc_alarms: CPSC Pub 559: test monthly, replace smoke alarms over 10 years; CPSC CO fact sheet: replacement age per manufacturer
+  R-RADON-001  Test for radon (or locate a test result from the last two years)  [health]
+      why: EPA recommends testing every home below the third floor; Allegheny County ZIP test histories show frequent elevated results, and PA law requires only disclosure, not testing.
+      do:  Run a short-term radon test on the lowest lived-in level, or file the inspection's radon test in the house record. If the result is 4 pCi/L or higher, get mitigation quotes; EPA says consider fixing between 2 and 4.
+      because: all trigger conditions met
+      evidence: radon_result_date=unknown (UNKNOWN)
+      source: epa_radon_guides: EPA Citizen's Guide to Radon pp.2-3,10: test all homes below third floor; fix at 4 pCi/L; retest every two years
+  R-ROOF-001  Establish the roof's installation date  [budget]
+      why: Replacement planning stays provisional until the roof's age and condition are better established.
+      do:  Ask the seller or agent for roofing paperwork; check the inspection report's roof section; look for a permit. Record the year once known.
+      because: all trigger conditions met
+      evidence: roof_installed_year=unknown (UNKNOWN)
+      source: internachi_sop: InterNACHI SOP §3.1: inspectors are not required to predict roof service life — the date must come from records
+  R-MSI-001  Consider Mine Subsidence Insurance before closing  [damage]
+      why: DEP's confirmed-mining layer intersects this point.
+      do:  Look the address up on PA DEP's Mine Subsidence Insurance map and consider applying; coverage applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.
+      because: all trigger conditions met
+      evidence: undermined=True (regional)
+      source: padep_msi_layer: DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ
+  R-SEWER-001  Point-of-sale sewer dye test / lateral certification  [deadline]
+      why: The municipality requires a sewer certification before sale; lead times run from 7 to 30 days and a failed test can require repairs before closing.
+      do:  Confirm with the seller's agent that the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.
+      because: all trigger conditions met
+      evidence: point_of_sale_sewer_rule=name=City of Pittsburgh (PWSA), required_at_sale=True, applies=Properties in a separate sanitary-sewer area need the dye test; combined-sewer areas are exempt f (public record)
+      source: municipal_dye_tests: data/municipal_dye_tests.json entry for the municipality
+
+VERIFY FIRST
+  R-SUMP-001  Test the sump pump  [damage]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      do:  Check the basement for a sump pit and pump; record whether one is present.
+      because: sump_pump_present unknown — verify first
+      evidence: sump_pump_present=unknown (UNKNOWN); basement=unknown (UNKNOWN)
+      source: zoeller_fm2676: Zoeller FM2676: inspect and test at least every three months (generic until the installed model is identified)
+
+NEEDS AN ANSWER
+  R-HEAT-001  Annual professional inspection of the fuel-burning heating system  [safety]
+      why: Fuel-burning heating equipment produces combustion gases; CPSC recommends annual professional inspection.
+      do:  Have a heating professional inspect and service the furnace or boiler before the heating season, including vent connector, chimney/flue and a CO check.
+      because: needs heating_fuel to decide
+      evidence: heating_fuel=unknown (UNKNOWN)
+      source: cpsc_alarms: CPSC NSN-9 'Inspect, Detect and Protect': professional inspection of all fuel-burning heating systems every year; DOE Energy Saver furnace checklist
+  R-WH-001  Plan a water-heater replacement window  [budget]
+      why: InterNACHI's estimate for conventional tank water heaters is 6–12 years; a unit at or past 8 years is in its planning window.
+      do:  Set aside a replacement reserve and watch for rust at the base, moisture or inconsistent hot water. This is planning, not a prediction: the unit may last well beyond the estimate.
+      because: needs water_heater_age_years to decide
+      evidence: water_heater_age_years=unknown (UNKNOWN)
+      source: internachi_life_expectancy: InterNACHI life-expectancy chart: conventional water heater 6–12 years (guideline only)
+  R-LEAD-001  Lead-based paint: collect the disclosure and pamphlet  [health]
+      why: The home was built before 1978, so federal lead disclosure rules apply.
+      do:  Make sure you received the seller's lead-based-paint disclosure and the EPA pamphlet; if children will live in the home, consider a lead inspection or risk assessment during the 10-day window.
+      because: needs year_built to decide
+      evidence: year_built=unknown (UNKNOWN)
+      source: epa_lead: EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing
+
+NOT APPLICABLE (data gap)
+  R-ROOF-002  Plan an asphalt-roof replacement window  [budget]
+      because: roof_age_years, roof_type not available
+      evidence: roof_age_years=unknown (UNKNOWN); roof_type=unknown (UNKNOWN)
+      source: internachi_life_expectancy: InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only)
+  R-FLOOD-001  Check flood-insurance status and basement water history  [damage]
+      because: flood_zone not available
+      evidence: flood_zone=unknown (UNKNOWN)
+      source: fema_nfhl: NFHL layer 28 SFHA_TF=T at the geocoded point
+
+QUESTIONS THAT COULD CHANGE THE PLAN (answer with: answer <house> <field> <value>)
+  heating_fuel                 What fuels the heating system?  [gas / oil / propane / electric / heat pump]  (unblocks R-HEAT-001)
+      matters because: fuel-burning systems get an annual CO-related service rule; electric ones do not
+  water_heater_installed_year  About what year was the water heater installed?  [year or 'unknown']  (unblocks R-WH-001)
+      matters because: sets the replacement-planning window (InterNACHI 6–12 yr estimate)
+  sump_pump_present            Is there a sump pump in the basement?  [yes / no / unknown]  (unblocks R-SUMP-001)
+      matters because: adds a quarterly test task; absence in a full basement may add a verification task
+  year_built                   Value for year_built?  []  (unblocks R-LEAD-001)
+      matters because: a rule needs it
+  owner_confirms_match         Is this the right parcel/address?  [yes / no]
+      matters because: everything else is keyed to this parcel
+  furnace_installed_year       About what year was the furnace or boiler installed?  [year or 'unknown']
+      matters because: sets the replacement-planning window
+  roof_installed_year          What year was the roof last replaced?  [year or 'unknown']
+      matters because: largest replacement budget item; unknown keeps it provisional
+  radon_result_date            Date of the most recent radon test, if any  [YYYY-MM-DD or 'none']
+      matters because: a result within two years satisfies the EPA retest guidance
+  radon_result_pci_l           Radon test result, if known  [number (pCi/L)]
+      matters because: 4 pCi/L or higher triggers mitigation planning
+  chimney_in_use               Is the chimney/fireplace used?  [yes / no]
+      matters because: an unused chimney drops the annual inspection task
+  hoa_or_shared                Is there an HOA or any shared-responsibility items (party wall, shared drive)?  [yes / no]
+      matters because: moves exterior/shared items off your action list
+  known_problems               Any known problems from the inspection or seller disclosure?  [short text]
+      matters because: documented defects outrank preventive tasks
+
+=== DEMO 3: ambiguous match (SYNTHETIC) ===
+HOUSE RECORD  sample-ambiguous   (SYNTHETIC DEMO DATA)
+Address entered: 100 Main St, Pittsburgh
+MATCH UNRESOLVED: two candidates score about equally — choose one
+   [0] 100 MAIN ST, PITTSBURGH, 15201  score 100  parcel 0000X00003000000  (PointAddress)
+   [1] 100 MAIN ST, CARNEGIE, 15106  score 100  parcel 0000X00004000000  (PointAddress)
+   -> re-run with --choose N to pick the right one
+
+PROPERTY FIELDS
+  parcel_id                    unknown                                            [UNKNOWN; unknown]
+      -> address match unresolved: two candidates score about equally — choose one
+
+REGIONAL EXPOSURE (describes the area, not this house)
+
+--- owner chooses candidate 1 ---
+HOUSE RECORD  sample-ambiguous   (SYNTHETIC DEMO DATA)
+Address entered: 100 Main St, Pittsburgh
+Match: 100 MAIN ST, CARNEGIE, 15106  (score 100, PointAddress; owner chose candidate 1; owner confirmed)
+

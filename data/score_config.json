@@ -1,0 +1,226 @@
+{
+  "_about": "HomeKeeper Ownership Score: every weight, band and point value lives here. These are PRODUCT ASSUMPTIONS for the prototype, chosen by the author to be simple and explainable. They are not validated measures and should be reviewed with buyers, agents and inspectors before anyone relies on them.",
+  "version": 1,
+  "review_status": "prototype assumption — not validated",
+  "weights": {
+    "price": 0.4,
+    "maintenance": 0.3,
+    "major": 0.3
+  },
+  "overall_display_rounding": 5,
+  "labels": [
+    {
+      "min": 80,
+      "label": "Favourable balance",
+      "tone": "good"
+    },
+    {
+      "min": 60,
+      "label": "Fair balance",
+      "tone": "fair"
+    },
+    {
+      "min": 40,
+      "label": "Mixed",
+      "tone": "mixed"
+    },
+    {
+      "min": 0,
+      "label": "Demanding",
+      "tone": "low"
+    }
+  ],
+  "price": {
+    "_about": "Asking price per finished sq ft compared with the median price per sq ft of recent valid sales of similar homes. Cheaper never scores higher than the top band: a price well under comparable sales often reflects condition.",
+    "min_comparables": 6,
+    "window_months": 24,
+    "extended_window_months": 36,
+    "size_tolerance": 0.3,
+    "era_tolerance_years": 30,
+    "min_sale_price": 10000,
+    "bands": [
+      {
+        "max_ratio": 0.9,
+        "points": 80,
+        "text": "Asking price is well below the comparable-sales benchmark ({pct}% under the median per sq ft). That doesn't raise the score further: prices this low often reflect condition."
+      },
+      {
+        "max_ratio": 1.0,
+        "points": 70,
+        "text": "Asking price is at or slightly below the comparable-sales benchmark ({pct}% under the median per sq ft)."
+      },
+      {
+        "max_ratio": 1.1,
+        "points": 55,
+        "text": "Asking price is slightly above the comparable-sales benchmark ({pct}% over the median per sq ft)."
+      },
+      {
+        "max_ratio": 1.2,
+        "points": 40,
+        "text": "Asking price is above the comparable-sales benchmark ({pct}% over the median per sq ft)."
+      },
+      {
+        "max_ratio": 1.35,
+        "points": 25,
+        "text": "Asking price is well above the comparable-sales benchmark ({pct}% over the median per sq ft)."
+      },
+      {
+        "max_ratio": null,
+        "points": 10,
+        "text": "Asking price is far above the comparable-sales benchmark ({pct}% over the median per sq ft)."
+      }
+    ]
+  },
+  "maintenance": {
+    "_about": "Starts at 100; points come off for characteristics that add recurring upkeep or recurring cost. Essential inputs: living area and exterior walls. Optional inputs that are unknown take the stated assumption, never zero.",
+    "size_sqft": [
+      {
+        "max": 1500,
+        "points": 0,
+        "text": "A compact house ({sqft} sq ft) keeps upkeep modest."
+      },
+      {
+        "max": 2500,
+        "points": 10,
+        "text": "A mid-sized house ({sqft} sq ft) means more surface to heat, clean and maintain."
+      },
+      {
+        "max": 3500,
+        "points": 20,
+        "text": "A large house ({sqft} sq ft) means considerably more to heat and maintain."
+      },
+      {
+        "max": null,
+        "points": 30,
+        "text": "A very large house ({sqft} sq ft) carries a heavy upkeep load."
+      }
+    ],
+    "exterior": {
+      "low": {
+        "match": [
+          "brick",
+          "stone",
+          "masonry",
+          "concrete"
+        ],
+        "points": 0,
+        "text": "{ext} exterior walls need little routine upkeep."
+      },
+      "medium": {
+        "match": [
+          "frame",
+          "stucco",
+          "wood",
+          "siding",
+          "aluminum",
+          "vinyl"
+        ],
+        "points": 10,
+        "text": "{ext} exterior walls need periodic painting, sealing or repair."
+      },
+      "high": {
+        "match": [
+          "log"
+        ],
+        "points": 15,
+        "text": "Log walls need regular sealing and checks for rot and insects."
+      },
+      "other_points": 10
+    },
+    "stories": {
+      "two_or_more_points": 5,
+      "unknown_points": 5,
+      "text": "Two or more stories put gutters, eaves and upper walls out of easy reach."
+    },
+    "lot_sqft": [
+      {
+        "max": 5000,
+        "points": 0,
+        "text": "A small lot ({lot} sq ft) keeps yard work light."
+      },
+      {
+        "max": 15000,
+        "points": 5,
+        "text": null
+      },
+      {
+        "max": null,
+        "points": 15,
+        "text": "A large lot ({lot} sq ft) adds yard, tree and drainage upkeep."
+      }
+    ],
+    "lot_unknown_points": 5,
+    "basement_points": 5,
+    "basement_unknown_points": 5,
+    "basement_text": "A {bs} basement needs ongoing moisture control in this climate.",
+    "flood_sfha_points": 10,
+    "flood_sfha_text": "A mapped high-risk flood area usually means a recurring flood-insurance cost.",
+    "flood_unknown_points": 5,
+    "undermined_points": 5,
+    "undermined_text": "Mine subsidence insurance is a separate recurring cost in this mapped area.",
+    "shared_exterior_bonus": 10,
+    "shared_exterior_text": "Shared exterior maintenance ({what}) reduces the owner's direct upkeep responsibilities; any association fee isn't known and isn't counted.",
+    "hoa_exterior_note": "Asked in the score inputs: whether an association handles exterior maintenance."
+  },
+  "major": {
+    "_about": "Starts at 100; points come off for supported exposure to substantial one-time projects. Essential input: a matched county parcel record. Component ages are never inferred from the construction year.",
+    "documented_points": 25,
+    "documented_text": "Documented {what} increase major-work exposure.",
+    "roof": {
+      "recent_documented_points": 0,
+      "recent_documented_text": "{basis} lowers roof exposure compared with an unknown roof.",
+      "recent_max_age": 15,
+      "planning_points": 15,
+      "planning_text": "The roof is about {age} years old, inside the usual planning window for asphalt shingles.",
+      "past_window_age": 25,
+      "past_window_points": 20,
+      "past_window_text": "The roof is about {age} years old, at or past the usual planning window for asphalt shingles.",
+      "unknown_points": 10,
+      "unknown_text": "Roof age is unknown, so it counts as an open question, neither sound nor failing."
+    },
+    "assessor_poor_points": 20,
+    "assessor_poor_text": "The assessor's condition rating ({cond}) suggests broad repair needs.",
+    "assess_points": {
+      "slope": 10,
+      "water": 10,
+      "permit": 10,
+      "sewer": 5
+    },
+    "assess_text": {
+      "slope": "The mapped landslide-prone area adds possible slope or retaining-wall work.",
+      "water": "Mapped conditions favour basement water, adding possible waterproofing or drainage work.",
+      "permit": "Permitted work without a final inspection on record may need finishing.",
+      "sewer": "The municipality's sale-time sewer test could require line repairs."
+    }
+  },
+  "completeness": {
+    "_about": "Shown separately and never used in the score.",
+    "inputs": [
+      "asking_price",
+      "price_benchmark",
+      "living_area",
+      "exterior_finish",
+      "stories",
+      "lot_area",
+      "basement",
+      "flood_zone",
+      "roof_age",
+      "condition_assessor",
+      "year_built"
+    ],
+    "levels": [
+      {
+        "min": 0.85,
+        "label": "Strong"
+      },
+      {
+        "min": 0.6,
+        "label": "Partial"
+      },
+      {
+        "min": 0,
+        "label": "Limited"
+      }
+    ]
+  }
+}

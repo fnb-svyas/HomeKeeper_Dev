@@ -1,0 +1,1800 @@
+{
+  "_about": "HomeKeeper rule base for the Allegheny County pre-1960 single-family pilot. Each rule cites one primary source (data/sources.json) and states what that source supports. review_status 'author-reviewed' means the recommendation was checked against the cited source during the Checkpoint 1 audit; it is NOT independent expert validation (Checkpoint 9 benchmark). Intervals that no primary source states are labelled planning_assumption in the recurrence.",
+  "schema_version": "0.2",
+  "condition_ops": [
+    "eq",
+    "ne",
+    "lt",
+    "lte",
+    "gt",
+    "gte",
+    "in",
+    "not_in",
+    "truthy",
+    "falsy",
+    "known",
+    "unknown",
+    "contains",
+    "icontains",
+    "before_year",
+    "has"
+  ],
+  "recurrence_types": [
+    "one_time",
+    "fixed_date",
+    "seasonal_window",
+    "interval_since_completion",
+    "equipment_interval",
+    "event"
+  ],
+  "rules": [
+    {
+      "id": "R-ALARM-001",
+      "version": 2,
+      "component": "smoke_co_alarms",
+      "task_category": "preventive",
+      "title": "Test smoke and CO alarms monthly; record manufacture dates",
+      "trigger": [],
+      "exclusions": [],
+      "required_fields": [],
+      "when_unknown": "skip",
+      "action": "Press the test button on every smoke and CO alarm. On first pass, write down the manufacture date printed on the back of each unit; replace batteries at least yearly.",
+      "why": "Applies to every home. CPSC: test monthly, replace batteries at least annually.",
+      "safe_observation": "Test button only; do not open sealed units.",
+      "delay_consequence": "A dead alarm gives no warning; CPSC links most fatal fires to missing or non-working alarms (statement from Pub 559).",
+      "effort": "10 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 1
+      },
+      "severity": "safety",
+      "priority_rationale": "Life safety; trivial effort; no cost.",
+      "diy_pro": "diy",
+      "completion_criteria": "Every alarm sounded on test; dates recorded in the house record.",
+      "retain_evidence": "Alarm manufacture dates (photo of back label).",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "cpsc_alarms",
+      "source_ref": "CPSC Pub 559 'Smoke Alarms – Why, Where, and Which': test once a month; replace batteries at least annually",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author (not an inspector)"
+    },
+    {
+      "id": "R-ALARM-002",
+      "version": 1,
+      "component": "smoke_co_alarms",
+      "task_category": "replacement_planning",
+      "title": "Replace smoke alarms older than 10 years; CO alarms per their label",
+      "trigger": [
+        {
+          "field": "oldest_smoke_alarm_year",
+          "op": "lte",
+          "value": 2016
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "oldest_smoke_alarm_year"
+      ],
+      "when_unknown": "verify",
+      "verification_task": "Read the manufacture date on the back of each smoke and CO alarm and record the oldest year.",
+      "action": "Replace any smoke alarm manufactured more than 10 years ago; replace CO alarms at the age printed on the unit. Prefer interconnected units with sealed 10-year batteries.",
+      "why": "CPSC: replace smoke alarms that are more than 10 years old; CO alarms have a manufacturer replacement age.",
+      "delay_consequence": "Sensors degrade; an old alarm can pass a button test and still fail to detect smoke.",
+      "effort": "30–60 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "safety",
+      "priority_rationale": "Life safety; low cost.",
+      "diy_pro": "diy",
+      "completion_criteria": "No alarm older than 10 years in the record.",
+      "retain_evidence": "Purchase receipt; new manufacture dates.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "cpsc_alarms",
+      "source_ref": "CPSC Pub 559: replace smoke alarms more than 10 years old; CPSC CO Fact Sheet: alarms have a recommended replacement age",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-GFCI-001",
+      "version": 1,
+      "component": "electrical",
+      "task_category": "preventive",
+      "title": "Test GFCI outlets and breakers monthly",
+      "trigger": [],
+      "exclusions": [],
+      "required_fields": [],
+      "when_unknown": "skip",
+      "action": "Press TEST then RESET on every GFCI receptacle and GFCI breaker (kitchen, baths, basement, garage, exterior). Any that does not trip or reset needs replacement.",
+      "why": "CPSC: test every GFCI at least once a month, after installation and after power failures.",
+      "delay_consequence": "A failed GFCI leaves wet-area circuits without shock protection.",
+      "effort": "10 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 1
+      },
+      "severity": "safety",
+      "priority_rationale": "Shock protection; no cost.",
+      "diy_pro": "diy",
+      "completion_criteria": "All GFCIs tripped and reset.",
+      "retain_evidence": "Note any failed device and its location.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "cpsc_dryer_gfci",
+      "source_ref": "CPSC Pub 099 'What Is A GFCI?': test at least once a month; Pub 513 Home Electrical Safety Checklist",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-ELEC-001",
+      "version": 1,
+      "component": "electrical",
+      "task_category": "verification",
+      "title": "Establish the wiring type and grounding (pre-1960 house)",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1960
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "wiring_type",
+          "op": "in",
+          "value": [
+            "modern grounded",
+            "rewired"
+          ]
+        }
+      ],
+      "required_fields": [
+        "wiring_type"
+      ],
+      "when_unknown": "verify",
+      "verification_task": "Check the inspection report's electrical section for knob-and-tube, ungrounded two-slot receptacles, aluminum branch wiring or an undersized panel. Record what it says. If the report is silent, ask an electrician to assess.",
+      "action": "Have a licensed electrician assess and quote remediation; CPSC notes GFCI receptacles may replace ungrounded two-slot receptacles (labelled 'No Equipment Ground').",
+      "why": "Houses of this era commonly retain original wiring; the assessor record says nothing about it and the inspection report is the only document that does.",
+      "pro_conditions": "Any knob-and-tube, scorching, double-tapped breakers or missing grounds — professional only.",
+      "delay_consequence": "Fire and shock risk is unquantified until assessed; insurers may ask about knob-and-tube.",
+      "effort": "15 minutes to read the report; assessment visit if needed",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "safety",
+      "priority_rationale": "Safety; evidence usually already exists in the inspection report.",
+      "diy_pro": "verification",
+      "completion_criteria": "wiring_type recorded with the report page or electrician's note as source.",
+      "retain_evidence": "Inspection report electrical pages; electrician's assessment.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "electrician",
+      "source_id": "cpsc_dryer_gfci",
+      "source_ref": "CPSC Pub 099: GFCI receptacles may replace ungrounded two-slot receptacles with a 'NO EQUIPMENT GROUND' label; InterNACHI SOP §3 electrical scope",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-HEAT-001",
+      "version": 2,
+      "component": "heating",
+      "task_category": "preventive",
+      "title": "Annual professional inspection and service of the fuel-burning heating system",
+      "trigger": [
+        {
+          "field": "heating_fuel",
+          "op": "in",
+          "value": [
+            "gas",
+            "oil",
+            "propane"
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "heating_fuel",
+          "op": "in",
+          "value": [
+            "electric",
+            "heat pump"
+          ]
+        }
+      ],
+      "required_fields": [
+        "heating_fuel"
+      ],
+      "when_unknown": "ask",
+      "action": "Before the heating season, have a heating professional inspect and service the furnace or boiler: vent connector and chimney/flue, heat exchanger, combustion/CO check, blower or circulator, controls. Ask for the CO reading in writing.",
+      "why": "Fuel-burning heating equipment produces combustion gases; CPSC recommends professional inspection every year.",
+      "pro_conditions": "All of it — combustion equipment is professional work.",
+      "delay_consequence": "Carbon-monoxide exposure risk and mid-winter failure; many manufacturer warranties condition coverage on maintenance.",
+      "effort": "1 visit",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "window": {
+          "start": "09-01",
+          "end": "11-15",
+          "label": "before heating season"
+        }
+      },
+      "severity": "safety",
+      "priority_rationale": "CO risk; seasonal deadline.",
+      "diy_pro": "pro",
+      "completion_criteria": "Service invoice with date, CO reading and technician notes in the house record.",
+      "retain_evidence": "Invoice; CO reading; any parts replaced.",
+      "cost": {
+        "basis": "unknown",
+        "range": null,
+        "note": "No free local price source; enter your quote."
+      },
+      "provider_category": "hvac",
+      "equipment_component": "furnace",
+      "variants": {
+        "goodman_rs6612023": {
+          "months": 12,
+          "note": "Goodman RS6612023r2: furnace inspected at least once per year by a qualified servicer",
+          "source_ref": "RS6612023r2 'Scheduled Maintenance' p.18"
+        },
+        "carrier_58d_u_9sm": {
+          "months": 12,
+          "note": "Carrier 58D,U-9SM: blower and electrical service annually by a qualified technician",
+          "source_ref": "Form 58D,U-9SM maintenance section"
+        }
+      },
+      "source_id": "cpsc_alarms",
+      "source_ref": "CPSC NSN-9 'Inspect, Detect and Protect': have a professional inspect all fuel-burning heating systems every year; DOE Energy Saver furnace/boiler checklist",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-HEAT-002",
+      "version": 1,
+      "component": "heating",
+      "task_category": "preventive",
+      "title": "Check the furnace/air-handler filter",
+      "trigger": [
+        {
+          "field": "heating_type",
+          "op": "in",
+          "value": [
+            "forced air",
+            "furnace",
+            "heat pump"
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "heating_type",
+          "op": "in",
+          "value": [
+            "boiler",
+            "steam",
+            "hot water",
+            "radiant"
+          ]
+        }
+      ],
+      "required_fields": [
+        "heating_type"
+      ],
+      "when_unknown": "ask",
+      "action": "Check the filter; replace when dirty. Without a manufacturer instruction, check monthly during heating and cooling seasons (DOE's AC guidance) and record the filter size.",
+      "why": "A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual's own interval overrides this when known.",
+      "delay_consequence": "Higher bills, reduced heat, and strain on the blower and heat exchanger.",
+      "effort": "5 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 1,
+        "basis": "DOE AC guidance applied to forced-air heating; manufacturer interval preferred"
+      },
+      "severity": "comfort",
+      "priority_rationale": "Cheap, frequent, protects the most expensive system.",
+      "diy_pro": "diy",
+      "completion_criteria": "Filter checked/replaced; size and date recorded.",
+      "retain_evidence": "Filter size.",
+      "cost": {
+        "basis": "planning_assumption",
+        "range": null,
+        "note": "Filter cost only."
+      },
+      "provider_category": "",
+      "equipment_component": "furnace",
+      "variants": {
+        "goodman_rs6612023": {
+          "months": 2,
+          "action": "Clean or replace the filter every two months or as required (Goodman).",
+          "note": "Goodman RS6612023r2: filters cleaned/replaced every two months or as required",
+          "source_ref": "RS6612023r2 maintenance section"
+        },
+        "carrier_58d_u_9sm": {
+          "months": 1,
+          "action": "Check and clean the air filter each month, more often if required (Carrier).",
+          "note": "Carrier 58D,U-9SM: check and clean air filter each month or more frequently if required",
+          "source_ref": "Form 58D,U-9SM 'minimum maintenance'"
+        }
+      },
+      "source_id": "doe_energysaver",
+      "source_ref": "DOE Energy Saver 'Maintaining Your Air Conditioner': clean or replace filters every month or two in season (applied to forced-air heating as a planning assumption)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-HEAT-003",
+      "version": 1,
+      "component": "heating",
+      "task_category": "preventive",
+      "title": "Boiler: test the pressure-relief valve and check the expansion tank at annual service",
+      "trigger": [
+        {
+          "field": "heating_type",
+          "op": "in",
+          "value": [
+            "boiler",
+            "hot water",
+            "steam"
+          ]
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "heating_type"
+      ],
+      "when_unknown": "skip",
+      "action": "Ask the technician at the annual service to test the pressure-relief valve and high-limit control, check the expansion tank (hot-water) or drain sediment and test the low-water cutoff (steam).",
+      "why": "DOE's professional maintenance checklist for hot-water and steam systems names these items.",
+      "pro_conditions": "Relief valves and controls — professional.",
+      "delay_consequence": "A stuck relief valve or failed low-water cutoff is a safety failure, not just a comfort one.",
+      "effort": "part of the annual visit",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "window": {
+          "start": "09-01",
+          "end": "11-15",
+          "label": "before heating season"
+        }
+      },
+      "severity": "safety",
+      "priority_rationale": "Pressure-vessel safety.",
+      "diy_pro": "pro",
+      "completion_criteria": "Service invoice lists relief valve/limit/low-water cutoff checked.",
+      "retain_evidence": "Invoice.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "hvac",
+      "merge_key": "annual-heating-service",
+      "source_id": "doe_energysaver",
+      "source_ref": "DOE Energy Saver 'Furnaces and Boilers': hot-water systems — test pressure-relief valve, high-limit control, expansion tank; steam — drain sediment, test low-water cutoff",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author",
+      "silent_when_unknown": true
+    },
+    {
+      "id": "R-AC-001",
+      "version": 1,
+      "component": "ac",
+      "task_category": "preventive",
+      "title": "Central AC: filter monthly in season, clear the outdoor unit, annual coil check",
+      "trigger": [
+        {
+          "field": "ac_present",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "ac_present",
+          "op": "falsy"
+        }
+      ],
+      "required_fields": [
+        "ac_present"
+      ],
+      "when_unknown": "ask",
+      "action": "Clean or replace the filter every month or two during cooling season; keep about 2 ft clear around the outdoor condenser and remove debris; have the evaporator coil checked yearly and the drain channels cleared.",
+      "why": "DOE Energy Saver AC maintenance guidance.",
+      "pro_conditions": "Refrigerant, electrical and coil cleaning inside the cabinet — professional.",
+      "delay_consequence": "Reduced cooling, higher bills, frozen coil.",
+      "effort": "15 minutes monthly; one pro visit",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "window": {
+          "start": "04-01",
+          "end": "05-31",
+          "label": "before cooling season"
+        }
+      },
+      "severity": "comfort",
+      "priority_rationale": "Comfort and energy; seasonal.",
+      "diy_pro": "diy_or_pro",
+      "completion_criteria": "Pre-season check recorded; service invoice if a pro visited.",
+      "retain_evidence": "Invoice; filter size.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "hvac",
+      "equipment_component": "ac",
+      "source_id": "doe_energysaver",
+      "source_ref": "DOE Energy Saver 'Maintaining Your Air Conditioner': filter every month or two; evaporator coil every year; keep ~2 ft clearance; clear drain channels",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-WH-001",
+      "version": 2,
+      "component": "water_heater",
+      "task_category": "preventive",
+      "title": "Water heater: test the T&P relief valve, flush sediment, check the anode",
+      "trigger": [],
+      "exclusions": [
+        {
+          "field": "water_heater_type",
+          "op": "eq",
+          "value": "tankless"
+        }
+      ],
+      "required_fields": [],
+      "when_unknown": "apply",
+      "action": "Lift the T&P relief valve lever briefly and confirm it reseats (yearly per Bradford White and A. O. Smith; every 6 months per DOE). Drain sediment (DOE: a quart every 3 months; Bradford White: a gallon monthly; A. O. Smith: flush after 6 months). Have the anode rod inspected (A. O. Smith: annually after 6 months; DOE: every 3–4 years). Set the thermostat near 120°F unless you have a reason for hotter.",
+      "why": "Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified.",
+      "safe_observation": "T&P test discharges hot water — ensure the discharge pipe ends somewhere safe before lifting the lever.",
+      "pro_conditions": "A T&P valve that drips afterwards or won't reseat; gas-valve or venting issues; anode replacement if seized.",
+      "delay_consequence": "Sediment shortens tank life and a stuck T&P valve removes the tank's over-pressure protection.",
+      "effort": "20 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "basis": "annual T&P/anode per manufacturer manuals; DOE gives shorter sediment interval"
+      },
+      "severity": "safety",
+      "priority_rationale": "Pressure safety plus service life.",
+      "diy_pro": "diy_or_pro",
+      "completion_criteria": "T&P tested, sediment drained, anode checked; dates recorded.",
+      "retain_evidence": "Model and serial (label photo); anode condition note.",
+      "cost": {
+        "basis": "none",
+        "range": null,
+        "note": "Anode replacement cost unknown until quoted."
+      },
+      "provider_category": "plumber",
+      "equipment_component": "water_heater",
+      "variants": {
+        "bradford_white_io": {
+          "months": 12,
+          "action": "Check the T&P relief valve at least once a year; drain a gallon monthly for sediment; inspect the anode periodically; have the vent inspected yearly (Bradford White I&O).",
+          "note": "Bradford White I&O 238-37281-00AB",
+          "source_ref": "238-37281-00AB maintenance section"
+        },
+        "aosmith_100398943": {
+          "months": 12,
+          "action": "Inspect and operate the T&P valve annually; inspect the anode at 6 months then at least annually; flush after the first six months (A. O. Smith).",
+          "note": "A. O. Smith 100398943",
+          "source_ref": "100398943 maintenance section"
+        }
+      },
+      "source_id": "doe_energysaver",
+      "source_ref": "DOE Energy Saver 'Storage Water Heaters': flush a quart every three months; check T&P every six months; inspect anode every three to four years; ~120°F",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-WH-002",
+      "version": 2,
+      "component": "water_heater",
+      "task_category": "replacement_planning",
+      "title": "Plan a water-heater replacement window",
+      "trigger": [
+        {
+          "field": "water_heater_age_years",
+          "op": "gte",
+          "value": 8
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "water_heater_type",
+          "op": "eq",
+          "value": "tankless"
+        }
+      ],
+      "required_fields": [
+        "water_heater_age_years"
+      ],
+      "when_unknown": "ask",
+      "action": "Start a replacement reserve; watch for rust at the base, moisture, or inconsistent hot water. This is planning, not a prediction — units often outlast the estimate.",
+      "why": "InterNACHI estimates 6–12 years for conventional tank heaters (NAHB 2007: 10); a unit at 8+ years is in its planning window.",
+      "delay_consequence": "Emergency replacement at the worst price, and a leaking tank in a basement.",
+      "effort": "planning only",
+      "recurrence": {
+        "type": "one_time",
+        "reset_on_install": true
+      },
+      "severity": "budget",
+      "priority_rationale": "Avoids an emergency purchase.",
+      "diy_pro": "planning",
+      "completion_criteria": "Reserve scenario chosen in the future-replacements budget.",
+      "retain_evidence": "Label photo for age; quotes.",
+      "cost": {
+        "basis": "unknown",
+        "range": null,
+        "note": "Enter a quote or choose a planning range."
+      },
+      "provider_category": "plumber",
+      "equipment_component": "water_heater",
+      "source_id": "internachi_life_expectancy",
+      "source_ref": "InterNACHI life-expectancy chart: conventional water heater 6–12 years (guideline only); NAHB 2007 study: gas water heater 10 years",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-WH-003",
+      "version": 1,
+      "component": "water_heater",
+      "task_category": "deadline",
+      "title": "Register new equipment with the manufacturer before the deadline",
+      "trigger": [
+        {
+          "field": "new_equipment_pending_registration",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "new_equipment_pending_registration"
+      ],
+      "when_unknown": "skip",
+      "action": "Register the new unit on the manufacturer's site within its deadline (Goodman: 60 days; Carrier: 90 days) and file the confirmation; unregistered units typically drop to the shorter base warranty.",
+      "why": "Manufacturer warranty terms condition the longer parts warranty on timely registration.",
+      "delay_consequence": "Loss of the extended parts warranty (e.g., 10-year vs 5-year).",
+      "effort": "10 minutes",
+      "recurrence": {
+        "type": "event",
+        "event": "equipment installed"
+      },
+      "severity": "deadline",
+      "priority_rationale": "Hard deadline with a large warranty consequence.",
+      "diy_pro": "diy",
+      "completion_criteria": "Registration confirmation stored with the equipment record.",
+      "retain_evidence": "Registration confirmation; installer invoice; serial number.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "goodman_rs6612023",
+      "source_ref": "Goodman Warranty Overview PM-WARRCHRT-G: online registration within 60 days of installation; Carrier warranty page: 90 days to register",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author",
+      "silent_when_unknown": true
+    },
+    {
+      "id": "R-CHIM-001",
+      "version": 2,
+      "component": "chimney",
+      "task_category": "preventive",
+      "title": "Annual chimney and flue inspection (Level 1)",
+      "trigger": [
+        {
+          "field": "fireplaces",
+          "op": "gte",
+          "value": 1
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "chimney_in_use",
+          "op": "falsy"
+        }
+      ],
+      "required_fields": [
+        "fireplaces"
+      ],
+      "when_unknown": "ask",
+      "action": "Arrange a Level 1 chimney inspection before the heating season; sweep if 1/8 inch of soot has built up. Ask whether the flue is lined and whether the heating appliance vents through it.",
+      "why": "The record lists a fireplace. CSIA (citing NFPA 211) recommends annual inspection; CPSC includes chimneys and flues in its CO guidance.",
+      "pro_conditions": "Inspection and sweeping — professional.",
+      "delay_consequence": "Flue blockage or liner failure can vent CO into the house or start a chimney fire.",
+      "effort": "1 visit",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "window": {
+          "start": "08-15",
+          "end": "10-31",
+          "label": "before heating season"
+        }
+      },
+      "severity": "safety",
+      "priority_rationale": "Fire/CO risk; pre-1960 masonry chimneys are often unlined.",
+      "diy_pro": "pro",
+      "completion_criteria": "Inspection report in the house record.",
+      "retain_evidence": "Inspection report; sweep invoice.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "chimney",
+      "source_id": "csia_homeowner",
+      "source_ref": "CSIA Homeowner Resources: chimneys inspected at least once a year (NFPA 211); sweep at 1/8 in buildup; CPSC CO Fact Sheet: check chimneys and flues",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-ROOF-001",
+      "version": 2,
+      "component": "roof",
+      "task_category": "verification",
+      "title": "Establish the roof's installation date",
+      "trigger": [
+        {
+          "field": "roof_installed_year",
+          "op": "unknown"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "roof_installed_year"
+      ],
+      "when_unknown": "apply",
+      "action": "Ask the seller/agent for roofing paperwork, read the inspection report's roof section, and check permit history (City of Pittsburgh parcels). Record the year with its source.",
+      "why": "Replacement planning is provisional until the roof's age and condition are established; inspectors are not required to predict roof life.",
+      "delay_consequence": "The largest replacement cost in this housing stock stays unplanned.",
+      "effort": "15 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "budget",
+      "priority_rationale": "Unblocks the biggest budget item.",
+      "diy_pro": "verification",
+      "completion_criteria": "roof_installed_year recorded with a source.",
+      "retain_evidence": "Roofing invoice or permit.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "internachi_sop",
+      "source_ref": "InterNACHI SOP §3.1: inspector not required to predict roof service life; §2.1.08 life expectancy not determined",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-ROOF-002",
+      "version": 2,
+      "component": "roof",
+      "task_category": "replacement_planning",
+      "title": "Plan an asphalt-roof replacement window",
+      "trigger": [
+        {
+          "field": "roof_age_years",
+          "op": "gte",
+          "value": 15
+        },
+        {
+          "field": "roof_type",
+          "op": "icontains",
+          "value": "shingle"
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "roof_type",
+          "op": "icontains",
+          "value": "slate"
+        },
+        {
+          "field": "roof_type",
+          "op": "icontains",
+          "value": "metal"
+        }
+      ],
+      "required_fields": [
+        "roof_age_years",
+        "roof_type"
+      ],
+      "when_unknown": "skip",
+      "action": "Start a replacement reserve and get a roofer's condition assessment at the next seasonal check; condition drives timing more than age.",
+      "why": "InterNACHI estimates 20 years (3-tab) to 30 (architectural) for asphalt shingles; a roof past 15 years is in its planning window.",
+      "delay_consequence": "Unplanned replacement; water damage if deferred past failure.",
+      "effort": "planning",
+      "recurrence": {
+        "type": "one_time",
+        "reset_on_install": true
+      },
+      "severity": "budget",
+      "priority_rationale": "Large cost; planning horizon.",
+      "diy_pro": "planning",
+      "completion_criteria": "Reserve scenario chosen.",
+      "retain_evidence": "Roofer's assessment; quotes.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "roofer",
+      "equipment_component": "roof",
+      "source_id": "internachi_life_expectancy",
+      "source_ref": "InterNACHI chart: asphalt 3-tab 20 yr / architectural 30 yr (guideline only); NAHB 2007: asphalt shingles ~20 yr",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-ROOF-003",
+      "version": 1,
+      "component": "roof",
+      "task_category": "preventive",
+      "title": "Seasonal roof and flashing visual check (spring and fall, and after severe weather)",
+      "trigger": [],
+      "exclusions": [],
+      "required_fields": [],
+      "when_unknown": "skip",
+      "action": "From the ground or a window, look for missing/lifted shingles, exposed nails, rust at flashings, debris in valleys, and daylight or staining in the attic. Do not walk the roof.",
+      "why": "NRCA recommends scheduled roof inspections at least twice a year plus after severe weather (reported by Professional Roofing).",
+      "safe_observation": "Ground level with binoculars or a camera; attic check with a flashlight.",
+      "pro_conditions": "Anything you see that needs a ladder on a slope, or any active leak.",
+      "delay_consequence": "Small flashing leaks become sheathing and ceiling damage.",
+      "effort": "20 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 6
+      },
+      "severity": "damage",
+      "priority_rationale": "Early detection; no cost.",
+      "diy_pro": "diy",
+      "completion_criteria": "Check recorded with any observations and photos.",
+      "retain_evidence": "Photos of problem areas.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "roofer",
+      "source_id": "nrca_roof_inspection",
+      "source_ref": "Professional Roofing article 4787 reporting NRCA's recommendation of roof inspections at least twice per year (spring/fall) and after severe weather",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-GUTTER-001",
+      "version": 1,
+      "component": "gutters_downspouts",
+      "task_category": "preventive",
+      "title": "Clean gutters and confirm downspouts discharge 5–10 ft from the foundation",
+      "trigger": [],
+      "exclusions": [
+        {
+          "field": "gutters_present",
+          "op": "falsy"
+        }
+      ],
+      "required_fields": [],
+      "when_unknown": "apply",
+      "action": "Clear gutters and downspout outlets; confirm every downspout carries water at least 5–10 ft from the house (extensions or splash blocks). EPA says clean and repair gutters regularly; the twice-yearly cadence (after leaf fall, after spring) is a planning assumption, not a sourced interval.",
+      "why": "Roof runoff dumped at the foundation is the most common driver of basement water in this housing stock; ISU Extension gives the 5–10 ft figure.",
+      "safe_observation": "Watch during a rain; look for overflow and splash at the base of the wall.",
+      "pro_conditions": "Two-story gutters or steep ground — hire it out.",
+      "delay_consequence": "Basement seepage, efflorescence, and foundation moisture.",
+      "effort": "1–2 hours",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 6,
+        "window": {
+          "start": "10-15",
+          "end": "12-01",
+          "label": "after leaf fall"
+        },
+        "basis": "planning_assumption"
+      },
+      "severity": "damage",
+      "priority_rationale": "Highest-leverage basement-water task.",
+      "diy_pro": "diy_or_pro",
+      "completion_criteria": "Gutters clear; every downspout discharging 5–10 ft away; recorded.",
+      "retain_evidence": "Photo of downspout extensions.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "gutter",
+      "source_id": "isu_drainage",
+      "source_ref": "ISU Extension Pm-1560: downspouts should discharge at least 5 to 10 feet from the house; EPA Mold Guide p.10: clean and repair roof gutters regularly",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-GRADE-001",
+      "version": 1,
+      "component": "grading",
+      "task_category": "verification",
+      "title": "Check that the ground slopes away from the foundation",
+      "trigger": [
+        {
+          "field": "basement",
+          "op": "in",
+          "value": [
+            "Full",
+            "Part",
+            "Crawl"
+          ]
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "basement"
+      ],
+      "when_unknown": "apply",
+      "action": "Walk the perimeter after a rain: the first 10 ft should drop about 6 in away from the house (ISU Extension). Note low spots, settled backfill, window wells that hold water, and paving that slopes toward the wall.",
+      "why": "Houses with below-grade space depend on surface drainage; EPA and ISU Extension both call for ground sloping away from the foundation.",
+      "safe_observation": "Visual, after rain.",
+      "pro_conditions": "Regrading against a foundation wall, or any sign of movement/cracking — professional.",
+      "delay_consequence": "Water against the wall; seepage; freeze–thaw damage.",
+      "effort": "30 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "Cheap check with a large downstream effect.",
+      "diy_pro": "verification",
+      "completion_criteria": "Grading observation recorded; any low spots photographed.",
+      "retain_evidence": "Photos of low spots.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "landscaper",
+      "source_id": "isu_drainage",
+      "source_ref": "ISU Extension Pm-1560: first 10 ft from the house should drop at least 6 in; EPA Mold Guide p.10: ground slopes away from the building foundation",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-BSMT-001",
+      "version": 1,
+      "component": "basement",
+      "task_category": "preventive",
+      "title": "Keep basement humidity below 60% and dry any wet spot within 24–48 hours",
+      "trigger": [
+        {
+          "field": "basement",
+          "op": "in",
+          "value": [
+            "Full",
+            "Part"
+          ]
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "basement"
+      ],
+      "when_unknown": "apply",
+      "action": "Put an inexpensive hygrometer in the basement; run a dehumidifier in humid months to keep relative humidity under 60% (ideally 30–50%). Dry any wet material within 24–48 hours; cleanup larger than about 10 sq ft of mold warrants professional help.",
+      "why": "EPA mold guidance thresholds; old basements in this climate run humid all summer.",
+      "delay_consequence": "Mold growth, musty odors, and damage to stored items and finishes.",
+      "effort": "ongoing; 5 minutes to check",
+      "recurrence": {
+        "type": "seasonal_window",
+        "window": {
+          "start": "05-15",
+          "end": "09-30",
+          "label": "humid season"
+        }
+      },
+      "severity": "health",
+      "priority_rationale": "Health and material damage; cheap control.",
+      "diy_pro": "diy",
+      "completion_criteria": "Hygrometer in place; readings under 60% during humid months.",
+      "retain_evidence": "Occasional readings.",
+      "cost": {
+        "basis": "planning_assumption",
+        "range": null,
+        "note": "Hygrometer and dehumidifier purchase; electricity."
+      },
+      "provider_category": "",
+      "source_id": "epa_mold_guide",
+      "source_ref": "EPA 'A Brief Guide to Mold, Moisture and Your Home' pp.3,4,10,11: humidity below 60%; dry within 24–48 h; DIY cleanup under ~10 sq ft",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SUMP-001",
+      "version": 2,
+      "component": "sump_pump",
+      "task_category": "preventive",
+      "title": "Test the sump pump",
+      "trigger": [
+        {
+          "field": "sump_pump_present",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "basement",
+          "op": "in",
+          "value": [
+            "None",
+            "Slab/Piers"
+          ]
+        }
+      ],
+      "required_fields": [
+        "sump_pump_present"
+      ],
+      "when_unknown": "verify",
+      "verification_task": "Check the basement for a sump pit and pump; record whether one is present, and photograph the pump label if so.",
+      "action": "Pour water into the pit until the float rises; confirm the pump runs, empties the pit, the check valve holds and the discharge runs clear outside. Clear debris from the pit. Without a manufacturer instruction, test quarterly (planning assumption aligned with Zoeller's interval).",
+      "why": "A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.",
+      "safe_observation": "Keep hands clear of the impeller; unplug before clearing debris.",
+      "pro_conditions": "Pump doesn't run, runs constantly, or trips the GFCI.",
+      "delay_consequence": "A silent pump failure is discovered during the storm that floods the basement.",
+      "effort": "10 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 3,
+        "basis": "planning_assumption"
+      },
+      "severity": "damage",
+      "priority_rationale": "Basement water is the dominant risk in this housing stock.",
+      "diy_pro": "diy",
+      "completion_criteria": "Pump cycled on test; date recorded.",
+      "retain_evidence": "Pump label photo (make/model) for its manual.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "plumber",
+      "equipment_component": "sump_pump",
+      "variants": {
+        "zoeller_fm2676": {
+          "months": 3,
+          "action": "Inspect and test the system at least every three months; check frequently for debris (Zoeller FM2676).",
+          "note": "Zoeller FM2676 (Models 53/57/98)",
+          "source_ref": "FM2676 maintenance section; 3-year warranty void if not maintained per instructions"
+        },
+        "liberty_7035000": {
+          "months": 1,
+          "action": "Monthly: run the pump and check operation; quarterly checks; annually inspect and clean the basin and replace defective components (Liberty 7035000).",
+          "note": "Liberty Pumps 250/280-series manual 7035000R",
+          "source_ref": "7035000R maintenance schedule"
+        }
+      },
+      "source_id": "zoeller_fm2676",
+      "source_ref": "Zoeller FM2676: inspect and test for proper operation at least every three months (used as the generic planning interval until the installed model is identified)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SUMP-002",
+      "version": 1,
+      "component": "sump_pump",
+      "task_category": "replacement_planning",
+      "title": "Plan a sump-pump replacement and consider battery backup",
+      "trigger": [
+        {
+          "field": "sump_pump_age_years",
+          "op": "gte",
+          "value": 6
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "sump_pump_age_years"
+      ],
+      "when_unknown": "skip",
+      "action": "Budget a replacement; consider a battery backup or water-powered backup if the basement is finished or storms coincide with outages.",
+      "why": "InterNACHI estimates about 7 years for sump pumps; a pump at 6+ years is in its window.",
+      "delay_consequence": "Failure during a storm.",
+      "effort": "planning",
+      "recurrence": {
+        "type": "one_time",
+        "reset_on_install": true
+      },
+      "severity": "budget",
+      "priority_rationale": "Moderate cost, high consequence.",
+      "diy_pro": "planning",
+      "completion_criteria": "Reserve chosen; backup decision recorded.",
+      "retain_evidence": "Quotes.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "plumber",
+      "equipment_component": "sump_pump",
+      "source_id": "internachi_life_expectancy",
+      "source_ref": "InterNACHI chart: sump pump 7 years (guideline only)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-RADON-001",
+      "version": 2,
+      "component": "radon",
+      "task_category": "verification",
+      "title": "Test for radon (or file a result from the last two years)",
+      "trigger": [
+        {
+          "field": "radon_result_date",
+          "op": "unknown"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [],
+      "when_unknown": "apply",
+      "action": "Run a short-term test on the lowest lived-in level, or file the inspection's radon result in the house record. At 4 pCi/L or above, get mitigation quotes; EPA says consider fixing between 2 and 4.",
+      "why": "EPA recommends testing every home below the third floor; PA law requires only disclosure at sale, not a test.",
+      "delay_consequence": "Unmeasured exposure; the seller-remediation window closes at closing.",
+      "effort": "test kit: 10 minutes + lab wait",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 24
+      },
+      "severity": "health",
+      "priority_rationale": "Health exposure; cheap to measure; transaction window.",
+      "diy_pro": "diy_or_pro",
+      "completion_criteria": "Result (pCi/L, date, floor) stored in the house record.",
+      "retain_evidence": "Lab report.",
+      "cost": {
+        "basis": "planning_assumption",
+        "range": null,
+        "note": "Test kits are inexpensive; mitigation unknown until quoted."
+      },
+      "provider_category": "radon",
+      "source_id": "epa_radon_guides",
+      "source_ref": "EPA Citizen's Guide to Radon pp.2–3, 10, 12: test homes below third floor; fix at 4 pCi/L; consider 2–4; retest every two years",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-RADON-002",
+      "version": 1,
+      "component": "radon",
+      "task_category": "documented_defect",
+      "title": "Radon at or above 4 pCi/L: get mitigation quotes",
+      "trigger": [
+        {
+          "field": "radon_result_pci_l",
+          "op": "gte",
+          "value": 4
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "radon_mitigation_present",
+          "op": "truthy"
+        }
+      ],
+      "required_fields": [
+        "radon_result_pci_l"
+      ],
+      "when_unknown": "skip",
+      "action": "Get quotes from PA DEP-certified mitigators; after installation, test within 30 days (not sooner than 24 h after startup) and then at least every two years.",
+      "why": "EPA action level is 4 pCi/L; the recorded result is at or above it.",
+      "pro_conditions": "Mitigation systems — DEP-certified professional.",
+      "delay_consequence": "Continued exposure at a level EPA says to fix.",
+      "effort": "quotes + 1 install day",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "health",
+      "priority_rationale": "Measured exposure above the action level.",
+      "diy_pro": "pro",
+      "completion_criteria": "System installed; post-mitigation test result filed.",
+      "retain_evidence": "Installer's documentation; post-mitigation test.",
+      "cost": {
+        "basis": "unknown",
+        "range": null,
+        "note": "DEP's mitigation dataset (vm4e-6nir) can show reported system costs for context."
+      },
+      "provider_category": "radon",
+      "source_id": "epa_radon_guides",
+      "source_ref": "EPA Consumer's Guide to Radon Reduction p.13: post-mitigation test within 30 days, not sooner than 24 h after startup; retest at least every two years; Citizen's Guide p.2: fix at 4 pCi/L or higher",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author",
+      "silent_when_unknown": true
+    },
+    {
+      "id": "R-RADON-003",
+      "version": 1,
+      "component": "radon",
+      "task_category": "preventive",
+      "title": "Radon mitigation system: check the manometer and plan for fan replacement",
+      "trigger": [
+        {
+          "field": "radon_mitigation_present",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "radon_mitigation_present"
+      ],
+      "when_unknown": "skip",
+      "action": "Glance at the U-tube manometer on the pipe (unequal liquid levels mean the fan is pulling); retest every two years; budget a fan replacement — EPA says fans may last five years or more.",
+      "why": "EPA mitigation-system upkeep guidance.",
+      "delay_consequence": "A dead fan silently returns the house to its pre-mitigation level.",
+      "effort": "1 minute monthly",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 1
+      },
+      "severity": "health",
+      "priority_rationale": "Keeps an existing control working.",
+      "diy_pro": "diy",
+      "completion_criteria": "Manometer checked; retest on the two-year cycle.",
+      "retain_evidence": "Fan model; install date.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "radon",
+      "source_id": "epa_radon_guides",
+      "source_ref": "EPA Consumer's Guide to Radon Reduction p.13: check manometer regularly; retest at least every two years; fans may last five years or more",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author",
+      "silent_when_unknown": true
+    },
+    {
+      "id": "R-LEAD-001",
+      "version": 2,
+      "component": "interior_finishes",
+      "task_category": "verification",
+      "title": "Lead-based paint: collect the disclosure and pamphlet; assess if children will live here",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1978
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "year_built"
+      ],
+      "when_unknown": "ask",
+      "action": "Confirm you received the seller's lead-based-paint disclosure and the EPA pamphlet; if children under six will live in the home, use the 10-day window for a lead inspection or risk assessment, and plan lead-safe practices for any renovation.",
+      "why": "Built before 1978: federal lead disclosure rules apply.",
+      "delay_consequence": "Loss of the pre-closing inspection window; exposure risk during renovation.",
+      "effort": "15 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "health",
+      "priority_rationale": "Transaction-window right; child health.",
+      "diy_pro": "diy",
+      "completion_criteria": "Disclosure and pamphlet filed; assessment decision recorded.",
+      "retain_evidence": "Signed disclosure form.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "lead_assessor",
+      "source_id": "epa_lead",
+      "source_ref": "EPA real-estate disclosure page (Section 1018, Title X): pre-1978 housing — pamphlet, disclosure, 10-day inspection opportunity",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-DRYER-001",
+      "version": 1,
+      "component": "dryer",
+      "task_category": "preventive",
+      "title": "Clean the dryer vent duct; replace any plastic or foil duct with metal",
+      "trigger": [
+        {
+          "field": "dryer_present",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "dryer_present",
+          "op": "falsy"
+        }
+      ],
+      "required_fields": [
+        "dryer_present"
+      ],
+      "when_unknown": "ask",
+      "action": "Clean the lint screen every load; periodically disconnect and clean the exhaust duct and the outside hood; replace plastic or foil accordion duct with rigid or semi-rigid metal. The yearly duct cleaning cadence is a planning assumption (CPSC says 'periodically').",
+      "why": "CPSC dryer-fire guidance.",
+      "pro_conditions": "Long or inaccessible duct runs; gas dryer connections.",
+      "delay_consequence": "Lint fires; long dry times.",
+      "effort": "30–60 minutes",
+      "recurrence": {
+        "type": "interval_since_completion",
+        "months": 12,
+        "basis": "planning_assumption"
+      },
+      "severity": "safety",
+      "priority_rationale": "Fire risk; low cost.",
+      "diy_pro": "diy_or_pro",
+      "completion_criteria": "Duct cleaned; duct material recorded.",
+      "retain_evidence": "Photo of duct type.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "duct_cleaner",
+      "source_id": "cpsc_dryer_gfci",
+      "source_ref": "CPSC Pub 5022 'Overheated Clothes Dryers Can Cause Fires': clean lint screen each load; clean vent and exhaust duct periodically; use rigid or semi-rigid metal duct",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-FREEZE-001",
+      "version": 1,
+      "component": "plumbing_exterior",
+      "task_category": "preventive",
+      "title": "Winterize exterior hose bibs before the first freeze",
+      "trigger": [
+        {
+          "field": "exterior_hose_bibs",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "exterior_hose_bibs",
+          "op": "falsy"
+        }
+      ],
+      "required_fields": [
+        "exterior_hose_bibs"
+      ],
+      "when_unknown": "ask",
+      "action": "Disconnect hoses, close any interior shutoff for each exterior faucet and open the exterior valve to drain it; for frost-free faucets, disconnecting the hose is the essential step.",
+      "why": "Pittsburgh's median first 32°F date is about October 20 (NCEI normals); freeze-split pipes behind a wall are a common winter loss. The task is standard practice; the timing is sourced, the practice is a planning assumption.",
+      "delay_consequence": "A split pipe that floods a wall or basement during the first hard freeze.",
+      "effort": "15 minutes",
+      "recurrence": {
+        "type": "fixed_date",
+        "date": "10-15",
+        "basis": "NCEI 1991–2020 median first freeze Oct 20 at USW00094823"
+      },
+      "severity": "damage",
+      "priority_rationale": "Seasonal deadline; trivial effort.",
+      "diy_pro": "diy",
+      "completion_criteria": "Hoses off; valves drained; date recorded.",
+      "retain_evidence": "None needed.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "ncei_normals",
+      "source_ref": "NCEI 1991–2020 normals, station USW00094823: ANN-TMIN-PRBFST-T32FP50 = 10/20 (50% probability first 32°F)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-FLOOD-001",
+      "version": 2,
+      "component": "basement",
+      "task_category": "verification",
+      "title": "Flood zone: check insurance status and basement water history",
+      "trigger": [
+        {
+          "field": "flood_zone.sfha",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "flood_zone"
+      ],
+      "when_unknown": "skip",
+      "action": "Confirm with lender and insurer whether flood insurance is required or advisable; ask the seller disclosure (item 4, basements) about water entry; check for a LOMA for the property.",
+      "why": "FEMA's flood hazard layer places this point inside a Special Flood Hazard Area.",
+      "delay_consequence": "Insurance decisions are tied to closing; uninsured flood loss.",
+      "effort": "1 hour of calls",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "Transaction-linked insurance decision.",
+      "diy_pro": "diy",
+      "completion_criteria": "Insurance decision and any LOMA recorded.",
+      "retain_evidence": "Policy or lender letter.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "fema_nfhl",
+      "source_ref": "NFHL layer 28 SFHA_TF = T at the geocoded point; LOMA layer 2 to be checked",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-MSI-001",
+      "version": 2,
+      "component": "foundation",
+      "task_category": "deadline",
+      "title": "Consider Mine Subsidence Insurance before closing",
+      "trigger": [
+        {
+          "field": "undermined",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "undermined"
+      ],
+      "when_unknown": "skip",
+      "action": "Look up the address on PA DEP's Mine Subsidence Insurance map and decide on coverage; a policy applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.",
+      "why": "DEP's confirmed-mining layer intersects this point (a flag only; not a parcel-level mine-map review).",
+      "delay_consequence": "Uninsured subsidence damage; coverage timing tied to closing.",
+      "effort": "30 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "deadline",
+      "priority_rationale": "Coverage decision tied to the closing date.",
+      "diy_pro": "diy",
+      "completion_criteria": "Decision recorded (policy number or 'declined').",
+      "retain_evidence": "Policy.",
+      "cost": {
+        "basis": "published_reference",
+        "range": null,
+        "note": "DEP FAQ cites roughly $0.27 per $1,000 of coverage; confirm current rate."
+      },
+      "provider_category": "",
+      "source_id": "padep_msi_layer",
+      "source_ref": "DEP MSI confirmed-mining layer point intersect; DEP MSI FAQ (coverage effective at closing when applied for at purchase agreement)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SLOPE-001",
+      "version": 1,
+      "component": "site",
+      "task_category": "verification",
+      "title": "Landslide-prone area: review retaining walls, slope and drainage with the inspection report",
+      "trigger": [
+        {
+          "field": "landslide_prone",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "landslide_prone"
+      ],
+      "when_unknown": "skip",
+      "action": "Read the inspection report's site/retaining-wall notes; look for leaning or bulging walls, tension cracks, trees leaning downhill, and downspouts discharging onto the slope. If anything is noted, get a geotechnical or structural assessment before closing.",
+      "why": "The county's landslide-prone layer intersects this point; drainage onto a slope is the controllable factor.",
+      "pro_conditions": "Any wall movement or slope cracking — professional.",
+      "delay_consequence": "Slope or wall failure is expensive and often uninsured.",
+      "effort": "30 minutes + possible assessment",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "Regional exposure that the inspection can confirm or clear.",
+      "diy_pro": "verification",
+      "completion_criteria": "Observation recorded; assessment if warranted.",
+      "retain_evidence": "Photos; engineer's letter if obtained.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "engineer",
+      "source_id": "pasda_landslide_prone",
+      "source_ref": "PASDA Allegheny County Landslide Prone 202509 point intersect (City of Pittsburgh extent)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SOIL-001",
+      "version": 1,
+      "component": "foundation",
+      "task_category": "verification",
+      "title": "Poorly drained or high water-table soil map unit: pay extra attention to basement water evidence",
+      "trigger": [
+        {
+          "field": "soil_map_unit.drainagecl",
+          "op": "in",
+          "value": [
+            "Somewhat poorly drained",
+            "Poorly drained",
+            "Very poorly drained"
+          ]
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "soil_map_unit"
+      ],
+      "when_unknown": "skip",
+      "action": "Treat basement water evidence in the inspection report (staining, efflorescence, sump activity) as likely recurring; prioritise the gutter, grading and sump tasks and ask the seller disclosure about water entry.",
+      "why": "The mapped soil unit's natural drainage class is poor; this describes the area, not the lot, and does not establish the foundation's condition.",
+      "delay_consequence": "Recurring seepage treated as a one-off.",
+      "effort": "reading",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "Raises the weight of other evidence; no cost.",
+      "diy_pro": "verification",
+      "completion_criteria": "Noted against the basement tasks.",
+      "retain_evidence": "None.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "nrcs_sda",
+      "source_ref": "SSURGO component.drainagecl for the map unit at the point; NRCS: map units do not replace on-site investigation",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SEWER-001",
+      "version": 2,
+      "component": "sewer_lateral",
+      "task_category": "deadline",
+      "title": "Point-of-sale sewer dye test / lateral certification",
+      "trigger": [
+        {
+          "field": "point_of_sale_sewer_rule.required_at_sale",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "point_of_sale_sewer_rule"
+      ],
+      "when_unknown": "verify",
+      "verification_task": "Ask the municipality (or the agent) whether a point-of-sale sewer dye test or lateral inspection is required; no entry is compiled for this municipality yet.",
+      "action": "Confirm the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.",
+      "why": "The municipality requires a sewer certification before sale; lead times run 7–30 days and a failed test can require repairs before closing.",
+      "delay_consequence": "Closing delay or seller-side repair dispute.",
+      "effort": "phone call",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "deadline",
+      "priority_rationale": "Transaction deadline.",
+      "diy_pro": "pro",
+      "completion_criteria": "Certificate stored in the house record.",
+      "retain_evidence": "Certificate; camera video if provided.",
+      "cost": {
+        "basis": "published_reference",
+        "range": null,
+        "note": "Municipal fee per the compiled table; plumber charge unknown."
+      },
+      "provider_category": "plumber",
+      "source_id": "municipal_dye_tests",
+      "source_ref": "data/municipal_dye_tests.json entry for the municipality (primary municipal page/code cited there)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-SEWER-002",
+      "version": 1,
+      "component": "sewer_lateral",
+      "task_category": "verification",
+      "title": "Private sewer lateral: establish material and condition (pre-1960 house)",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1960
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "point_of_sale_sewer_rule.camera_inspection",
+          "op": "eq",
+          "value": "yes"
+        }
+      ],
+      "required_fields": [
+        "year_built"
+      ],
+      "when_unknown": "skip",
+      "action": "If the municipality's sale process did not include a camera inspection of the lateral, consider one before closing or in the first year; record the material (clay, cast iron, Orangeburg) and any root intrusion.",
+      "why": "Laterals of this era are commonly clay or cast iron; the homeowner owns the lateral to the main in most Allegheny County municipalities (ALCOSAN: municipalities own local sewers; private laterals are the owner's).",
+      "pro_conditions": "Camera inspection — ACHD-registered plumber.",
+      "delay_consequence": "Sewer backup into the basement; emergency excavation.",
+      "effort": "1 visit",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "High-cost hidden component.",
+      "diy_pro": "pro",
+      "completion_criteria": "Lateral material and condition recorded with the video/report.",
+      "retain_evidence": "Camera report.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "plumber",
+      "source_id": "municipal_dye_tests",
+      "source_ref": "Municipal dye-test/lateral programs (Upper St. Clair, Bethel Park, Dormont, Baldwin require lateral video at sale); ALCOSAN municipal-customers page on sewer ownership",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-PLUMB-001",
+      "version": 1,
+      "component": "plumbing",
+      "task_category": "verification",
+      "title": "Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1960
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "plumbing_supply_material",
+          "op": "in",
+          "value": [
+            "copper",
+            "pex",
+            "cpvc",
+            "replaced"
+          ]
+        }
+      ],
+      "required_fields": [
+        "plumbing_supply_material"
+      ],
+      "when_unknown": "verify",
+      "verification_task": "Read the inspection report's plumbing section and look at exposed pipes in the basement: grey threaded pipe is galvanized steel; black heavy pipe is cast iron; a dull grey soft pipe at the meter may be lead. Record what you find.",
+      "action": "Galvanized supply piping is near or past InterNACHI's estimated life and often restricts flow; plan a repipe quote. For PWSA customers, check the lead service line inventory and request a free replacement if the private side is lead or unknown.",
+      "why": "The assessor record never records pipe materials; houses of this era commonly retain original galvanized supply and cast-iron drains.",
+      "delay_consequence": "Low pressure, leaks inside walls, and (for lead) a health exposure.",
+      "effort": "20 minutes",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "health",
+      "priority_rationale": "Lead possibility raises this from budget to health.",
+      "diy_pro": "verification",
+      "completion_criteria": "Materials recorded with source.",
+      "retain_evidence": "Photos of pipe at the meter and main stack.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "plumber",
+      "source_id": "internachi_life_expectancy",
+      "source_ref": "InterNACHI chart: galvanized/copper water lines and cast-iron waste pipe estimated lives (guideline only); PWSA lead service line program page",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-WDI-001",
+      "version": 1,
+      "component": "structure",
+      "task_category": "verification",
+      "title": "Wood-destroying insect inspection and moisture contact at wood",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1960
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "wdi_inspection_date",
+          "op": "known"
+        }
+      ],
+      "required_fields": [],
+      "when_unknown": "apply",
+      "action": "If the purchase did not include a wood-destroying insect (WDI) inspection, get one; keep soil and mulch below sill plates and wood siding, and fix wood-to-ground contact.",
+      "why": "Allegheny County municipalities adopt the IRC termite probability 'moderate to heavy' (e.g., Shaler Township UCC ordinance); the seller disclosure form asks about infestation (item 5).",
+      "delay_consequence": "Hidden structural damage.",
+      "effort": "1 visit",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "damage",
+      "priority_rationale": "Regional exposure that only an inspection can resolve.",
+      "diy_pro": "pro",
+      "completion_criteria": "WDI report filed; wdi_inspection_date recorded.",
+      "retain_evidence": "WDI report.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "pest_control",
+      "source_id": "termite_probability",
+      "source_ref": "Shaler Township UCC ordinance: Termite 'Moderate to heavy'; PA seller disclosure form item 5 (termites/wood-destroying insects)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-DISC-001",
+      "version": 1,
+      "component": "transaction",
+      "task_category": "verification",
+      "title": "Before you buy: reconcile the seller disclosure with the inspection report",
+      "trigger": [
+        {
+          "field": "stage",
+          "op": "in",
+          "value": [
+            "under_contract",
+            "before_buy"
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "field": "stage",
+          "op": "eq",
+          "value": "owner"
+        }
+      ],
+      "required_fields": [
+        "stage"
+      ],
+      "when_unknown": "skip",
+      "action": "Read the seller's property disclosure statement (PA law lists roof, basements, structure, water/sewage, plumbing, heating/AC, electrical, soils/drainage, hazardous substances) against the inspection findings; list every 'yes/unknown' answer and every report finding that the other document does not mention. Those are your questions before the inspection contingency expires.",
+      "why": "PA's Real Estate Seller Disclosure Law defines what the seller must disclose; the inspection report is the independent evidence.",
+      "delay_consequence": "Lost contingency leverage.",
+      "effort": "1 hour",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "deadline",
+      "priority_rationale": "Contingency deadline.",
+      "diy_pro": "diy",
+      "completion_criteria": "Question list sent to the agent; answers filed.",
+      "retain_evidence": "Disclosure form; question list; answers.",
+      "cost": {
+        "basis": "none",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "pa_seller_disclosure",
+      "source_ref": "68 Pa.C.S. §7304(b) subjects of disclosure; form at 49 Pa. Code §35.335a",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    },
+    {
+      "id": "R-PERMIT-001",
+      "version": 1,
+      "component": "transaction",
+      "task_category": "info",
+      "title": "Major work needs a municipal permit under the PA Uniform Construction Code",
+      "trigger": [
+        {
+          "field": "planned_major_work",
+          "op": "truthy"
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [
+        "planned_major_work"
+      ],
+      "when_unknown": "skip",
+      "action": "Before structural, electrical, plumbing, HVAC replacement or roofing work, ask the municipality's building office what permits apply; plumbing permits in Allegheny County come from the Health Department and must be pulled by a registered master plumber (or owner-occupant).",
+      "why": "PA enforces the UCC through municipalities (2021 I-Codes effective 2026-01-01 per L&I); unpermitted work surfaces at the next sale.",
+      "delay_consequence": "Failed sale certifications; insurance disputes.",
+      "effort": "phone call",
+      "recurrence": {
+        "type": "event",
+        "event": "major work planned"
+      },
+      "severity": "info",
+      "priority_rationale": "Informational, event-driven.",
+      "diy_pro": "diy",
+      "completion_criteria": "Permit numbers filed with the project record.",
+      "retain_evidence": "Permits and inspection sign-offs.",
+      "cost": {
+        "basis": "unknown",
+        "range": null
+      },
+      "provider_category": "",
+      "source_id": "pa_ucc",
+      "source_ref": "PA L&I UCC page (Triennial Update effective 2026-01-01); ACHD Plumbing Program (permits pulled by registered master plumbers)",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author",
+      "silent_when_unknown": true
+    },
+    {
+      "id": "R-AIR-001",
+      "version": 1,
+      "component": "envelope",
+      "task_category": "optional",
+      "title": "Seal obvious air leaks at windows, doors and the sill (optional improvement)",
+      "trigger": [
+        {
+          "field": "year_built",
+          "op": "before_year",
+          "value": 1960
+        }
+      ],
+      "exclusions": [],
+      "required_fields": [],
+      "when_unknown": "apply",
+      "action": "Caulk gaps at window and door trim and the foundation sill with latex or silicone caulk; leave duct sealing to a contractor. Do this after moisture problems are controlled, not before.",
+      "why": "DOE air-sealing guidance; optional comfort/energy improvement, deliberately ranked last.",
+      "delay_consequence": "Higher heating bills; no safety consequence.",
+      "effort": "an afternoon",
+      "recurrence": {
+        "type": "one_time"
+      },
+      "severity": "comfort",
+      "priority_rationale": "Optional; never outranks safety or water tasks.",
+      "diy_pro": "diy",
+      "completion_criteria": "Done; noted.",
+      "retain_evidence": "None.",
+      "cost": {
+        "basis": "planning_assumption",
+        "range": null,
+        "note": "Caulk and weatherstripping only."
+      },
+      "provider_category": "",
+      "source_id": "doe_energysaver",
+      "source_ref": "DOE Energy Saver 'Seal Air Leaks with Caulk': caulk windows/doors/foundation sill; leave duct sealing to a contractor",
+      "review_status": "author-reviewed",
+      "review_date": "2026-10-29",
+      "reviewer": "author"
+    }
+  ]
+}

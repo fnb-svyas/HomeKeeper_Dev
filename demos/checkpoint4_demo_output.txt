@@ -1,0 +1,401 @@
+=== CHECKPOINT 4 — CONNECTED REPORTS AND BUDGETS (synthetic sample house; quotes are illustrative, entered by the 'owner') ===
+
+BEFORE YOU BUY — what is known, what is not, and what to do before your deadlines
+This report is built from public records, regional data and whatever you have entered. It is not an inspection and not proof of the property's condition; the inspection report and the seller disclosure are the evidence that matters.
+
+House: 123 SAMPLE ST, PITTSBURGH, 15228   stage: under_contract   closing: 2026-11-14
+
+WHAT IS KNOWN (with its source)
+  year_built                   1928                             [public_record; unverified]
+  style                        COLONIAL                         [public_record; unverified]
+  stories                      2.0                              [public_record; unverified]
+  basement                     Full                             [public_record; unverified]
+  exterior_finish              Brick                            [public_record; unverified]
+  roof_type                    SHINGLE                          [public_record; unverified]
+  heating_cooling              Central Heat with AC             [public_record; unverified]
+  condition_assessor           AVERAGE                          [public_record; unverified]
+  grade_assessor               AVERAGE +                        [public_record; unverified]
+  living_area                  1850                             [public_record; unverified]
+  lot_area                     6200                             [public_record; unverified]
+  fireplaces                   1                                [public_record; unverified]
+  municipality                 Mt. Lebanon                      [public_record; unverified]
+  heating_fuel                 gas                              [owner_reported; owner_confirmed]
+  heating_type                 forced air                       [owner_reported; owner_confirmed]
+  roof_installed_year          2008                             [owner_reported; owner_confirmed]
+  water_heater_installed_year  2015                             [owner_reported; owner_confirmed]
+  furnace_installed_year       2019                             [owner_reported; owner_confirmed]
+  sump_pump_present            True                             [owner_reported; owner_confirmed]
+
+WHAT IS NOT KNOWN YET
+  wiring_type                  unknown
+  plumbing_supply_material     unknown
+
+REGIONAL EXPOSURE (area, not this house)
+  radon_zip_stats      zip=15228, tests=12, basement_tests=12, median_pci_l=3.6, pct_at_or_above_4=42, latest_test=2025-03-09
+  flood_zone           fld_zone=X, zone_subtype=AREA OF MINIMAL FLOOD HAZARD, sfha=False, static_bfe=-9999
+  undermined           True
+  landslide_prone      False
+  soil_map_unit        mukey=999001, muname=Synthetic silt loam, 8 to 15 percent slopes, compname=Synthetic, comppct_r=85, drainagecl=Moderatel
+
+BEFORE THE DEADLINES (transaction items)
+  • Before you buy: reconcile the seller disclosure with the inspection report — Read the seller's property disclosure statement (PA law lists roof, basements, structure, water/sewage, plumbing, heating/AC, electrical, soils/drainage, hazardous substances) against the inspection findings; list every 'yes/unknown' answer and every report finding that the other document does not mention. Those are your questions before the inspection contingency expires.
+  • Point-of-sale sewer dye test / lateral certification — Confirm the municipality's dye test (and lateral camera inspection where required) is scheduled far enough before closing; ask for the certificate and any repair records for the house record.
+  • Consider Mine Subsidence Insurance before closing — Look up the address on PA DEP's Mine Subsidence Insurance map and decide on coverage; a policy applied for at purchase agreement takes effect at closing. Homeowners policies usually exclude subsidence.
+    Sewer certification (Mt. Lebanon): Sale; refinancing exempt; performed by Allegheny County-licensed plumber (municipality does not schedule tests); fee $50; lead time Evidence of Compliance at least 10 business days before closing; interim relief request at least 14; valid 3 years; camera not stated. Verify with the municipality (compiled 2026-10-29; https://mtlebanon.org/residents/public-works/dye-testing/).
+
+FINDINGS THAT MAY WARRANT ADDITIONAL PROFESSIONAL ASSESSMENT
+  • [safety] Documented finding: Open junction box with exposed splices above basement stairs — Licensed electrician to correct
+  • [damage] Documented finding: Lifted shingles and exposed nail heads at rear slope — Roofer to evaluate and repair
+
+WHAT TO INSPECT OR ASK ABOUT (verification items)
+  • Replace smoke alarms older than 10 years; CO alarms per their label: Read the manufacture date on the back of each smoke and CO alarm and record the oldest year.
+  • Establish the wiring type and grounding (pre-1960 house): Check the inspection report's electrical section for knob-and-tube, ungrounded two-slot receptacles, aluminum branch wiring or an undersized panel. Record what it says. If the report is silent, ask an electrician to assess.
+  • Establish supply and drain pipe materials (galvanized, cast iron, copper, lead): Read the inspection report's plumbing section and look at exposed pipes in the basement: grey threaded pipe is galvanized steel; black heavy pipe is cast iron; a dull grey soft pipe at the meter may be lead. Record what you find.
+
+KNOWN REPAIRS AND UNCERTAIN FIRST-YEAR EXPENSES
+  • Documented finding: Lifted shingles and exposed nail heads at rear slope: $450–$900 [user_quote]
+  • water_heater replacement reserve: $1,400–$2,600 over 3 yr [planning_assumption]
+  • roof replacement reserve: $9,000–$16,000 over 6 yr [planning_assumption]
+  • Documented finding: Open junction box with exposed splices above basement stairs: cost unknown — no quote on file — get quotes (job brief available in Checkpoint 5)
+  Routine maintenance in year one: see the 12-month calendar and the routine budget.
+
+RESPONSIBILITIES
+  homeowner for everything recorded; answer 'hoa_or_shared' or use 'responsibility' if anything is shared
+
+WHAT COULD CHANGE THIS REPORT
+  • wiring_type — once known: modern grounded wiring clears the electrical verification task
+  • plumbing_supply_material — once known: copper/PEX clears the pipe-material verification; lead raises a health task
+
+==================================================================
+NEXT THREE ACTIONS
+1. Documented finding: Open junction box with exposed splices above basement stairs
+   why it applies to this house: Documented in inspection report p.22 on 2026-10-20.
+   what if you delay: a documented hazard remains in place
+   time/effort: depends on scope — get quotes; pro; cost basis: unknown
+   done when: Repair or assessment documented in the house record and the finding marked resolved.
+   keep afterwards: invoice, before/after photos, any warranty
+   evidence: finding f-002=Open junction box with exposed splices above basement stairs (professional_finding)
+   source: inspection report p.22: 
+2. Documented finding: Lifted shingles and exposed nail heads at rear slope
+   why it applies to this house: Documented in inspection report p.14 on 2026-10-20.
+   what if you delay: documented damage can progress; repair scope and cost tend to grow
+   time/effort: depends on scope — get quotes; pro; cost basis: unknown
+   done when: Repair or assessment documented in the house record and the finding marked resolved.
+   keep afterwards: invoice, before/after photos, any warranty
+   evidence: finding f-001=Lifted shingles and exposed nail heads at rear slope (professional_finding)
+   source: inspection report p.14: 
+3. Clean the dryer vent duct; replace any plastic or foil duct with metal
+   why it applies to this house: CPSC dryer-fire guidance.
+   what if you delay: Lint fires; long dry times.
+   time/effort: 30–60 minutes; diy_or_pro; cost basis: none
+   done when: Duct cleaned; duct material recorded.
+   keep afterwards: Photo of duct type.
+   evidence: dryer_present=True (owner_reported)
+   source: cpsc_dryer_gfci: CPSC Pub 5022 'Overheated Clothes Dryers Can Cause Fires': clean lint screen each load; clean vent and exhaust duct periodically; use rigid or semi-rigid metal duct
+
+==================================================================
+FIRST 90 DAYS OF OWNERSHIP (from 2026-11-14)
+Order within a week follows the explained priority (see 'priority:' lines).
+
+Week 1  (2026-11-14 → 2026-11-21)
+  • Documented finding: Open junction box with exposed splices above basement stairs  [safety; pro; effort depends on scope — get quotes]
+      why: Documented in inspection report p.22 on 2026-10-20.
+      priority: documented defect — severity: safety; documented defect; strong evidence
+      due: open until resolved
+  • Documented finding: Lifted shingles and exposed nail heads at rear slope  [damage; pro; effort depends on scope — get quotes]
+      why: Documented in inspection report p.14 on 2026-10-20.
+      priority: documented defect — severity: damage; documented defect; strong evidence
+      due: open until resolved
+  • Clean the dryer vent duct; replace any plastic or foil duct with metal  [safety; diy_or_pro; effort 30–60 minutes]
+      why: CPSC dryer-fire guidance.
+      priority: severity: safety; rule applies; owner-reported; no completion on record
+      due: due now — no completion on record
+  • Water heater: test the T&P relief valve, flush sediment, check the anode  [safety; diy_or_pro; effort 20 minutes]
+      why: Manufacturer manuals and DOE agree on the tasks; they differ on intervals, so the range and its sources are shown. Your heater's manual overrides when identified. Refined by the installed equipment's own instructions (Bradford White RG240T6N).
+      priority: severity: safety; rule applies; owner-reported; no completion on record
+      due: due now — no completion on record
+  • Annual professional inspection and service of the fuel-burning heating system  [safety; pro; effort 1 visit]
+      why: Fuel-burning heating equipment produces combustion gases; CPSC recommends professional inspection every year. Refined by the installed equipment's own instructions (Goodman GMVC96).
+      priority: severity: safety; rule applies; owner-reported; no completion on record; window closes in 17 days
+      due: due now — no completion on record; best window in season now, window closes 2026-11-15 (before heating season)
+  • Annual chimney and flue inspection (Level 1)  [safety; pro; effort 1 visit]
+      why: The record lists a fireplace. CSIA (citing NFPA 211) recommends annual inspection; CPSC includes chimneys and flues in its CO guidance.
+      priority: severity: safety; rule applies; public record; no completion on record; window closes in 2 days
+      due: due now — no completion on record; best window in season now, window closes 2026-10-31 (before heating season)
+  • Test smoke and CO alarms monthly; record manufacture dates  [safety; diy; effort 10 minutes]
+      why: Applies to every home. CPSC: test monthly, replace batteries at least annually.
+      priority: severity: safety; rule applies; unknown; no completion on record
+      due: due now — no completion on record
+  • Test GFCI outlets and breakers monthly  [safety; diy; effort 10 minutes]
+      why: CPSC: test every GFCI at least once a month, after installation and after power failures.
+      priority: severity: safety; rule applies; unknown; no completion on record
+      due: due now — no completion on record
+  • Replace smoke alarms older than 10 years; CO alarms per their label  [safety; verification; effort 30–60 minutes]
+      why: CPSC: replace smoke alarms that are more than 10 years old; CO alarms have a manufacturer replacement age.
+      priority: severity: safety; needs verification first; unknown
+  • Establish the wiring type and grounding (pre-1960 house)  [safety; verification; effort 15 minutes to read the report; assessment visit if needed]
+      why: Houses of this era commonly retain original wiring; the assessor record says nothing about it and the inspection report is the only document that does.
+      priority: severity: safety; needs verification first; unknown
+  • Before you buy: reconcile the seller disclosure with the inspection report  [deadline; diy; effort 1 hour]
+      why: PA's Real Estate Seller Disclosure Law defines what the seller must disclose; the inspection report is the independent evidence.
+      priority: severity: deadline; rule applies; owner-reported
+      due: open until done
+  • Point-of-sale sewer dye test / lateral certification  [deadline; pro; effort phone call]
+      why: The municipality requires a sewer certification before sale; lead times run 7–30 days and a failed test can require repairs before closing.
+      priority: severity: deadline; rule applies; public record
+      due: open until done
+  • Consider Mine Subsidence Insurance before closing  [deadline; diy; effort 30 minutes]
+      why: DEP's confirmed-mining layer intersects this point (a flag only; not a parcel-level mine-map review).
+      priority: severity: deadline; rule applies; regional exposure
+      due: open until done
+
+Weeks 2–4  (2026-11-21 → 2026-12-14)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  [health; diy; effort ongoing; 5 minutes to check]
+      why: EPA mold guidance thresholds; old basements in this climate run humid all summer.
+      priority: severity: health; rule applies; public record; window closes in 336 days
+      due: next window 2027-05-15 to 2027-09-30 (humid season)
+  • Lead-based paint: collect the disclosure and pamphlet; assess if children will live here  [health; diy; effort 15 minutes]
+      why: Built before 1978: federal lead disclosure rules apply.
+      priority: severity: health; rule applies; public record
+      due: open until done
+  • Test for radon (or file a result from the last two years)  [health; diy_or_pro; effort test kit: 10 minutes + lab wait]
+      why: EPA recommends testing every home below the third floor; PA law requires only disclosure at sale, not a test.
+      priority: severity: health; rule applies; unknown; no completion on record
+      due: due now — no completion on record
+  • Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)  [health; verification; effort 20 minutes]
+      why: The assessor record never records pipe materials; houses of this era commonly retain original galvanized supply and cast-iron drains.
+      priority: severity: health; needs verification first; unknown
+
+Days 31–60  (2026-12-14 → 2027-01-13)
+  • Test the sump pump  [damage; diy; effort 10 minutes]
+      why: A basement home with a sump pump depends on it in wet weather; manufacturer instructions call for periodic testing.
+      priority: severity: damage; rule applies; owner-reported; no completion on record
+      due: due now — no completion on record
+  • Winterize exterior hose bibs before the first freeze  [damage; diy; effort 15 minutes]
+      why: Pittsburgh's median first 32°F date is about October 20 (NCEI normals); freeze-split pipes behind a wall are a common winter loss. The task is standard practice; the timing is sourced, the practice is a planning assumption.
+      priority: severity: damage; rule applies; owner-reported
+      due: by 2027-10-15
+  • Check that the ground slopes away from the foundation  [damage; verification; effort 30 minutes]
+      why: Houses with below-grade space depend on surface drainage; EPA and ISU Extension both call for ground sloping away from the foundation.
+      priority: severity: damage; rule applies; public record
+      due: open until done
+  • Private sewer lateral: establish material and condition (pre-1960 house)  [damage; pro; effort 1 visit]
+      why: Laterals of this era are commonly clay or cast iron; the homeowner owns the lateral to the main in most Allegheny County municipalities (ALCOSAN: municipalities own local sewers; private laterals are the owner's).
+      priority: severity: damage; rule applies; public record
+      due: open until done
+  • Wood-destroying insect inspection and moisture contact at wood  [damage; pro; effort 1 visit]
+      why: Allegheny County municipalities adopt the IRC termite probability 'moderate to heavy' (e.g., Shaler Township UCC ordinance); the seller disclosure form asks about infestation (item 5).
+      priority: severity: damage; rule applies; public record
+      due: open until done
+  • Seasonal roof and flashing visual check (spring and fall, and after severe weather)  [damage; diy; effort 20 minutes]
+      why: NRCA recommends scheduled roof inspections at least twice a year plus after severe weather (reported by Professional Roofing).
+      priority: severity: damage; rule applies; unknown; no completion on record
+      due: due now — no completion on record
+  • Clean gutters and confirm downspouts discharge 5–10 ft from the foundation  [damage; diy_or_pro; effort 1–2 hours]
+      why: Roof runoff dumped at the foundation is the most common driver of basement water in this housing stock; ISU Extension gives the 5–10 ft figure.
+      priority: severity: damage; rule applies; unknown; no completion on record; window closes in 33 days
+      due: due now — no completion on record; best window in season now, window closes 2026-12-01 (after leaf fall)
+
+Days 61–90  (2027-01-13 → 2027-02-12)
+  • Plan a water-heater replacement window  [budget; planning; effort planning only]
+      why: InterNACHI estimates 6–12 years for conventional tank heaters (NAHB 2007: 10); a unit at 8+ years is in its planning window.
+      priority: severity: budget; rule applies; owner-reported
+      due: open until done
+  • Plan an asphalt-roof replacement window  [budget; planning; effort planning]
+      why: InterNACHI estimates 20 years (3-tab) to 30 (architectural) for asphalt shingles; a roof past 15 years is in its planning window.
+      priority: severity: budget; rule applies; public record
+      due: open until done
+
+Later / recurring  (after 2027-02-12)
+  • Check the furnace/air-handler filter  [comfort; diy; effort 5 minutes]
+      why: A clogged filter restricts airflow; DOE recommends monthly checks in season. Your furnace manual's own interval overrides this when known. Refined by the installed equipment's own instructions (Goodman GMVC96).
+      priority: severity: comfort; rule applies; owner-reported; no completion on record
+      due: due now — no completion on record
+  • Central AC: filter monthly in season, clear the outdoor unit, annual coil check  [comfort; diy_or_pro; effort 15 minutes monthly; one pro visit]
+      why: DOE Energy Saver AC maintenance guidance.
+      priority: severity: comfort; rule applies; owner-reported; no completion on record; window closes in 214 days
+      due: due now — no completion on record; best window next window 2027-04-01 to 2027-05-31 (before cooling season)
+  • Seal obvious air leaks at windows, doors and the sill (optional improvement)  [comfort; diy; effort an afternoon]
+      why: DOE air-sealing guidance; optional comfort/energy improvement, deliberately ranked last.
+      priority: severity: comfort; rule applies; public record
+      due: open until done
+
+==================================================================
+12-MONTH CALENDAR (from Oct 2026); recurring tasks reset from their actual completion dates once recorded
+
+Oct 2026
+  • Documented finding: Open junction box with exposed splices above basement stairs  [FIX]  (one_time)
+  • Documented finding: Lifted shingles and exposed nail heads at rear slope  [FIX]  (one_time)
+  • Clean the dryer vent duct; replace any plastic or foil duct with metal  (interval_since_completion, every 12 mo)
+  • Water heater: test the T&P relief valve, flush sediment, check the anode  (interval_since_completion, every 12 mo)
+  • Annual professional inspection and service of the fuel-burning heating system  (interval_since_completion, every 12 mo)
+  • Annual chimney and flue inspection (Level 1)  (interval_since_completion, every 12 mo)
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Replace smoke alarms older than 10 years; CO alarms per their label  [VERIFY]  (one_time)
+  • Establish the wiring type and grounding (pre-1960 house)  [VERIFY]  (one_time)
+  • Lead-based paint: collect the disclosure and pamphlet; assess if children will live here  (one_time)
+  • Test for radon (or file a result from the last two years)  (interval_since_completion, every 24 mo)
+  • Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)  [VERIFY]  (one_time)
+  • Before you buy: reconcile the seller disclosure with the inspection report  (one_time)
+  • Point-of-sale sewer dye test / lateral certification  (one_time)
+  • Consider Mine Subsidence Insurance before closing  (one_time)
+  • Test the sump pump  (interval_since_completion, every 3 mo)
+  • Check that the ground slopes away from the foundation  (one_time)
+  • Private sewer lateral: establish material and condition (pre-1960 house)  (one_time)
+  • Wood-destroying insect inspection and moisture contact at wood  (one_time)
+  • Seasonal roof and flashing visual check (spring and fall, and after severe weather)  (interval_since_completion, every 6 mo)
+  • Clean gutters and confirm downspouts discharge 5–10 ft from the foundation  (interval_since_completion, every 6 mo)
+  • Plan a water-heater replacement window  (one_time)
+  • Plan an asphalt-roof replacement window  (one_time)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+  • Seal obvious air leaks at windows, doors and the sill (optional improvement)  (one_time)
+
+Nov 2026
+  • Annual professional inspection and service of the fuel-burning heating system  (interval_since_completion, every 12 mo)
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+
+Dec 2026
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+
+Jan 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Test the sump pump  (interval_since_completion, every 3 mo)
+
+Feb 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+
+Mar 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+
+Apr 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Test the sump pump  (interval_since_completion, every 3 mo)
+  • Seasonal roof and flashing visual check (spring and fall, and after severe weather)  (interval_since_completion, every 6 mo)
+  • Clean gutters and confirm downspouts discharge 5–10 ft from the foundation  (interval_since_completion, every 6 mo)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+  • Central AC: filter monthly in season, clear the outdoor unit, annual coil check  (interval_since_completion, every 12 mo)
+
+May 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  (seasonal_window)
+  • Central AC: filter monthly in season, clear the outdoor unit, annual coil check  (interval_since_completion, every 12 mo)
+
+Jun 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  (seasonal_window)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+
+Jul 2027
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  (seasonal_window)
+  • Test the sump pump  (interval_since_completion, every 3 mo)
+
+Aug 2027
+  • Annual chimney and flue inspection (Level 1)  (interval_since_completion, every 12 mo)
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  (seasonal_window)
+  • Check the furnace/air-handler filter  (interval_since_completion, every 2 mo)
+
+Sep 2027
+  • Annual professional inspection and service of the fuel-burning heating system  (interval_since_completion, every 12 mo)
+  • Annual chimney and flue inspection (Level 1)  (interval_since_completion, every 12 mo)
+  • Test smoke and CO alarms monthly; record manufacture dates  (interval_since_completion, every 1 mo)
+  • Test GFCI outlets and breakers monthly  (interval_since_completion, every 1 mo)
+  • Keep basement humidity below 60% and dry any wet spot within 24–48 hours  (seasonal_window)
+
+==================================================================
+BUDGETS (as of 2026-10-29)
+Totals cover only items with a recorded quote, published reference, or planning assumption; items under 'unknown' are not included and are the next things to price.
+
+1. ROUTINE MAINTENANCE (annualised)
+   Test smoke and CO alarms monthly; record manufacture dates   ×12.0/yr  your time only
+   Test GFCI outlets and breakers monthly                       ×12.0/yr  your time only
+   Annual professional inspection and service of the fuel-burni ×1.0/yr  $120–$220/yr [user_quote; phone quote, two HVAC firms 2026-10-29]
+   Check the furnace/air-handler filter                         ×6.0/yr  $90–$180/yr [planning_assumption; typical retail 2026-10-29]
+   Water heater: test the T&P relief valve, flush sediment, che ×1.0/yr  your time only
+   Annual chimney and flue inspection (Level 1)                 ×1.0/yr  $150–$350/yr [user_quote; phone quote, Sweep Co 2026-10-29]
+   Seasonal roof and flashing visual check (spring and fall, an ×2.0/yr  your time only
+   Clean gutters and confirm downspouts discharge 5–10 ft from  ×2.0/yr  your time only
+   Test the sump pump                                           ×4.0/yr  your time only
+   Clean the dryer vent duct; replace any plastic or foil duct  ×1.0/yr  your time only
+   Winterize exterior hose bibs before the first freeze         ×1.0/yr  your time only
+   total of priced items: $360–$750 per year
+
+2. KNOWN REPAIRS (documented findings)
+   Documented finding: Lifted shingles and exposed nail heads a $450–$900 [user_quote; ABC Roofing written quote 2026-10-25; Allegheny County, PA]
+      scope: re-secure lifted shingles and seal exposed nails, rear slope; excludes: decking repair if found
+   total of priced items: $450–$900
+
+3. FUTURE REPLACEMENTS (reserve scenarios; average service life is not a failure date)
+   water_heater   $1,400–$2,600 over 3 yr → set aside $39–$72/month [planning_assumption; planning_assumption 2026-10-29]
+   roof           $9,000–$16,000 over 6 yr → set aside $125–$222/month [planning_assumption; planning_assumption 2026-10-29]
+      overlap: a documented repair exists for this component — if it is replaced, the repair is moot; do not count both
+   total monthly reserve of priced scenarios: $164–$294
+
+UNPRICED (not in any total)
+   [routine] Central AC: filter monthly in season, clear the outdoor unit — no price source; enter your quote
+   [routine] Keep basement humidity below 60% and dry any wet spot within — Hygrometer and dehumidifier purchase; electricity.
+   [routine] Test for radon (or file a result from the last two years)    — Test kits are inexpensive; mitigation unknown until quoted.
+   [repairs] Documented finding: Open junction box with exposed splices a — no quote on file — get quotes (job brief available in Checkpoint 5)
+
+==================================================================
+WITH 2 HOURS AND $200: what fits, in priority order
+  ✓ Clean the dryer vent duct; replace any plastic or foil duct with metal  (~60 min; $0)
+  ✓ Water heater: test the T&P relief valve, flush sediment, check the anode  (~20 min; $0)
+  ✓ Test smoke and CO alarms monthly; record manufacture dates  (~10 min; $0)
+  ✓ Test GFCI outlets and breakers monthly  (~10 min; $0)
+  ✓ Establish the wiring type and grounding (pre-1960 house)  (~15 min; $0)
+  ✓ Check the furnace/air-handler filter  (~5 min; $30)
+  remaining: 0 min, $170
+
+IMPORTANT ITEMS THAT DO NOT FIT THIS BUDGET — still need attention
+  ! Documented finding: Open junction box with exposed splices above basement stairs  [safety] — needs a professional visit (not a weekend DIY item)
+  ! Documented finding: Lifted shingles and exposed nail heads at rear slope  [damage] — needs a professional visit (not a weekend DIY item)
+  ! Annual professional inspection and service of the fuel-burning heating system  [safety] — needs a professional visit (not a weekend DIY item)
+  ! Annual chimney and flue inspection (Level 1)  [safety] — needs a professional visit (not a weekend DIY item)
+  ! Replace smoke alarms older than 10 years; CO alarms per their label  [safety] — needs ~60 min, 20 left
+  ! Keep basement humidity below 60% and dry any wet spot within 24–48 hours  [health] — cost unknown — price it first
+  ! Lead-based paint: collect the disclosure and pamphlet; assess if children will live here  [health] — needs ~15 min, 5 left
+  ! Test for radon (or file a result from the last two years)  [health] — cost unknown — price it first
+  ! Establish supply and drain pipe materials (galvanized, cast iron, copper, lead)  [health] — needs ~20 min, 5 left
+  ! Before you buy: reconcile the seller disclosure with the inspection report  [deadline] — needs ~60 min, 5 left
+  ! Point-of-sale sewer dye test / lateral certification  [deadline] — needs a professional visit (not a weekend DIY item)
+  ! Consider Mine Subsidence Insurance before closing  [deadline] — cost unknown — price it first
+
+Deferred (lower priority)
+  · Test the sump pump — needs ~10 min, 5 left
+  · Winterize exterior hose bibs before the first freeze — needs ~15 min, 5 left
+  · Check that the ground slopes away from the foundation — cost unknown — price it first
+  · Private sewer lateral: establish material and condition (pre-1960 house) — needs a professional visit (not a weekend DIY item)
+  · Wood-destroying insect inspection and moisture contact at wood — needs a professional visit (not a weekend DIY item)
+  · Seasonal roof and flashing visual check (spring and fall, and after severe weather) — needs ~20 min, 5 left
+  · Clean gutters and confirm downspouts discharge 5–10 ft from the foundation — needs ~120 min, 5 left
+  · Plan a water-heater replacement window — time unknown
+  · Plan an asphalt-roof replacement window — time unknown
+  · Central AC: filter monthly in season, clear the outdoor unit, annual coil check — cost unknown — price it first
+  · Seal obvious air leaks at windows, doors and the sill (optional improvement) — time unknown
+
+=== WHAT CHANGES THE REPORTS: a correction ===
+recorded stage = 'owner' (source: owner) for sample-complete
+recommendations changed:
+  R-DISC-001: applies -> excluded
+recorded wiring_type = 'rewired' (source: owner) for sample-complete
+recommendations changed:
+  R-ELEC-001: verification -> excluded
+NEXT THREE ACTIONS
+1. Documented finding: Open junction box with exposed splices above basement stairs
+   why it applies to this house: Documented in inspection report p.22 on 2026-10-20.
+   what if you delay: a documented hazard remains in place

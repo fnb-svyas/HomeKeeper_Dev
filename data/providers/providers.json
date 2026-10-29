@@ -1,0 +1,183 @@
+{
+  "updated": "2026-10-29",
+  "count": 5,
+  "_about": "SYNTHETIC demo entries only (synthetic=true). They are shown only for sample houses. Real entries arrive via 'providers import ...' or 'providers add'.",
+  "providers": [
+    {
+      "id": "p-0001",
+      "name": "Demo Plumbing Co (SYNTHETIC)",
+      "categories": [
+        "plumber"
+      ],
+      "address": "",
+      "phone": "412-555-0100",
+      "service_area": [
+        "Allegheny County"
+      ],
+      "source_id": "manual_directory",
+      "source_key": "demo1",
+      "existence": {
+        "basis": "synthetic demo record",
+        "date": "2026-10-29"
+      },
+      "synthetic": true,
+      "lat": 40.39,
+      "lon": -80.04,
+      "credentials": [
+        {
+          "type": "achd_master_plumber",
+          "identifier": "HP 00000",
+          "status": "listed",
+          "date": "2026-07-29",
+          "source_id": "achd_master_plumbers",
+          "url": "https://data.wprdc.org/dataset/allegheny-county-plumbers",
+          "checked_by": "demo"
+        },
+        {
+          "type": "hicpa",
+          "identifier": "PA000000",
+          "status": "active",
+          "date": "2026-10-15",
+          "source_id": "pa_ag_hicpa",
+          "url": "https://hicsearch.attorneygeneral.gov/",
+          "checked_by": "demo"
+        }
+      ],
+      "claims": [
+        "'family owned since 1980' (website)"
+      ]
+    },
+    {
+      "id": "p-0002",
+      "name": "Demo Drain & Sewer (SYNTHETIC)",
+      "categories": [
+        "plumber",
+        "sewer"
+      ],
+      "address": "",
+      "phone": "412-555-0101",
+      "service_area": null,
+      "source_id": "manual_directory",
+      "source_key": "demo2",
+      "existence": {
+        "basis": "synthetic demo record",
+        "date": "2026-10-29"
+      },
+      "synthetic": true,
+      "credentials": [],
+      "claims": [
+        "'licensed and insured' (truck lettering)"
+      ]
+    },
+    {
+      "id": "p-0003",
+      "name": "Demo Electric LLC (SYNTHETIC)",
+      "categories": [
+        "electrician"
+      ],
+      "address": "",
+      "phone": "412-555-0102",
+      "service_area": null,
+      "source_id": "manual_directory",
+      "source_key": "demo3",
+      "existence": {
+        "basis": "synthetic demo record",
+        "date": "2026-10-29"
+      },
+      "synthetic": true,
+      "lat": 40.44,
+      "lon": -79.99,
+      "credentials": [
+        {
+          "type": "pgh_trade_license",
+          "identifier": "Electrical 00000",
+          "status": "Active",
+          "date": "2026-10-29",
+          "source_id": "pgh_trade_licenses",
+          "url": "https://data.wprdc.org/dataset/business-contractors-trades",
+          "checked_by": "demo"
+        },
+        {
+          "type": "pgh_insurance_expiry",
+          "identifier": "",
+          "status": "2027-03-31",
+          "date": "2026-10-29",
+          "source_id": "pgh_trade_licenses",
+          "url": "",
+          "checked_by": "demo"
+        }
+      ],
+      "claims": [],
+      "note": "License scope is the City of Pittsburgh; service area unknown until stated."
+    },
+    {
+      "id": "p-0004",
+      "name": "Demo Radon Mitigation (SYNTHETIC)",
+      "categories": [
+        "radon mitigator"
+      ],
+      "address": "",
+      "phone": "412-555-0103",
+      "service_area": [
+        "Allegheny County",
+        "Washington County"
+      ],
+      "source_id": "manual_directory",
+      "source_key": "demo4",
+      "existence": {
+        "basis": "synthetic demo record",
+        "date": "2026-10-29"
+      },
+      "synthetic": true,
+      "lat": 40.36,
+      "lon": -80.08,
+      "credentials": [
+        {
+          "type": "padep_radon",
+          "identifier": "0000",
+          "status": "mitigator",
+          "date": "2026-10-01",
+          "source_id": "padep_radon_lists",
+          "url": "https://www.pa.gov/agencies/dep/programs-and-services/radiation-protection/radon-division/radon-services-directory.html",
+          "checked_by": "demo"
+        }
+      ],
+      "claims": []
+    },
+    {
+      "id": "p-0005",
+      "name": "Demo Chimney Sweeps (SYNTHETIC)",
+      "categories": [
+        "chimney"
+      ],
+      "address": "",
+      "phone": "412-555-0104",
+      "service_area": [
+        "Mt. Lebanon",
+        "Upper St. Clair",
+        "Bethel Park"
+      ],
+      "source_id": "manual_directory",
+      "source_key": "demo5",
+      "existence": {
+        "basis": "synthetic demo record",
+        "date": "2026-10-29"
+      },
+      "synthetic": true,
+      "lat": 40.37,
+      "lon": -80.05,
+      "credentials": [
+        {
+          "type": "csia",
+          "identifier": "",
+          "status": "",
+          "date": "2026-10-20",
+          "source_id": "csia_directory",
+          "url": "https://web.csia.org/CSIA-Certified",
+          "checked_by": "demo"
+        }
+      ],
+      "claims": []
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+match_id,house_id,task_id,provider_id,provider_name,category,suitability_evidence_ok(Y/N),service_area_evidence_ok(Y/N),credential_claims_match_source(Y/N/NA),unknowns_shown_as_unknown(Y/N),registration_presented_as_competence(Y/N),reviewer,review_date,notes
