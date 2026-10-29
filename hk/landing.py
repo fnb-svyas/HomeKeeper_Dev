@@ -201,3 +201,38 @@ main{position:relative;flex:1;display:flex;flex-direction:column;align-items:cen
 
 def landing_page() -> str:
     return PAGE
+
+
+def hero_css() -> str:
+    """The house drawing and wordmark styles (for reuse in the Streamlit app)."""
+    css = PAGE.split("<style>", 1)[1].split("</style>", 1)[0]
+    root = css[:css.index("*{box-sizing")]  # :root tokens
+    house = css[css.index("/* ---------- the house"):css.index("/* ---------- choices")]
+    return root + house + ".hero{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:.5rem 0 1rem}"
+
+
+def hero_html() -> str:
+    """The lit house elevation and the HomeKeeper wordmark, as on the landing page."""
+    main = PAGE.split("<main>", 1)[1]
+    scene = main[main.index('<div class="scene"'):main.index('<h1 class="wordmark"')]
+    word = main[main.index('<h1 class="wordmark"'):]
+    word = word[:word.index("</h1>") + 5]
+    return '<div class="hero">' + scene + word + "</div>"
+
+
+def choice_css() -> str:
+    """Styles for the two choice cards, without the link hover (the Streamlit app puts a button under each)."""
+    css = PAGE.split("<style>", 1)[1].split("</style>", 1)[0]
+    block = css[css.index("/* ---------- choices"):css.index("@media (prefers-reduced-motion:reduce)")]
+    return block + ".choice.static{min-height:0;cursor:default}.choice.static:hover{transform:none;border-color:var(--glass-edge);background-color:var(--glass)}"
+
+
+def choice_card(which: str) -> str:
+    """'owner' or 'browse': the landing page's card markup as a static block."""
+    main = PAGE.split('<ul class="choices"', 1)[1]
+    href = {"owner": 'href="/owner"', "browse": 'href="/browse"'}[which]
+    a = main[main.index('<a class="choice" ' + href):]
+    a = a[:a.index("</a>")]
+    a = a.replace('<a class="choice" ' + href + '>', '<div class="choice static">')
+    a = a[:a.index('<svg class="go"')]
+    return a + "</div>"
